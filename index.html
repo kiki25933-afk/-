@@ -165,18 +165,12 @@
             border-radius: 50px;
             border: 1px solid rgba(255,255,255,0.1);
             z-index: 1000;
-            width: auto;
-            max-width: 90%;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
             gap: 30px;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
         }
 
         .nav-menu a {
@@ -186,7 +180,6 @@
             transition: all 0.3s ease;
             padding: 8px 16px;
             border-radius: 20px;
-            white-space: nowrap;
         }
 
         .nav-menu a:hover,
@@ -548,16 +541,12 @@
 
             .nav {
                 position: static;
-                margin: 15px auto;
+                margin: 15px 20px;
                 padding: 10px 20px;
-                left: auto;
-                transform: none;
-                width: fit-content;
             }
 
             .nav-menu {
                 gap: 20px;
-                justify-content: center;
             }
 
             .nav-menu a {
@@ -736,10 +725,9 @@
                 <h1 class="brand-name">GOLD:ON</h1>
                 <p class="tagline">NFC 명함용 고품질 QR 코드 생성</p>
                 <div class="cta-buttons">
-                    <a href="mailto:contact@goldon.com" class="cta-btn" id="emailBtn">📧 이메일</a>
-                    <a href="tel:010-1234-5678" class="cta-btn" id="phoneBtn">📞 전화</a>
-                    <a href="#" class="cta-btn" id="notionBtn" target="_blank">📋 노션</a>
-                    <a href="#" class="cta-btn" id="snsBtn" target="_blank">🌐 SNS</a>
+                    <a href="mailto:contact@goldon.com" class="cta-btn">📧 이메일</a>
+                    <a href="tel:010-1234-5678" class="cta-btn">📞 전화</a>
+                    <a href="https://notion.so/your-page" class="cta-btn" target="_blank">📋 노션</a>
                     <a href="#" class="cta-btn" onclick="downloadVCard()">💾 연락처 저장</a>
                 </div>
             </div>
@@ -873,14 +861,7 @@
                         <div class="contact-icon">📋</div>
                         <div>
                             <h4>노션</h4>
-                            <p><a href="#" id="notionLink" target="_blank" style="color: #667eea; text-decoration: none;">설정에서 URL 등록</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🌐</div>
-                        <div>
-                            <h4>SNS</h4>
-                            <p><a href="#" id="snsLink" target="_blank" style="color: #667eea; text-decoration: none;">설정에서 URL 등록</a></p>
+                            <p><a href="https://notion.so/your-page" target="_blank" style="color: #667eea; text-decoration: none;">notion.so/goldon</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -922,10 +903,10 @@
     <footer class="footer">
         <div class="container">
             <div class="social-links">
-                <a href="#" class="social-link" id="instagramLink" target="_blank" title="Instagram">📷</a>
-                <a href="#" class="social-link" id="youtubeLink" target="_blank" title="YouTube">📺</a>
-                <a href="#" class="social-link" id="socialNotionLink" target="_blank" title="Notion">📋</a>
-                <a href="#" class="social-link" id="socialSNSLink" target="_blank" title="SNS">🌐</a>
+                <a href="https://instagram.com/goldon_official" class="social-link" target="_blank" title="Instagram">📷</a>
+                <a href="https://youtube.com/@goldon" class="social-link" target="_blank" title="YouTube">📺</a>
+                <a href="https://notion.so/your-page" class="social-link" target="_blank" title="Notion">📋</a>
+                <a href="https://linkedin.com/company/goldon" class="social-link" target="_blank" title="LinkedIn">💼</a>
                 <a href="https://github.com/goldon" class="social-link" target="_blank" title="GitHub">🐙</a>
             </div>
             <p>&copy; 2024 GOLD:ON. All rights reserved.</p>
