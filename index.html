@@ -520,51 +520,151 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .brand-name {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
 
             .tagline {
-                font-size: 1.2rem;
+                font-size: 1rem;
+                margin-bottom: 30px;
             }
 
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
+            }
+
+            .cta-btn {
+                width: 280px;
+                text-align: center;
             }
 
             .nav {
-                position: relative;
-                top: 0;
-                transform: none;
-                margin: 20px;
+                position: static;
+                margin: 15px 20px;
+                padding: 10px 20px;
             }
 
             .nav-menu {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+                gap: 20px;
+            }
+
+            .nav-menu a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
             }
 
             .about-content,
             .contact-content {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                gap: 40px;
             }
 
             .projects-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
 
             .section-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                margin-bottom: 40px;
             }
 
             .section {
-                padding: 80px 0;
+                padding: 60px 0;
             }
 
             .hero {
-                padding: 0 20px;
+                padding: 40px 20px;
+                min-height: 90vh;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .skill-item {
+                padding: 20px 15px;
+            }
+
+            .skill-icon {
+                font-size: 2rem;
+            }
+
+            .project-card {
+                margin: 0 10px;
+            }
+
+            .project-image {
+                height: 180px;
+                font-size: 3rem;
+            }
+
+            .contact-form {
+                padding: 30px 25px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 12px;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+
+            /* 모바일용 터치 최적화 */
+            .cta-btn:active,
+            .project-link:active,
+            .submit-btn:active {
+                transform: scale(0.98);
+            }
+
+            /* 모바일 스크롤 개선 */
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-name {
+                font-size: 2rem;
+            }
+
+            .logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            .cta-btn {
+                width: 250px;
+                padding: 12px 25px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-content {
+                padding: 25px 20px;
+            }
+
+            .contact-form {
+                padding: 25px 20px;
             }
         }
 
@@ -627,7 +727,8 @@
                 <div class="cta-buttons">
                     <a href="mailto:contact@goldon.com" class="cta-btn">📧 이메일</a>
                     <a href="tel:010-1234-5678" class="cta-btn">📞 전화</a>
-                    <a href="#" class="cta-btn" onclick="downloadVCard()">📇 연락처 저장</a>
+                    <a href="https://notion.so/your-page" class="cta-btn" target="_blank">📋 노션</a>
+                    <a href="#" class="cta-btn" onclick="downloadVCard()">💾 연락처 저장</a>
                 </div>
             </div>
         </div>
@@ -757,6 +858,13 @@
                         </div>
                     </div>
                     <div class="contact-item">
+                        <div class="contact-icon">📋</div>
+                        <div>
+                            <h4>노션</h4>
+                            <p><a href="https://notion.so/your-page" target="_blank" style="color: #667eea; text-decoration: none;">notion.so/goldon</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
                         <div class="contact-icon">🌐</div>
                         <div>
                             <h4>웹사이트</h4>
@@ -795,11 +903,11 @@
     <footer class="footer">
         <div class="container">
             <div class="social-links">
-                <a href="#" class="social-link">📘</a>
-                <a href="#" class="social-link">📷</a>
-                <a href="#" class="social-link">🐦</a>
-                <a href="#" class="social-link">💼</a>
-                <a href="#" class="social-link">🐙</a>
+                <a href="https://instagram.com/goldon_official" class="social-link" target="_blank" title="Instagram">📷</a>
+                <a href="https://youtube.com/@goldon" class="social-link" target="_blank" title="YouTube">📺</a>
+                <a href="https://notion.so/your-page" class="social-link" target="_blank" title="Notion">📋</a>
+                <a href="https://linkedin.com/company/goldon" class="social-link" target="_blank" title="LinkedIn">💼</a>
+                <a href="https://github.com/goldon" class="social-link" target="_blank" title="GitHub">🐙</a>
             </div>
             <p>&copy; 2024 GOLD:ON. All rights reserved.</p>
             <p>NFC 명함용 고품질 QR 코드 생성</p>
