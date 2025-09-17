@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLD:ON - NFC 스마트 포트폴리오</title>
+    <title>개인화 NFC 명함 - GOLD:ON</title>
     <style>
         * {
             margin: 0;
@@ -19,13 +19,6 @@
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Animated Background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -44,12 +37,156 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Logo */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 편집 모드 토글 */
+        .edit-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .edit-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 편집 패널 */
+        .edit-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            z-index: 999;
+            padding: 20px;
+        }
+
+        .edit-panel.open {
+            right: 0;
+        }
+
+        .edit-panel h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #aaa;
+        }
+
+        .color-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .color-input input[type="color"] {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 메인 컨텐츠가 편집 패널에 가려지지 않도록 */
+        .main-content {
+            transition: margin-right 0.3s ease;
+        }
+
+        .main-content.editing {
+            margin-right: 400px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
         .logo {
             position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
             background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
             background-size: 300% 300%;
             animation: logoShine 3s ease infinite;
@@ -66,42 +203,35 @@
 
         .logo::before {
             content: '⚡';
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: white;
             text-shadow: 0 0 20px rgba(255,255,255,0.5);
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .brand-name {
+        .company-name {
             font-size: 4rem;
             font-weight: 900;
             background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
             background-size: 400% 400%;
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             animation: textShine 4s ease infinite;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             letter-spacing: 0.1em;
         }
 
         @keyframes textShine {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
+        }
+
+        .brand-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
         }
 
         .tagline {
@@ -126,26 +256,10 @@
             text-decoration: none;
             border-radius: 50px;
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.2);
             transition: all 0.3s ease;
             font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-btn:hover::before {
-            left: 100%;
         }
 
         .cta-btn:hover {
@@ -153,820 +267,739 @@
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(20px);
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.1);
-            z-index: 1000;
-            width: auto;
-            max-width: 90%;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 16px;
-            border-radius: 20px;
-            white-space: nowrap;
-        }
-
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: rgba(255,255,255,0.2);
-            color: #667eea;
-        }
-
-        /* Sections */
-        .section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 60px;
-            color: #ffffff;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
         /* About Section */
+        .about-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            padding: 60px;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .about-content h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
         }
 
         .about-text {
             font-size: 1.2rem;
             line-height: 1.8;
             color: #e0e0ff;
+            margin-bottom: 40px;
         }
 
-        .about-text h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .skills-grid {
+        .skills {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
         }
 
         .skill-item {
             background: rgba(255,255,255,0.05);
-            padding: 25px;
+            padding: 20px;
             border-radius: 15px;
-            text-align: center;
             border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
         }
 
-        .skill-item:hover {
-            border-color: #667eea;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
-        }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 40px;
-        }
-
-        .project-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-            border-color: #667eea;
-        }
-
-        .project-image {
-            height: 220px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: projectShine 3s infinite;
-        }
-
-        @keyframes projectShine {
-            0% { transform: rotate(45deg) translate(-100%, -100%); }
-            50% { transform: rotate(45deg) translate(100%, 100%); }
-            100% { transform: rotate(45deg) translate(200%, 200%); }
-        }
-
-        .project-content {
-            padding: 30px;
-        }
-
-        .project-title {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .project-description {
-            color: #b8b8ff;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .tech-tag {
-            background: rgba(102, 126, 234, 0.2);
+        .skill-item h4 {
             color: #667eea;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(102, 126, 234, 0.3);
-        }
-
-        .project-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .project-link {
-            padding: 10px 20px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .project-link.secondary {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 10px;
         }
 
         /* Contact Section */
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
+        .contact-section {
+            padding: 100px 0;
         }
 
-        .contact-info {
-            space-y: 40px;
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
         }
 
         .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            margin-bottom: 30px;
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
         }
 
         .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
+            font-size: 3rem;
+            margin-bottom: 20px;
         }
 
-        .contact-form {
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
+        .contact-item h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
         }
 
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: #ffffff;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: #888;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Footer */
-        .footer {
-            background: rgba(0,0,0,0.3);
+        .contact-item p {
             color: #b8b8ff;
-            text-align: center;
-            padding: 50px 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            word-break: break-all;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .contact-item a {
+            color: #667eea;
             text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .social-link:hover {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            transform: translateY(-3px);
+        .contact-item a:hover {
+            color: #764ba2;
         }
 
-        /* NFC Banner */
-        .nfc-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(45deg, #28a745, #20c997);
-            color: white;
-            padding: 15px 0;
-            text-align: center;
-            font-weight: 600;
-            transform: translateY(-100%);
-            transition: transform 0.5s ease;
-            z-index: 9999;
+        /* 회사 정보 섹션 */
+        .company-info-section {
+            padding: 100px 0;
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .nfc-banner.show {
-            transform: translateY(0);
-        }
-
-        /* Mobile Responsive */
+        /* Responsive */
         @media (max-width: 768px) {
-            .brand-name {
+            .edit-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .main-content.editing {
+                margin-right: 0;
+            }
+
+            .company-name {
                 font-size: 2.5rem;
             }
 
+            .brand-name {
+                font-size: 2rem;
+            }
+
             .tagline {
-                font-size: 1rem;
-                margin-bottom: 30px;
+                font-size: 1.1rem;
             }
 
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
-                gap: 15px;
             }
 
-            .cta-btn {
-                width: 280px;
-                text-align: center;
-            }
-
-            .nav {
-                position: static;
-                margin: 15px auto;
-                padding: 10px 20px;
-                left: auto;
-                transform: none;
-                width: fit-content;
-            }
-
-            .nav-menu {
-                gap: 20px;
-                justify-content: center;
-            }
-
-            .nav-menu a {
-                font-size: 0.9rem;
-                padding: 6px 12px;
-            }
-
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-                margin-bottom: 40px;
-            }
-
-            .section {
-                padding: 60px 0;
-            }
-
-            .hero {
-                padding: 40px 20px;
-                min-height: 90vh;
-            }
-
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .skill-item {
-                padding: 20px 15px;
-            }
-
-            .skill-icon {
-                font-size: 2rem;
-            }
-
-            .project-card {
-                margin: 0 10px;
-            }
-
-            .project-image {
-                height: 180px;
-                font-size: 3rem;
-            }
-
-            .contact-form {
-                padding: 30px 25px;
-            }
-
-            .form-group input,
-            .form-group textarea {
-                padding: 12px;
-            }
-
-            .social-links {
-                gap: 15px;
-            }
-
-            .social-link {
-                width: 45px;
-                height: 45px;
-            }
-
-            /* 모바일용 터치 최적화 */
-            .cta-btn:active,
-            .project-link:active,
-            .submit-btn:active {
-                transform: scale(0.98);
-            }
-
-            /* 모바일 스크롤 개선 */
-            body {
-                -webkit-overflow-scrolling: touch;
+            .about-content {
+                padding: 40px 30px;
             }
         }
 
-        @media (max-width: 480px) {
-            .brand-name {
-                font-size: 2rem;
-            }
-
-            .logo {
-                width: 60px;
-                height: 60px;
-            }
-
-            .cta-btn {
-                width: 250px;
-                padding: 12px 25px;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .about-text {
-                font-size: 1rem;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project-content {
-                padding: 25px 20px;
-            }
-
-            .contact-form {
-                padding: 25px 20px;
-            }
+        /* 프리뷰 모드 알림 */
+        .preview-mode {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
         }
 
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Fade In Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Glitch Effect for Logo */
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        .logo:hover {
-            animation: glitch 0.3s ease-in-out;
+        .preview-mode.show {
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
 
-    <!-- NFC 배너 -->
-    <div class="nfc-banner" id="nfcBanner">
-        ⚡ NFC로 접속하신 것을 환영합니다! GOLD:ON 디지털 명함을 경험해보세요.
+    <!-- 편집 모드 토글 버튼 -->
+    <button class="edit-toggle" onclick="toggleEditMode()">✏️ 명함 정보 수정</button>
+
+    <!-- 프리뷰 모드 알림 -->
+    <div class="preview-mode" id="previewAlert">
+        💡 정보를 수정하려면 우상단의 '명함 정보 수정' 버튼을 클릭하세요
     </div>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <ul class="nav-menu">
-            <li><a href="#about" class="nav-link">소개</a></li>
-            <li><a href="#projects" class="nav-link">프로젝트</a></li>
-            <li><a href="#contact" class="nav-link">연락</a></li>
-        </ul>
-    </nav>
+    <!-- 편집 패널 -->
+    <div class="edit-panel" id="editPanel">
+        <h3>📝 명함 정보 입력</h3>
+        
+        <div class="form-group">
+            <label for="userName">이름 *</label>
+            <input type="text" id="userName" placeholder="홍길동">
+        </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="logo"></div>
-                <h1 class="brand-name">GOLD:ON</h1>
-                <p class="tagline">NFC 명함용 고품질 QR 코드 생성</p>
-                <div class="cta-buttons">
-                    <a href="mailto:contact@goldon.com" class="cta-btn" id="emailBtn">📧 이메일</a>
-                    <a href="tel:010-1234-5678" class="cta-btn" id="phoneBtn">📞 전화</a>
-                    <a href="#" class="cta-btn" id="notionBtn" target="_blank">📋 노션</a>
-                    <a href="#" class="cta-btn" id="snsBtn" target="_blank">🌐 SNS</a>
-                    <a href="#" class="cta-btn" onclick="downloadVCard()">💾 연락처 저장</a>
-                </div>
+        <div class="form-group">
+            <label for="userTitle">직책 *</label>
+            <input type="text" id="userTitle" placeholder="대표이사 / 마케팅 팀장">
+        </div>
+
+        <div class="form-group">
+            <label for="userCompany">회사명</label>
+            <input type="text" id="userCompany" placeholder="테크 스타트업">
+        </div>
+
+        <div class="form-group">
+            <label for="userPhone">전화번호</label>
+            <input type="tel" id="userPhone" placeholder="010-1234-5678">
+        </div>
+
+        <div class="form-group">
+            <label for="userEmail">이메일 *</label>
+            <input type="email" id="userEmail" placeholder="name@company.com">
+        </div>
+
+        <div class="form-group">
+            <label for="userWebsite">웹사이트</label>
+            <input type="url" id="userWebsite" placeholder="https://www.company.com">
+        </div>
+
+        <div class="form-group">
+            <label for="userNotion">노션 페이지</label>
+            <input type="url" id="userNotion" placeholder="https://notion.so/your-page">
+        </div>
+
+        <div class="form-group">
+            <label for="userInstagram">인스타그램</label>
+            <input type="url" id="userInstagram" placeholder="https://instagram.com/username">
+        </div>
+
+        <div class="form-group">
+            <label for="userLinkedin">링크드인</label>
+            <input type="url" id="userLinkedin" placeholder="https://linkedin.com/in/username">
+        </div>
+
+        <div class="form-group">
+            <label for="userAddress">주소</label>
+            <textarea id="userAddress" rows="2" placeholder="서울시 강남구 테헤란로 123"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="userBio">소개</label>
+            <textarea id="userBio" rows="3" placeholder="간단한 자기소개를 입력하세요"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="userSkills">주요 스킬 (쉼표로 구분)</label>
+            <input type="text" id="userSkills" placeholder="React, Node.js, Python, AWS">
+        </div>
+
+        <div class="form-group">
+            <div class="color-input">
+                <label for="themeColor">테마 색상</label>
+                <input type="color" id="themeColor" value="#667eea">
             </div>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">About GOLD:ON</h2>
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    <h3>혁신적인 NFC 솔루션</h3>
-                    <p>GOLD:ON은 차세대 디지털 명함 기술을 선도하는 혁신적인 플랫폼입니다.</p>
-                    <p>고품질 QR 코드 생성부터 NFC 태그 통합까지, 완벽한 디지털 네트워킹 솔루션을 제공합니다.</p>
-                    <p>3D 프린팅 기술과 스마트 NFC 기술을 결합하여, 미래형 명함 경험을 만들어갑니다.</p>
-                </div>
-                <div class="skills-grid fade-in">
-                    <div class="skill-item">
-                        <div class="skill-icon">📱</div>
-                        <div>NFC 기술</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">🔗</div>
-                        <div>QR 생성</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">🖨️</div>
-                        <div>3D 프린팅</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">⚡</div>
-                        <div>Fast Deploy</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">🎨</div>
-                        <div>Custom Design</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">📊</div>
-                        <div>Analytics</div>
+        <button class="save-btn" onclick="saveProfile()">💾 프로필 저장</button>
+        <button class="save-btn" onclick="downloadVCard()" style="background: linear-gradient(45deg, #28a745, #20c997); margin-top: 10px;">📇 vCard 다운로드</button>
+        <button class="save-btn" onclick="closeEditMode()" style="background: rgba(255,255,255,0.1); margin-top: 10px;">👁️ 프리뷰 모드</button>
+        <button class="save-btn" onclick="forceUpdate()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); margin-top: 10px;">🔄 강제 업데이트</button>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <div class="main-content" id="mainContent">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="logo"></div>
+                    <h1 class="company-name" id="displayCompany">회사명을 입력하세요</h1>
+                    <p class="tagline" id="displayTitle">직책을 입력하세요</p>
+                    <h2 class="brand-name" id="displayName">사용자 이름</h2>
+                    <div class="cta-buttons">
+                        <a href="#" class="cta-btn" id="emailBtn">📧 이메일</a>
+                        <a href="#" class="cta-btn" id="phoneBtn">📞 전화</a>
+                        <a href="#" class="cta-btn" id="notionBtn">📋 노션</a>
+                        <a href="#" class="cta-btn" id="websiteBtn">🌐 웹사이트</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">프로젝트</h2>
-            <div class="projects-grid">
-                <div class="project-card fade-in">
-                    <div class="project-image">📱</div>
-                    <div class="project-content">
-                        <h3 class="project-title">NFC 스마트 명함</h3>
-                        <p class="project-description">3D 프린팅 기술과 NFC 칩을 결합한 혁신적인 디지털 명함. 터치만으로 연락처와 포트폴리오를 즉시 공유할 수 있습니다.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">NFC</span>
-                            <span class="tech-tag">3D Print</span>
-                            <span class="tech-tag">QR Code</span>
-                            <span class="tech-tag">vCard</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">데모 보기</a>
-                            <a href="#" class="project-link secondary">상세 정보</a>
-                        </div>
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About Me</h2>
+                    <div class="about-text" id="displayBio">
+                        자기소개를 입력하면 여기에 표시됩니다.
+                    </div>
+                    <div class="skills" id="displaySkills">
+                        <!-- 스킬들이 여기에 동적으로 추가됩니다 -->
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="project-card fade-in">
-                    <div class="project-image">🔗</div>
-                    <div class="project-content">
-                        <h3 class="project-title">QR 코드 생성기</h3>
-                        <p class="project-description">고해상도 QR 코드를 생성하는 웹 애플리케이션. vCard, URL, 텍스트 등 다양한 형식을 지원하며 3D 프린팅에 최적화되었습니다.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">QRious</span>
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <h2 style="text-align: center; color: #ffffff; font-size: 2.5rem; margin-bottom: 20px;">연락처</h2>
+                <div class="contact-grid" id="contactGrid">
+                    <!-- 연락처 정보가 여기에 동적으로 추가됩니다 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 토스 스타일 회사 소개 섹션 -->
+        <section class="company-info-section">
+            <div class="container">
+                <div class="company-stats">
+                    <h3 style="text-align: center; color: #ffffff; margin-bottom: 40px; font-size: 2rem;">GOLD:ON과 함께하는 성장</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">1,000+</div>
+                            <div style="color: #b8b8ff; font-weight: 500;">제작된 NFC 명함</div>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">데모 보기</a>
-                            <a href="#" class="project-link secondary">GitHub</a>
+                        
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">500+</div>
+                            <div style="color: #b8b8ff; font-weight: 500;">만족한 고객사</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">98%</div>
+                            <div style="color: #b8b8ff; font-weight: 500;">고객 만족도</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">24/7</div>
+                            <div style="color: #b8b8ff; font-weight: 500;">기술 지원</div>
                         </div>
                     </div>
-                </div>
 
-                <div class="project-card fade-in">
-                    <div class="project-image">⚡</div>
-                    <div class="project-content">
-                        <h3 class="project-title">포트폴리오 플랫폼</h3>
-                        <p class="project-description">NFC 태그로 접근 가능한 반응형 포트폴리오 웹사이트. 다크모드와 애니메이션 효과로 프리미엄 사용자 경험을 제공합니다.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">GSAP</span>
-                            <span class="tech-tag">PWA</span>
-                            <span class="tech-tag">Mobile First</span>
+                    <!-- 특징 카드들 -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 15px;">📱</div>
+                            <h4 style="color: #ffffff; margin-bottom: 12px; font-size: 1.2rem;">간편한 NFC 연동</h4>
+                            <p style="color: #b8b8ff; line-height: 1.5; font-size: 0.95rem;">스마트폰을 태그에 가까이 대기만 하면 즉시 연결</p>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">데모 보기</a>
-                            <a href="#" class="project-link secondary">GitHub</a>
+                        
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 15px;">🎨</div>
+                            <h4 style="color: #ffffff; margin-bottom: 12px; font-size: 1.2rem;">맞춤형 디자인</h4>
+                            <p style="color: #b8b8ff; line-height: 1.5; font-size: 0.95rem;">브랜드에 맞는 커스텀 디자인과 3D 프린팅</p>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 15px;">🌱</div>
+                            <h4 style="color: #ffffff; margin-bottom: 12px; font-size: 1.2rem;">친환경 솔루션</h4>
+                            <p style="color: #b8b8ff; line-height: 1.5; font-size: 0.95rem;">종이 명함을 대체하여 환경보호에 기여</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
+    <!-- GOLD:ON 회사 정보 푸터 (한 번만) -->
+    <footer style="background: rgba(0,0,0,0.3); color: #b8b8ff; text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
         <div class="container">
-            <h2 class="section-title fade-in">연락처</h2>
-            <div class="contact-content">
-                <div class="contact-info fade-in">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <h4>이메일</h4>
-                            <p>contact@goldon.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📞</div>
-                        <div>
-                            <h4>전화번호</h4>
-                            <p>010-1234-5678</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📋</div>
-                        <div>
-                            <h4>노션</h4>
-                            <p><a href="#" id="notionLink" target="_blank" style="color: #667eea; text-decoration: none;">설정에서 URL 등록</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🌐</div>
-                        <div>
-                            <h4>SNS</h4>
-                            <p><a href="#" id="snsLink" target="_blank" style="color: #667eea; text-decoration: none;">설정에서 URL 등록</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🌐</div>
-                        <div>
-                            <h4>웹사이트</h4>
-                            <p>www.goldon.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <h4>위치</h4>
-                            <p>전북 군산시</p>
-                        </div>
-                    </div>
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">GOLD:ON</div>
+                <p style="color: #888; margin-bottom: 15px;">NFC 명함용 고품질 QR 코드 생성 플랫폼</p>
+                <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <a href="mailto:contact@goldon.com" style="color: #667eea; text-decoration: none;">contact@goldon.com</a>
+                    <span style="color: #555;">|</span>
+                    <span style="color: #888;">전북 군산시</span>
+                    <span style="color: #555;">|</span>
+                    <span style="color: #888;">010-1234-5678</span>
                 </div>
-
-                <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
-                    <div class="form-group">
-                        <label for="name">이름</label>
-                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">이메일</label>
-                        <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">메시지</label>
-                        <textarea id="message" name="message" rows="5" placeholder="메시지를 입력하세요" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">메시지 전송</button>
-                </form>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="social-links">
-                <a href="#" class="social-link" id="instagramLink" target="_blank" title="Instagram">📷</a>
-                <a href="#" class="social-link" id="youtubeLink" target="_blank" title="YouTube">📺</a>
-                <a href="#" class="social-link" id="socialNotionLink" target="_blank" title="Notion">📋</a>
-                <a href="#" class="social-link" id="socialSNSLink" target="_blank" title="SNS">🌐</a>
-                <a href="https://github.com/goldon" class="social-link" target="_blank" title="GitHub">🐙</a>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; color: #666; font-size: 0.9rem;">
+                <p>&copy; 2024 GOLD:ON. All rights reserved. | 혁신적인 NFC 솔루션으로 디지털 명함 문화를 선도합니다.</p>
             </div>
-            <p>&copy; 2024 GOLD:ON. All rights reserved.</p>
-            <p>NFC 명함용 고품질 QR 코드 생성</p>
         </div>
     </footer>
 
     <script>
-        // NFC 감지 및 모바일 접근성
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const isLocalTest = window.location.hostname === '127.0.0.1' || 
-                               window.location.hostname === 'localhost' || 
-                               window.location.hostname.includes('192.168.');
+        let isEditMode = false;
+        let currentThemeColor = '#667eea';
+
+        // 편집 모드 토글
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const editPanel = document.getElementById('editPanel');
+            const mainContent = document.getElementById('mainContent');
+            const previewAlert = document.getElementById('previewAlert');
+
+            if (isEditMode) {
+                editPanel.classList.add('open');
+                mainContent.classList.add('editing');
+                previewAlert.classList.remove('show');
+            } else {
+                editPanel.classList.remove('open');
+                mainContent.classList.remove('editing');
+                previewAlert.classList.add('show');
+                setTimeout(() => previewAlert.classList.remove('show'), 3000);
+            }
+        }
+
+        function closeEditMode() {
+            isEditMode = false;
+            document.getElementById('editPanel').classList.remove('open');
+            document.getElementById('mainContent').classList.remove('editing');
             
-            if (urlParams.get('nfc') === 'true' || 
-                document.referrer.includes('nfc') || 
-                (isMobile && urlParams.get('mobile') === 'true') ||
-                isLocalTest) {
-                
-                document.getElementById('nfcBanner').classList.add('show');
-                
-                setTimeout(() => {
-                    document.getElementById('nfcBanner').classList.remove('show');
-                }, 7000);
+            const previewAlert = document.getElementById('previewAlert');
+            previewAlert.classList.add('show');
+            setTimeout(() => previewAlert.classList.remove('show'), 3000);
+        }
+
+        // 실시간 프리뷰 업데이트
+        function updatePreview() {
+            const name = document.getElementById('userName').value || '사용자 이름';
+            const title = document.getElementById('userTitle').value || '직책을 입력하세요';
+            const company = document.getElementById('userCompany').value || '회사명을 입력하세요';
+            const phone = document.getElementById('userPhone').value;
+            const email = document.getElementById('userEmail').value;
+            const website = document.getElementById('userWebsite').value;
+            const notion = document.getElementById('userNotion').value;
+            const instagram = document.getElementById('userInstagram').value;
+            const linkedin = document.getElementById('userLinkedin').value;
+            const address = document.getElementById('userAddress').value;
+            const bio = document.getElementById('userBio').value || '자기소개를 입력하면 여기에 표시됩니다.';
+            const skills = document.getElementById('userSkills').value;
+            const themeColor = document.getElementById('themeColor').value;
+
+            document.getElementById('displayCompany').textContent = company;
+            document.getElementById('displayTitle').textContent = title;
+            document.getElementById('displayName').textContent = name;
+            document.getElementById('displayBio').textContent = bio;
+
+            // 버튼 링크 업데이트
+            document.getElementById('emailBtn').href = email ? `mailto:${email}` : '#';
+            document.getElementById('phoneBtn').href = phone ? `tel:${phone}` : '#';
+            document.getElementById('notionBtn').href = notion || '#';
+            document.getElementById('websiteBtn').href = website || '#';
+
+            // 버튼 투명도 조절
+            document.getElementById('emailBtn').style.opacity = email ? '1' : '0.5';
+            document.getElementById('phoneBtn').style.opacity = phone ? '1' : '0.5';
+            document.getElementById('notionBtn').style.opacity = notion ? '1' : '0.5';
+            document.getElementById('websiteBtn').style.opacity = website ? '1' : '0.5';
+
+            // 스킬 업데이트
+            updateSkills(skills);
+
+            // 연락처 정보 업데이트
+            updateContactInfo(phone, email, website, notion, instagram, linkedin, address);
+
+            // 테마 색상 업데이트
+            if (themeColor !== currentThemeColor) {
+                currentThemeColor = themeColor;
+                updateThemeColor(themeColor);
+            }
+        }
+
+        // 스킬 섹션 업데이트
+        function updateSkills(skillsText) {
+            const skillsContainer = document.getElementById('displaySkills');
+            skillsContainer.innerHTML = '';
+
+            if (skillsText && skillsText.trim()) {
+                const skillsArray = skillsText.split(',').map(skill => skill.trim()).filter(skill => skill);
+                skillsArray.forEach(skill => {
+                    const skillItem = document.createElement('div');
+                    skillItem.className = 'skill-item';
+                    skillItem.innerHTML = `<h4>${skill}</h4>`;
+                    skillsContainer.appendChild(skillItem);
+                });
+            } else {
+                skillsContainer.innerHTML = '<div class="skill-item"><h4>스킬을 입력하세요</h4></div>';
+            }
+        }
+
+        // 연락처 정보 업데이트
+        function updateContactInfo(phone, email, website, notion, instagram, linkedin, address) {
+            const contactGrid = document.getElementById('contactGrid');
+            contactGrid.innerHTML = '';
+
+            const contacts = [
+                { icon: '📧', title: '이메일', value: email, link: email ? `mailto:${email}` : null },
+                { icon: '📞', title: '전화', value: phone, link: phone ? `tel:${phone}` : null },
+                { icon: '🌐', title: '웹사이트', value: website, link: website },
+                { icon: '📋', title: '노션', value: notion, link: notion },
+                { icon: '📷', title: '인스타그램', value: instagram, link: instagram },
+                { icon: '💼', title: '링크드인', value: linkedin, link: linkedin },
+                { icon: '📍', title: '주소', value: address, link: null }
+            ];
+
+            contacts.forEach(contact => {
+                if (contact.value) {
+                    const contactItem = document.createElement('div');
+                    contactItem.className = 'contact-item';
+                    
+                    const displayValue = contact.link ? 
+                        contact.value.replace('https://', '').substring(0, 30) + 
+                        (contact.value.length > 30 ? '...' : '') : 
+                        contact.value;
+
+                    contactItem.innerHTML = `
+                        <div class="contact-icon">${contact.icon}</div>
+                        <h4>${contact.title}</h4>
+                        <p>${contact.link ? `<a href="${contact.link}" target="_blank">${displayValue}</a>` : displayValue}</p>
+                    `;
+                    contactGrid.appendChild(contactItem);
+                }
+            });
+
+            if (contactGrid.children.length === 0) {
+                contactGrid.innerHTML = '<div class="contact-item"><div class="contact-icon">📝</div><h4>연락처 정보</h4><p>정보를 입력하면 여기에 표시됩니다</p></div>';
+            }
+        }
+
+        // 테마 색상 업데이트
+        function updateThemeColor(color) {
+            // 회사명 색상 업데이트
+            const companyName = document.getElementById('displayCompany');
+            if (companyName) {
+                companyName.style.background = `linear-gradient(135deg, ${color}, #764ba2, #f093fb, #f5576c)`;
+                companyName.style.backgroundSize = '400% 400%';
+                companyName.style.webkitBackgroundClip = 'text';
+                companyName.style.webkitTextFillColor = 'transparent';
+                companyName.style.backgroundClip = 'text';
+            }
+            
+            // About 섹션 제목 색상 업데이트
+            const aboutTitle = document.querySelector('.about-content h2');
+            if (aboutTitle) {
+                aboutTitle.style.color = color;
+            }
+            
+            // 스킬 아이템 색상 업데이트
+            const skillTitles = document.querySelectorAll('.skill-item h4');
+            skillTitles.forEach(title => {
+                title.style.color = color;
+            });
+            
+            // 연락처 제목들 색상 업데이트
+            const contactTitles = document.querySelectorAll('.contact-item h4');
+            contactTitles.forEach(title => {
+                title.style.color = color;
+            });
+            
+            // 연락처 링크들 색상 업데이트
+            const contactLinks = document.querySelectorAll('.contact-item a');
+            contactLinks.forEach(link => {
+                link.style.color = color;
+            });
+        }
+
+        // 프로필 저장
+        function saveProfile() {
+            const profileData = {
+                name: document.getElementById('userName').value,
+                title: document.getElementById('userTitle').value,
+                company: document.getElementById('userCompany').value,
+                phone: document.getElementById('userPhone').value,
+                email: document.getElementById('userEmail').value,
+                website: document.getElementById('userWebsite').value,
+                notion: document.getElementById('userNotion').value,
+                instagram: document.getElementById('userInstagram').value,
+                linkedin: document.getElementById('userLinkedin').value,
+                address: document.getElementById('userAddress').value,
+                bio: document.getElementById('userBio').value,
+                skills: document.getElementById('userSkills').value,
+                themeColor: document.getElementById('themeColor').value
+            };
+
+            localStorage.setItem('nfcProfileData', JSON.stringify(profileData));
+            showNotification('프로필이 저장되었습니다!', 'success');
+        }
+
+        // 저장된 프로필 로드
+        function loadProfile() {
+            const saved = localStorage.getItem('nfcProfileData');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    
+                    document.getElementById('userName').value = data.name || '';
+                    document.getElementById('userTitle').value = data.title || '';
+                    document.getElementById('userCompany').value = data.company || '';
+                    document.getElementById('userPhone').value = data.phone || '';
+                    document.getElementById('userEmail').value = data.email || '';
+                    document.getElementById('userWebsite').value = data.website || '';
+                    document.getElementById('userNotion').value = data.notion || '';
+                    document.getElementById('userInstagram').value = data.instagram || '';
+                    document.getElementById('userLinkedin').value = data.linkedin || '';
+                    document.getElementById('userAddress').value = data.address || '';
+                    document.getElementById('userBio').value = data.bio || '';
+                    document.getElementById('userSkills').value = data.skills || '';
+                    document.getElementById('themeColor').value = data.themeColor || '#667eea';
+                    
+                    updatePreview();
+                } catch (e) {
+                    console.error('프로필 로드 오류:', e);
+                }
+            } else {
+                // 기본값 설정
+                updatePreview();
+            }
+        }
+
+        // vCard 다운로드
+        function downloadVCard() {
+            const name = document.getElementById('userName').value || '사용자';
+            const title = document.getElementById('userTitle').value;
+            const company = document.getElementById('userCompany').value;
+            const phone = document.getElementById('userPhone').value;
+            const email = document.getElementById('userEmail').value;
+            const website = document.getElementById('userWebsite').value;
+            const address = document.getElementById('userAddress').value;
+
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+${title ? `TITLE:${title}` : ''}
+${company ? `ORG:${company}` : ''}
+${phone ? `TEL:${phone}` : ''}
+${email ? `EMAIL:${email}` : ''}
+${website ? `URL:${website}` : ''}
+${address ? `ADR:;;${address};;;;` : ''}
+NOTE:GOLD:ON NFC 디지털 명함
+END:VCARD`.replace(/\n\n+/g, '\n');
+
+            const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${name}_명함.vcf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            URL.revokeObjectURL(url);
+            showNotification('vCard가 다운로드되었습니다!', 'success');
+        }
+
+        // 강제 업데이트 함수
+        function forceUpdate() {
+            updatePreview();
+            saveProfile();
+            showNotification('강제 업데이트 완료!', 'success');
+        }
+
+        // 알림 시스템
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'success' ? 'linear-gradient(45deg, #28a745, #20c997)' : 'linear-gradient(45deg, #667eea, #764ba2)'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 25px;
+                z-index: 10000;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                font-weight: 500;
+                backdrop-filter: blur(10px);
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(-50%) translateY(-20px)';
+                notification.style.opacity = '0';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // 페이지 로드시 저장된 프로필 로드
+        window.addEventListener('load', function() {
+            loadProfile();
+            
+            // 입력 필드에 이벤트 리스너 추가
+            const inputFields = [
+                'userName', 'userTitle', 'userCompany', 'userPhone', 'userEmail',
+                'userWebsite', 'userNotion', 'userInstagram', 'userLinkedin',
+                'userAddress', 'userBio', 'userSkills'
+            ];
+            
+            inputFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.addEventListener('input', updatePreview);
+                    field.addEventListener('keyup', updatePreview);
+                    field.addEventListener('change', updatePreview);
+                }
+            });
+            
+            // 색상 입력 필드
+            const colorField = document.getElementById('themeColor');
+            if (colorField) {
+                colorField.addEventListener('change', updatePreview);
+                colorField.addEventListener('input', updatePreview);
+            }
+            
+            // 초기 프리뷰 업데이트
+            setTimeout(updatePreview, 100);
+            
+            // URL 파라미터로 NFC 접근 감지
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('nfc') === 'true') {
+                showNotification('NFC로 접속하신 것을 환영합니다!', 'success');
+            }
+
+            // 처음 방문자를 위한 안내
+            setTimeout(() => {
+                const hasVisited = localStorage.getItem('hasVisitedNFCProfile');
+                if (!hasVisited) {
+                    showNotification('우상단 버튼을 클릭해서 나만의 명함을 만들어보세요!', 'info');
+                    localStorage.setItem('hasVisitedNFCProfile', 'true');
+                }
+            }, 2000);
+        });
+
+        // 키보드 단축키
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+                e.preventDefault();
+                toggleEditMode();
+            }
+            
+            if (e.key === 'Escape' && isEditMode) {
+                closeEditMode();
             }
         });
 
-        // 부드러운 스크롤 네비게이션
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-                
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        // 모바일에서 터치 제스처
+        let touchStartX = 0;
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            
+            if (diff > 100 && !isEditMode) {
+                toggleEditMode();
+            }
+            else if (diff < -100 && isEditMode) {
+                closeEditMode();
+            }
+        });
+    </script>
