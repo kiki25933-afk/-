@@ -187,25 +187,49 @@
             width: 120px;
             height: 120px;
             margin: 0 auto 30px;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
-            background-size: 300% 300%;
-            animation: logoShine 3s ease infinite;
-            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
-        @keyframes logoShine {
-            0%, 100% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
+        .logo-lightning {
+            width: 60px;
+            height: 80px;
+            position: relative;
         }
 
-        .logo::before {
-            content: '⚡';
-            font-size: 3rem;
-            color: white;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        .logo-lightning svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+        
+        .logo-lightning svg path {
+            animation: colorShine 4s ease infinite;
+            stroke-width: 3;
+            stroke-linejoin: round;
+        }
+        
+        @keyframes colorShine {
+            0%, 100% { 
+                fill: #667eea;
+                stroke: #667eea;
+            }
+            25% { 
+                fill: #764ba2;
+                stroke: #764ba2;
+            }
+            50% { 
+                fill: #f093fb;
+                stroke: #f093fb;
+            }
+            75% { 
+                fill: #f5576c;
+                stroke: #f5576c;
+            }
         }
 
         .company-name {
@@ -475,8 +499,8 @@
         </div>
 
         <div class="form-group">
-            <label for="userInstagram">인스타그램</label>
-            <input type="url" id="userInstagram" placeholder="https://instagram.com/username">
+            <label for="userSNS">SNS (유튜브, 인스타, 틱톡 등)</label>
+            <input type="url" id="userSNS" placeholder="https://youtube.com/@channel">
         </div>
 
         <div class="form-group">
@@ -518,7 +542,17 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <div class="logo"></div>
+                    <div class="logo">
+                        <div class="logo-lightning">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 65 5 L 30 45 L 50 45 L 25 95 L 75 35 L 50 35 Z" 
+                                      fill="#667eea" 
+                                      stroke="#667eea" 
+                                      stroke-width="3" 
+                                      stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
                     <h1 class="company-name" id="displayCompany">회사명을 입력하세요</h1>
                     <p class="tagline" id="displayTitle">직책을 입력하세요</p>
                     <h2 class="brand-name" id="displayName">사용자 이름</h2>
@@ -550,7 +584,7 @@
         <!-- Contact Section -->
         <section class="contact-section">
             <div class="container">
-                <h2 style="text-align: center; color: #ffffff; font-size: 2.5rem; margin-bottom: 20px;">연락처</h2>
+                <h2 style="text-align: center; color: #ffffff; font-size: 2.5rem; margin-bottom: 20px;">소셜</h2>
                 <div class="contact-grid" id="contactGrid">
                     <!-- 연락처 정보가 여기에 동적으로 추가됩니다 -->
                 </div>
@@ -672,7 +706,7 @@
             const email = document.getElementById('userEmail').value;
             const website = document.getElementById('userWebsite').value;
             const notion = document.getElementById('userNotion').value;
-            const instagram = document.getElementById('userInstagram').value;
+            const sns = document.getElementById('userSNS').value;
             const linkedin = document.getElementById('userLinkedin').value;
             const address = document.getElementById('userAddress').value;
             const bio = document.getElementById('userBio').value || '자기소개를 입력하면 여기에 표시됩니다.';
@@ -700,7 +734,7 @@
             updateSkills(skills);
 
             // 연락처 정보 업데이트
-            updateContactInfo(phone, email, website, notion, instagram, linkedin, address);
+            updateContactInfo(phone, email, website, notion, sns, linkedin, address);
 
             // 테마 색상 업데이트
             if (themeColor !== currentThemeColor) {
@@ -714,21 +748,137 @@
             const skillsContainer = document.getElementById('displaySkills');
             skillsContainer.innerHTML = '';
 
+            // 스킬별 로고 매핑
+            const skillLogos = {
+                // 프로그래밍 언어
+                'python': '🐍',
+                'javascript': '🟨',
+                'java': '☕',
+                'c++': '🔷',
+                'c#': '🟦',
+                'react': '⚛️',
+                'vue': '🟢',
+                'angular': '🔺',
+                'nodejs': '🟩',
+                'node.js': '🟩',
+                'html': '🟧',
+                'css': '🟦',
+                'php': '🟪',
+                'ruby': '💎',
+                'swift': '🍎',
+                'kotlin': '🟣',
+                'go': '🐹',
+                'rust': '🦀',
+                
+                // 디자인 툴
+                'photoshop': '🎨',
+                'illustrator': '🖌️',
+                'premiere': '🎬',
+                '프리미어': '🎬',
+                '프리미어프로': '🎬',
+                'premiere pro': '🎬',
+                'after effects': '🎆',
+                'aftereffects': '🎆',
+                'ae': '🎆',
+                'figma': '🎯',
+                'sketch': '✏️',
+                'xd': '📱',
+                'blender': '🧊',
+                '3ds max': '📦',
+                '3dsmax': '📦',
+                
+                // 데이터베이스
+                'mysql': '🐬',
+                'postgresql': '🐘',
+                'mongodb': '🍃',
+                'redis': '🔴',
+                'oracle': '🔮',
+                
+                // 클라우드 & DevOps
+                'aws': '☁️',
+                'azure': '☁️',
+                'gcp': '☁️',
+                'docker': '🐳',
+                'kubernetes': '☸️',
+                'jenkins': '🔧',
+                'git': '📂',
+                'github': '🐙',
+                
+                // 기타 툴
+                'excel': '📊',
+                'powerpoint': '📽️',
+                'word': '📄',
+                'notion': '📋',
+                'slack': '💬',
+                'jira': '📌',
+                
+                // AI & ML
+                'tensorflow': '🤖',
+                'pytorch': '🔥',
+                'ai': '🤖',
+                '인공지능': '🤖',
+                'machine learning': '🧠',
+                '머신러닝': '🧠',
+                
+                // 마케팅
+                'seo': '🔍',
+                '마케팅': '📈',
+                'marketing': '📈',
+                '광고': '📢',
+                'sns': '📱',
+                
+                // 영상/음악
+                '영상편집': '🎬',
+                '영상': '📹',
+                'video': '📹',
+                '음악': '🎵',
+                'music': '🎵',
+                'fl studio': '🎹',
+                'logic': '🎼',
+                'ableton': '🎛️'
+            };
+
             if (skillsText && skillsText.trim()) {
                 const skillsArray = skillsText.split(',').map(skill => skill.trim()).filter(skill => skill);
                 skillsArray.forEach(skill => {
                     const skillItem = document.createElement('div');
                     skillItem.className = 'skill-item';
-                    skillItem.innerHTML = `<h4>${skill}</h4>`;
+                    
+                    // 스킬명을 소문자로 변환하여 로고 찾기
+                    const skillLower = skill.toLowerCase();
+                    let logo = '';
+                    
+                    // 정확한 매칭 먼저 시도
+                    if (skillLogos[skillLower]) {
+                        logo = skillLogos[skillLower];
+                    } else {
+                        // 부분 매칭 시도
+                        for (const [key, value] of Object.entries(skillLogos)) {
+                            if (skillLower.includes(key) || key.includes(skillLower)) {
+                                logo = value;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // 로고가 없으면 기본 아이콘
+                    if (!logo) {
+                        logo = '⚡';
+                    }
+                    
+                    skillItem.innerHTML = `
+                        <div style="font-size: 2rem; margin-bottom: 8px;">${logo}</div>
+                        <h4>${skill}</h4>
+                    `;
                     skillsContainer.appendChild(skillItem);
                 });
             } else {
-                skillsContainer.innerHTML = '<div class="skill-item"><h4>스킬을 입력하세요</h4></div>';
+                skillsContainer.innerHTML = '<div class="skill-item"><div style="font-size: 2rem; margin-bottom: 8px;">💡</div><h4>스킬을 입력하세요</h4></div>';
             }
         }
 
         // 연락처 정보 업데이트
-        function updateContactInfo(phone, email, website, notion, instagram, linkedin, address) {
+        function updateContactInfo(phone, email, website, notion, sns, linkedin, address) {
             const contactGrid = document.getElementById('contactGrid');
             contactGrid.innerHTML = '';
 
@@ -737,7 +887,7 @@
                 { icon: '📞', title: '전화', value: phone, link: phone ? `tel:${phone}` : null },
                 { icon: '🌐', title: '웹사이트', value: website, link: website },
                 { icon: '📋', title: '노션', value: notion, link: notion },
-                { icon: '📷', title: '인스타그램', value: instagram, link: instagram },
+                { icon: '▶️', title: 'SNS', value: sns, link: sns },
                 { icon: '💼', title: '링크드인', value: linkedin, link: linkedin },
                 { icon: '📍', title: '주소', value: address, link: null }
             ];
@@ -813,7 +963,7 @@
                 email: document.getElementById('userEmail').value,
                 website: document.getElementById('userWebsite').value,
                 notion: document.getElementById('userNotion').value,
-                instagram: document.getElementById('userInstagram').value,
+                sns: document.getElementById('userSNS').value,
                 linkedin: document.getElementById('userLinkedin').value,
                 address: document.getElementById('userAddress').value,
                 bio: document.getElementById('userBio').value,
@@ -839,7 +989,7 @@
                     document.getElementById('userEmail').value = data.email || '';
                     document.getElementById('userWebsite').value = data.website || '';
                     document.getElementById('userNotion').value = data.notion || '';
-                    document.getElementById('userInstagram').value = data.instagram || '';
+                    document.getElementById('userSNS').value = data.sns || data.instagram || '';
                     document.getElementById('userLinkedin').value = data.linkedin || '';
                     document.getElementById('userAddress').value = data.address || '';
                     document.getElementById('userBio').value = data.bio || '';
