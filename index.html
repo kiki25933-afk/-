@@ -547,6 +547,7 @@
         </div>
 
         <button class="save-btn" onclick="saveProfile()">💾 프로필 저장</button>
+        <button class="save-btn" onclick="generateNFCLink()" style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4); margin-top: 10px;">🔗 NFC 링크 생성</button>
         <button class="save-btn" onclick="downloadVCard()" style="background: linear-gradient(45deg, #28a745, #20c997); margin-top: 10px;">📇 vCard 다운로드</button>
         <button class="save-btn" onclick="closeEditMode()" style="background: rgba(255,255,255,0.1); margin-top: 10px;">👁️ 프리뷰 모드</button>
         <button class="save-btn" onclick="forceUpdate()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); margin-top: 10px;">🔄 강제 업데이트</button>
@@ -676,34 +677,7 @@
                 <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; backdrop-filter: blur(20px); margin-bottom: 30px;">
                     <h4 style="color: #ffffff; margin-bottom: 20px;">최근 7일 방문 현황</h4>
                     <div style="display: flex; align-items: flex-end; justify-content: space-around; height: 200px; gap: 10px;" id="barChart">
-                        <div class="bar-day" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
-                            <div style="width: 100%; background: linear-gradient(to top, #667eea, #764ba2); border-radius: 5px 5px 0 0; transition: all 0.5s ease; height: 30%;" data-value="30"></div>
-                            <span style="color: #b8b8ff; margin-top: 10px; font-size: 0.9rem;">월</span>
-                        </div>
-                        <div class="bar-day" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
-                            <div style="width: 100%; background: linear-gradient(to top, #667eea, #764ba2); border-radius: 5px 5px 0 0; transition: all 0.5s ease; height: 45%;" data-value="45"></div>
-                            <span style="color: #b8b8ff; margin-top: 10px; font-size: 0.9rem;">화</span>
-                        </div>
-                        <div class="bar-day" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
-                            <div style="width: 100%; background: linear-gradient(to top, #667eea, #764ba2); border-radius: 5px 5px 0 0; transition: all 0.5s ease; height: 60%;" data-value="60"></div>
-                            <span style="color: #b8b8ff; margin-top: 10px; font-size: 0.9rem;">수</span>
-                        </div>
-                        <div class="bar-day" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
-                            <div style="width: 100%; background: linear-gradient(to top, #667eea, #764ba2); border-radius: 5px 5px 0 0; transition: all 0.5s ease; height: 80%;" data-value="80"></div>
-                            <span style="color: #b8b8ff; margin-top: 10px; font-size: 0.9rem;">목</span>
-                        </div>
-                        <div class="bar-day" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
-                            <div style="width: 100%; background: linear-gradient(to top, #667eea, #764ba2); border-radius: 5px 5px 0 0; transition: all 0.5s ease; height: 70%;" data-value="70"></div>
-                            <span style="color: #b8b8ff; margin-top: 10px; font-size: 0.9rem;">금</span>
-                        </div>
-                        <div class="bar-day" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
-                            <div style="width: 100%; background: linear-gradient(to top, #667eea, #764ba2); border-radius: 5px 5px 0 0; transition: all 0.5s ease; height: 90%;" data-value="90"></div>
-                            <span style="color: #b8b8ff; margin-top: 10px; font-size: 0.9rem;">토</span>
-                        </div>
-                        <div class="bar-day" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
-                            <div style="width: 100%; background: linear-gradient(to top, #f093fb, #f5576c); border-radius: 5px 5px 0 0; transition: all 0.5s ease; height: 100%;" data-value="100"></div>
-                            <span style="color: #b8b8ff; margin-top: 10px; font-size: 0.9rem;">오늘</span>
-                        </div>
+                        <!-- 막대 그래프는 JavaScript로 동적 생성됩니다 -->
                     </div>
                 </div>
 
@@ -720,7 +694,7 @@
         </section>
     </div>
 
-    <!-- GOLD:ON 회사 정보 푸터 (한 번만) -->
+    <!-- GOLD:ON 회사 정보 푸터 -->
     <footer style="background: rgba(0,0,0,0.3); color: #b8b8ff; text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
         <div class="container">
             <div style="margin-bottom: 20px;">
@@ -753,14 +727,11 @@
                 reader.onload = function(e) {
                     uploadedLogoData = e.target.result;
                     
-                    // 프리뷰 표시
                     document.getElementById('logoPreviewImg').src = uploadedLogoData;
                     document.getElementById('logoPreview').style.display = 'block';
                     document.getElementById('removeLogoBtn').style.display = 'inline-block';
                     
-                    // 메인 로고 업데이트
                     updateLogoDisplay();
-                    
                     showNotification('로고가 업로드되었습니다!', 'success');
                 };
                 reader.readAsDataURL(file);
@@ -774,9 +745,7 @@
             document.getElementById('logoPreview').style.display = 'none';
             document.getElementById('removeLogoBtn').style.display = 'none';
             
-            // 기본 로고로 복원
             updateLogoDisplay();
-            
             showNotification('로고가 삭제되었습니다', 'info');
         }
 
@@ -784,12 +753,10 @@
         function updateLogoDisplay() {
             const logoLightning = document.querySelector('.logo-lightning');
             if (uploadedLogoData) {
-                // 업로드된 로고 표시
                 logoLightning.innerHTML = `
                     <img src="${uploadedLogoData}" style="max-width: 80px; max-height: 80px; object-fit: contain;">
                 `;
             } else {
-                // 기본 번개 로고 표시
                 logoLightning.innerHTML = `
                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                         <path d="M 65 5 L 30 45 L 50 45 L 25 95 L 75 35 L 50 35 Z" 
@@ -864,13 +831,9 @@
             document.getElementById('notionBtn').style.opacity = notion ? '1' : '0.5';
             document.getElementById('websiteBtn').style.opacity = website ? '1' : '0.5';
 
-            // 스킬 업데이트
             updateSkills(skills);
-
-            // 연락처 정보 업데이트
             updateContactInfo(phone, email, website, notion, sns, linkedin, address);
 
-            // 테마 색상 업데이트
             if (themeColor !== currentThemeColor) {
                 currentThemeColor = themeColor;
                 updateThemeColor(themeColor);
@@ -882,94 +845,20 @@
             const skillsContainer = document.getElementById('displaySkills');
             skillsContainer.innerHTML = '';
 
-            // 스킬별 로고 매핑
             const skillLogos = {
-                // 프로그래밍 언어
-                'python': '🐍',
-                'javascript': '🟨',
-                'java': '☕',
-                'c++': '🔷',
-                'c#': '🟦',
-                'react': '⚛️',
-                'vue': '🟢',
-                'angular': '🔺',
-                'nodejs': '🟩',
-                'node.js': '🟩',
-                'html': '🟧',
-                'css': '🟦',
-                'php': '🟪',
-                'ruby': '💎',
-                'swift': '🍎',
-                'kotlin': '🟣',
-                'go': '🐹',
-                'rust': '🦀',
-                
-                // 디자인 툴
-                'photoshop': '🎨',
-                'illustrator': '🖌️',
-                'premiere': '🎬',
-                '프리미어': '🎬',
-                '프리미어프로': '🎬',
-                'premiere pro': '🎬',
-                'after effects': '🎆',
-                'aftereffects': '🎆',
-                'ae': '🎆',
-                'figma': '🎯',
-                'sketch': '✏️',
-                'xd': '📱',
-                'blender': '🧊',
-                '3ds max': '📦',
-                '3dsmax': '📦',
-                
-                // 데이터베이스
-                'mysql': '🐬',
-                'postgresql': '🐘',
-                'mongodb': '🍃',
-                'redis': '🔴',
-                'oracle': '🔮',
-                
-                // 클라우드 & DevOps
-                'aws': '☁️',
-                'azure': '☁️',
-                'gcp': '☁️',
-                'docker': '🐳',
-                'kubernetes': '☸️',
-                'jenkins': '🔧',
-                'git': '📂',
-                'github': '🐙',
-                
-                // 기타 툴
-                'excel': '📊',
-                'powerpoint': '📽️',
-                'word': '📄',
-                'notion': '📋',
-                'slack': '💬',
-                'jira': '📌',
-                
-                // AI & ML
-                'tensorflow': '🤖',
-                'pytorch': '🔥',
-                'ai': '🤖',
-                '인공지능': '🤖',
-                'machine learning': '🧠',
-                '머신러닝': '🧠',
-                
-                // 마케팅
-                'seo': '🔍',
-                '마케팅': '📈',
-                'marketing': '📈',
-                '광고': '📢',
-                'sns': '📱',
-                
-                // 영상/음악
-                '영상편집': '🎬',
-                '영상': '📹',
-                'video': '📹',
-                '음악': '🎵',
-                'music': '🎵',
-                'fl studio': '🎹',
-                'logic': '🎼',
-                'ableton': '🎛️'
+                'python': '🐍', 'javascript': '🟨', 'java': '☕', 'c++': '🔷', 'c#': '🟦',
+                'react': '⚛️', 'vue': '🟢', 'angular': '🔺', 'nodejs': '🟩', 'node.js': '🟩',
+                'html': '🟧', 'css': '🟦', 'php': '🟪', 'ruby': '💎', 'swift': '🍎',
+                'kotlin': '🟣', 'go': '🐹', 'rust': '🦀', 'photoshop': '🎨', 'illustrator': '🖌️',
+                'premiere': '🎬', 'figma': '🎯', 'sketch': '✏️', 'xd': '📱', 'blender': '🧊',
+                'mysql': '🐬', 'postgresql': '🐘', 'mongodb': '🍃', 'redis': '🔴', 'oracle': '🔮',
+                'aws': '☁️', 'azure': '☁️', 'gcp': '☁️', 'docker': '🐳', 'kubernetes': '☸️',
+                'jenkins': '🔧', 'git': '📂', 'github': '🐙', 'excel': '📊', 'powerpoint': '📽️',
+                'word': '📄', 'notion': '📋', 'slack': '💬', 'jira': '📌', 'tensorflow': '🤖',
+                'pytorch': '🔥', 'ai': '🤖', '인공지능': '🤖', 'machine learning': '🧠',
+                '머신러닝': '🧠', 'seo': '🔍', '마케팅': '📈', 'marketing': '📈',
+                '광고': '📢', 'sns': '📱', '영상편집': '🎬', '영상': '📹', 'video': '📹',
+                '음악': '🎵', 'music': '🎵'
             };
 
             if (skillsText && skillsText.trim()) {
@@ -978,15 +867,12 @@
                     const skillItem = document.createElement('div');
                     skillItem.className = 'skill-item';
                     
-                    // 스킬명을 소문자로 변환하여 로고 찾기
                     const skillLower = skill.toLowerCase();
                     let logo = '';
                     
-                    // 정확한 매칭 먼저 시도
                     if (skillLogos[skillLower]) {
                         logo = skillLogos[skillLower];
                     } else {
-                        // 부분 매칭 시도
                         for (const [key, value] of Object.entries(skillLogos)) {
                             if (skillLower.includes(key) || key.includes(skillLower)) {
                                 logo = value;
@@ -995,10 +881,7 @@
                         }
                     }
                     
-                    // 로고가 없으면 기본 아이콘
-                    if (!logo) {
-                        logo = '⚡';
-                    }
+                    if (!logo) logo = '⚡';
                     
                     skillItem.innerHTML = `
                         <div style="font-size: 2rem; margin-bottom: 8px;">${logo}</div>
@@ -1052,7 +935,6 @@
 
         // 테마 색상 업데이트
         function updateThemeColor(color) {
-            // 회사명 색상 업데이트
             const companyName = document.getElementById('displayCompany');
             if (companyName) {
                 companyName.style.background = `linear-gradient(135deg, ${color}, #764ba2, #f093fb, #f5576c)`;
@@ -1062,29 +944,12 @@
                 companyName.style.backgroundClip = 'text';
             }
             
-            // About 섹션 제목 색상 업데이트
             const aboutTitle = document.querySelector('.about-content h2');
-            if (aboutTitle) {
-                aboutTitle.style.color = color;
-            }
+            if (aboutTitle) aboutTitle.style.color = color;
             
-            // 스킬 아이템 색상 업데이트
-            const skillTitles = document.querySelectorAll('.skill-item h4');
-            skillTitles.forEach(title => {
-                title.style.color = color;
-            });
-            
-            // 연락처 제목들 색상 업데이트
-            const contactTitles = document.querySelectorAll('.contact-item h4');
-            contactTitles.forEach(title => {
-                title.style.color = color;
-            });
-            
-            // 연락처 링크들 색상 업데이트
-            const contactLinks = document.querySelectorAll('.contact-item a');
-            contactLinks.forEach(link => {
-                link.style.color = color;
-            });
+            document.querySelectorAll('.skill-item h4').forEach(title => title.style.color = color);
+            document.querySelectorAll('.contact-item h4').forEach(title => title.style.color = color);
+            document.querySelectorAll('.contact-item a').forEach(link => link.style.color = color);
         }
 
         // 프로필 저장
@@ -1110,8 +975,184 @@
             showNotification('프로필이 저장되었습니다!', 'success');
         }
 
+        // NFC 링크 생성
+        function generateNFCLink() {
+            const profileData = {
+                name: document.getElementById('userName').value,
+                title: document.getElementById('userTitle').value,
+                company: document.getElementById('userCompany').value,
+                phone: document.getElementById('userPhone').value,
+                email: document.getElementById('userEmail').value,
+                website: document.getElementById('userWebsite').value,
+                notion: document.getElementById('userNotion').value,
+                sns: document.getElementById('userSNS').value,
+                linkedin: document.getElementById('userLinkedin').value,
+                address: document.getElementById('userAddress').value,
+                bio: document.getElementById('userBio').value,
+                skills: document.getElementById('userSkills').value,
+                themeColor: document.getElementById('themeColor').value,
+                logo: uploadedLogoData
+            };
+            
+            const jsonString = JSON.stringify(profileData);
+            const encoded = btoa(unescape(encodeURIComponent(jsonString)));
+            const baseURL = window.location.origin + window.location.pathname;
+            const nfcURL = `${baseURL}?data=${encoded}`;
+            
+            const textArea = document.createElement('textarea');
+            textArea.value = nfcURL;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            showNotification('NFC 링크가 클립보드에 복사되었습니다!', 'success');
+            
+            if (nfcURL.length > 700) {
+                showNotification('⚠️ 링크가 너무 깁니다. 일부 NFC 카드에서 작동하지 않을 수 있습니다.', 'info');
+            }
+        }
+
+        // URL 파라미터 확인 및 데이터 로드
+        function checkURLData() {
+            const params = new URLSearchParams(window.location.search);
+            const encodedData = params.get('data');
+            
+            if (encodedData) {
+                try {
+                    const jsonString = decodeURIComponent(escape(atob(encodedData)));
+                    const data = JSON.parse(jsonString);
+                    
+                    if (data.name) document.getElementById('userName').value = data.name;
+                    if (data.title) document.getElementById('userTitle').value = data.title;
+                    if (data.company) document.getElementById('userCompany').value = data.company;
+                    if (data.phone) document.getElementById('userPhone').value = data.phone;
+                    if (data.email) document.getElementById('userEmail').value = data.email;
+                    if (data.website) document.getElementById('userWebsite').value = data.website;
+                    if (data.notion) document.getElementById('userNotion').value = data.notion;
+                    if (data.sns) document.getElementById('userSNS').value = data.sns;
+                    if (data.linkedin) document.getElementById('userLinkedin').value = data.linkedin;
+                    if (data.address) document.getElementById('userAddress').value = data.address;
+                    if (data.bio) document.getElementById('userBio').value = data.bio;
+                    if (data.skills) document.getElementById('userSkills').value = data.skills;
+                    if (data.themeColor) document.getElementById('themeColor').value = data.themeColor;
+                    
+                    if (data.logo) {
+                        uploadedLogoData = data.logo;
+                        document.getElementById('logoPreviewImg').src = uploadedLogoData;
+                        document.getElementById('logoPreview').style.display = 'block';
+                        document.getElementById('removeLogoBtn').style.display = 'inline-block';
+                        updateLogoDisplay();
+                    }
+                    
+                    updateRealVisitorStats();
+                    return true;
+                } catch (e) {
+                    console.error('URL 데이터 파싱 오류:', e);
+                }
+            }
+            return false;
+        }
+
+        // 실제 방문 통계 업데이트
+        function updateRealVisitorStats() {
+            const params = new URLSearchParams(window.location.search);
+            const encodedData = params.get('data');
+            
+            if (encodedData) {
+                const visitKey = 'nfc_visit_' + btoa(encodedData).substring(0, 20);
+                let visitCount = parseInt(localStorage.getItem(visitKey) || '0');
+                visitCount++;
+                localStorage.setItem(visitKey, visitCount.toString());
+                
+                const historyKey = visitKey + '_history';
+                const today = new Date().toDateString();
+                let visitHistory = JSON.parse(localStorage.getItem(historyKey) || '{}');
+                
+                if (!visitHistory[today]) visitHistory[today] = 0;
+                visitHistory[today]++;
+                localStorage.setItem(historyKey, JSON.stringify(visitHistory));
+                
+                animateCounter(visitCount);
+                updateChart(visitHistory);
+                
+                showNotification('NFC 명함에 오신 것을 환영합니다!', 'success');
+            }
+        }
+
+        // 방문자 카운터 애니메이션
+        function animateCounter(targetCount) {
+            const countElement = document.getElementById('visitCount');
+            if (countElement) {
+                let currentCount = 0;
+                const increment = Math.ceil(targetCount / 50);
+                const timer = setInterval(() => {
+                    currentCount += increment;
+                    if (currentCount >= targetCount) {
+                        currentCount = targetCount;
+                        clearInterval(timer);
+                    }
+                    countElement.textContent = currentCount.toLocaleString();
+                }, 20);
+            }
+        }
+
+        // 차트 업데이트
+        function updateChart(visitHistory) {
+            const chartContainer = document.getElementById('barChart');
+            if (!chartContainer) return;
+            
+            const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+            const weekData = [];
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toDateString();
+                const dayName = dayNames[date.getDay()];
+                
+                weekData.push({
+                    day: i === 0 ? '오늘' : dayName,
+                    count: visitHistory[dateStr] || 0,
+                    isToday: i === 0
+                });
+            }
+            
+            const maxCount = Math.max(1, ...weekData.map(d => d.count));
+            
+            let chartHTML = '';
+            weekData.forEach(item => {
+                const heightPercent = Math.max(5, (item.count / maxCount) * 100);
+                const gradient = item.isToday ? 
+                    'linear-gradient(to top, #f093fb, #f5576c)' : 
+                    'linear-gradient(to top, #667eea, #764ba2)';
+                
+                chartHTML += `
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
+                        ${item.count > 0 ? `<span style="color: #fff; font-size: 0.8rem; margin-bottom: 5px; opacity: 0.8;">${item.count}</span>` : ''}
+                        <div style="width: 100%; background: ${gradient}; border-radius: 5px 5px 0 0; transition: all 0.5s ease; height: ${heightPercent}%;"></div>
+                        <span style="color: #b8b8ff; margin-top: 10px; font-size: 0.9rem;">${item.day}</span>
+                    </div>
+                `;
+            });
+            
+            chartContainer.innerHTML = chartHTML;
+        }
+
+        // 기본 차트 표시
+        function showDefaultChart() {
+            updateChart({});
+        }
+
         // 저장된 프로필 로드
         function loadProfile() {
+            if (checkURLData()) {
+                setTimeout(updatePreview, 100);
+                return;
+            }
+            
             const saved = localStorage.getItem('nfcProfileData');
             if (saved) {
                 try {
@@ -1124,14 +1165,13 @@
                     document.getElementById('userEmail').value = data.email || '';
                     document.getElementById('userWebsite').value = data.website || '';
                     document.getElementById('userNotion').value = data.notion || '';
-                    document.getElementById('userSNS').value = data.sns || data.instagram || '';
+                    document.getElementById('userSNS').value = data.sns || '';
                     document.getElementById('userLinkedin').value = data.linkedin || '';
                     document.getElementById('userAddress').value = data.address || '';
                     document.getElementById('userBio').value = data.bio || '';
                     document.getElementById('userSkills').value = data.skills || '';
                     document.getElementById('themeColor').value = data.themeColor || '#667eea';
                     
-                    // 로고 데이터 로드
                     if (data.logo) {
                         uploadedLogoData = data.logo;
                         document.getElementById('logoPreviewImg').src = uploadedLogoData;
@@ -1144,10 +1184,16 @@
                 } catch (e) {
                     console.error('프로필 로드 오류:', e);
                 }
-            } else {
-                // 기본값 설정
-                updatePreview();
             }
+            
+            // 로컬 방문자 카운터
+            let localCount = parseInt(localStorage.getItem('localVisitCount') || '0');
+            localCount++;
+            localStorage.setItem('localVisitCount', localCount.toString());
+            animateCounter(localCount);
+            showDefaultChart();
+            
+            updatePreview();
         }
 
         // vCard 다운로드
@@ -1186,7 +1232,7 @@ END:VCARD`.replace(/\n\n+/g, '\n');
             showNotification('vCard가 다운로드되었습니다!', 'success');
         }
 
-        // 강제 업데이트 함수
+        // 강제 업데이트
         function forceUpdate() {
             updatePreview();
             saveProfile();
@@ -1221,94 +1267,19 @@ END:VCARD`.replace(/\n\n+/g, '\n');
             }, 3000);
         }
 
-        // 페이지 로드시 저장된 프로필 로드
-        window.addEventListener('load', function() {
-            loadProfile();
-            
-            // 입력 필드에 이벤트 리스너 추가
-            const inputFields = [
-                'userName', 'userTitle', 'userCompany', 'userPhone', 'userEmail',
-                'userWebsite', 'userNotion', 'userSNS', 'userLinkedin',
-                'userAddress', 'userBio', 'userSkills'
-            ];
-            
-            inputFields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                if (field) {
-                    field.addEventListener('input', updatePreview);
-                    field.addEventListener('keyup', updatePreview);
-                    field.addEventListener('change', updatePreview);
-                }
-            });
-            
-            // 색상 입력 필드
-            const colorField = document.getElementById('themeColor');
-            if (colorField) {
-                colorField.addEventListener('change', updatePreview);
-                colorField.addEventListener('input', updatePreview);
-            }
-            
-            // 초기 프리뷰 업데이트
-            setTimeout(updatePreview, 100);
-            
-            // URL 파라미터로 NFC 접근 감지
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('nfc') === 'true') {
-                showNotification('NFC로 접속하신 것을 환영합니다!', 'success');
-            }
-
-            // 처음 방문자를 위한 안내
-            setTimeout(() => {
-                const hasVisited = localStorage.getItem('hasVisitedNFCProfile');
-                if (!hasVisited) {
-                    showNotification('우상단 버튼을 클릭해서 나만의 명함을 만들어보세요!', 'info');
-                    localStorage.setItem('hasVisitedNFCProfile', 'true');
-                }
-            }, 2000);
-
-            // 방문자 카운터 업데이트
-            updateVisitorCount();
-            
-            // 그래프는 이미 height가 설정되어 있으므로 애니메이션 불필요
-        });
-
-        // 방문자 카운터
-        function updateVisitorCount() {
-            let visitCount = parseInt(localStorage.getItem('profileVisitCount') || '0');
-            visitCount++;
-            localStorage.setItem('profileVisitCount', visitCount.toString());
-            
-            // 카운터 애니메이션
-            const countElement = document.getElementById('visitCount');
-            if (countElement) {
-                let currentCount = 0;
-                const increment = Math.ceil(visitCount / 50);
-                const timer = setInterval(() => {
-                    currentCount += increment;
-                    if (currentCount >= visitCount) {
-                        currentCount = visitCount;
-                        clearInterval(timer);
-                    }
-                    countElement.textContent = currentCount.toLocaleString();
-                }, 20);
-            }
-        }
-
-        // 모바일 친화적 이스터 에그 - 탭 카운터
+        // 이스터 에그
         let tapCounter = 0;
         let tapTimer = null;
 
         function tapCount() {
             tapCounter++;
             
-            // 아이콘 애니메이션
             const icon = document.getElementById('easterEggIcon');
             if (icon) {
                 icon.style.transform = `scale(${1 + tapCounter * 0.05}) rotate(${tapCounter * 36}deg)`;
                 icon.style.transition = 'transform 0.3s ease';
             }
             
-            // 탭 카운터 리셋 타이머
             clearTimeout(tapTimer);
             tapTimer = setTimeout(() => {
                 tapCounter = 0;
@@ -1317,24 +1288,19 @@ END:VCARD`.replace(/\n\n+/g, '\n');
                 }
             }, 2000);
             
-            // 10번 탭하면 이스터 에그 활성화
             if (tapCounter === 10) {
                 activateMobileEasterEgg();
                 tapCounter = 0;
             }
         }
 
-        // 모바일 이스터 에그 활성화
         function activateMobileEasterEgg() {
-            // 진동 효과 (모바일에서만)
             if (navigator.vibrate) {
                 navigator.vibrate([100, 50, 100, 50, 200]);
             }
             
-            // 화면 효과
             document.body.style.animation = 'rainbowBackground 3s';
             
-            // 이모지 비 효과
             const emojis = ['⚡', '🎉', '🌟', '💫', '✨', '🎊', '🎯', '🏆', '💎', '🚀'];
             for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
@@ -1344,7 +1310,6 @@ END:VCARD`.replace(/\n\n+/g, '\n');
             
             showNotification('🎉 축하합니다! 번개의 힘을 깨우셨습니다! ⚡', 'success');
             
-            // 로고 특별 애니메이션
             const logo = document.querySelector('.logo');
             if (logo) {
                 logo.style.animation = 'bounce 1s ease infinite';
@@ -1353,32 +1318,11 @@ END:VCARD`.replace(/\n\n+/g, '\n');
                 }, 3000);
             }
             
-            // 숨겨진 메시지 표시
-            const secretMessage = document.createElement('div');
-            secretMessage.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 30px;
-                background: linear-gradient(135deg, #667eea, #764ba2);
-                color: white;
-                border-radius: 20px;
-                font-size: 1.5rem;
-                font-weight: bold;
-                z-index: 10000;
-                animation: secretPulse 2s ease;
-            `;
-            secretMessage.textContent = '⚡ GOLD:ON POWER MODE ACTIVATED! ⚡';
-            document.body.appendChild(secretMessage);
-            
             setTimeout(() => {
-                secretMessage.remove();
                 document.body.style.animation = '';
             }, 3000);
         }
 
-        // 이모지 비 효과
         function createEmojiRain(emoji) {
             const emojiElement = document.createElement('div');
             emojiElement.textContent = emoji;
@@ -1399,18 +1343,7 @@ END:VCARD`.replace(/\n\n+/g, '\n');
             }, 3000);
         }
 
-        // 힌트 클릭 이스터 에그
-        function showEasterEgg() {
-            const hints = [
-                '⚡ 번개를 탭해보세요!',
-                '🎮 숨겨진 기능이 있답니다!',
-                '🌈 10번의 탭으로 마법이 일어납니다!',
-                '✨ GOLD:ON의 숨겨진 파워!'
-            ];
-            showNotification(hints[Math.floor(Math.random() * hints.length)], 'info');
-        }
-
-        // 추가 CSS 애니메이션 스타일 삽입
+        // CSS 애니메이션 추가
         const style = document.createElement('style');
         style.textContent = `
             @keyframes rainbowBackground {
@@ -1433,14 +1366,51 @@ END:VCARD`.replace(/\n\n+/g, '\n');
                     opacity: 0;
                 }
             }
-            
-            @keyframes secretPulse {
-                0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-                50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-            }
         `;
         document.head.appendChild(style);
+
+        // 페이지 로드 시 초기화
+        window.addEventListener('load', function() {
+            loadProfile();
+            
+            const inputFields = [
+                'userName', 'userTitle', 'userCompany', 'userPhone', 'userEmail',
+                'userWebsite', 'userNotion', 'userSNS', 'userLinkedin',
+                'userAddress', 'userBio', 'userSkills'
+            ];
+            
+            inputFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.addEventListener('input', updatePreview);
+                    field.addEventListener('keyup', updatePreview);
+                    field.addEventListener('change', updatePreview);
+                }
+            });
+            
+            const colorField = document.getElementById('themeColor');
+            if (colorField) {
+                colorField.addEventListener('change', updatePreview);
+                colorField.addEventListener('input', updatePreview);
+            }
+            
+            setTimeout(updatePreview, 100);
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('data')) {
+                setTimeout(() => {
+                    showNotification('NFC 명함에 오신 것을 환영합니다!', 'success');
+                }, 1000);
+            } else {
+                setTimeout(() => {
+                    const hasVisited = localStorage.getItem('hasVisitedNFCProfile');
+                    if (!hasVisited) {
+                        showNotification('우상단 버튼을 클릭해서 나만의 명함을 만들어보세요!', 'info');
+                        localStorage.setItem('hasVisitedNFCProfile', 'true');
+                    }
+                }, 2000);
+            }
+        });
 
         // 키보드 단축키
         document.addEventListener('keydown', function(e) {
@@ -1454,7 +1424,7 @@ END:VCARD`.replace(/\n\n+/g, '\n');
             }
         });
 
-        // 모바일에서 터치 제스처
+        // 모바일 터치 제스처
         let touchStartX = 0;
         document.addEventListener('touchstart', function(e) {
             touchStartX = e.touches[0].clientX;
