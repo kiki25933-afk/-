@@ -239,17 +239,6 @@
             }
         }
 
-        @keyframes pixelate {
-            0%, 100% { filter: none; }
-            50% { filter: contrast(200%) brightness(150%); }
-        }
-
-        @keyframes shake-fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            50% { transform: translateY(50vh) rotate(180deg); opacity: 0.5; }
-            100% { transform: translateY(0) rotate(360deg); opacity: 1; }
-        }
-
         .achievement-popup {
             position: fixed;
             top: 50%;
@@ -1099,11 +1088,22 @@
                     console.error('프로필 로드 오류:', e);
                 }
             }
+            
+            // 로컬 방문자 카운터 업데이트
             let localCount = parseInt(localStorage.getItem('localVisitCount') || '0');
             localCount++;
             localStorage.setItem('localVisitCount', localCount.toString());
+            
+            // 방문 히스토리 업데이트
+            const historyKey = 'local_visit_history';
+            const today = new Date().toDateString();
+            let visitHistory = JSON.parse(localStorage.getItem(historyKey) || '{}');
+            if (!visitHistory[today]) visitHistory[today] = 0;
+            visitHistory[today]++;
+            localStorage.setItem(historyKey, JSON.stringify(visitHistory));
+            
             animateCounter(localCount);
-            showDefaultChart();
+            updateChart(visitHistory);
             updatePreview();
         }
 
@@ -1148,71 +1148,6 @@
 
         let tapCounter = 0;
         let tapTimer = null;
-        let companyNameClickCount = 0;
-        let companyNameClickTimer = null;
-        let lastShakeTime = 0;
-
-        // 2번: 더블클릭 이스터 에그 (회사명 3번 클릭)
-        function setupDoubleClickEasterEgg() {
-            const companyName = document.getElementById('displayCompany');
-            if (companyName) {
-                companyName.style.cursor = 'pointer';
-                companyName.addEventListener('click', function() {
-                    companyNameClickCount++;
-                    
-                    clearTimeout(companyNameClickTimer);
-                    companyNameClickTimer = setTimeout(() => {
-                        companyNameClickCount = 0;
-                    }, 500);
-                    
-                    if (companyNameClickCount === 3) {
-                        activateRetroMode();
-                        companyNameClickCount = 0;
-                    }
-                });
-            }
-        }
-
-        function activateRetroMode() {
-            const mainContent = document.querySelector('.main-content');
-            
-            // 8비트 레트로 효과
-            mainContent.style.animation = 'pixelate 2s ease-in-out';
-            mainContent.style.imageRendering = 'pixelated';
-            mainContent.style.filter = 'contrast(150%) brightness(120%)';
-            
-            showAchievementPopup('🎮 숨겨진 레벨 발견!', '레트로 모드 활성화');
-            
-            // 파티클 효과
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    createPixelParticle();
-                }, i * 50);
-            }
-            
-            setTimeout(() => {
-                mainContent.style.animation = '';
-                mainContent.style.imageRendering = '';
-                mainContent.style.filter = '';
-            }, 3000);
-        }
-
-        function createPixelParticle() {
-            const particle = document.createElement('div');
-            particle.textContent = ['█', '▓', '▒', '░'][Math.floor(Math.random() * 4)];
-            particle.style.cssText = `
-                position: fixed;
-                top: ${Math.random() * window.innerHeight}px;
-                left: ${Math.random() * window.innerWidth}px;
-                font-size: ${20 + Math.random() * 30}px;
-                color: hsl(${Math.random() * 360}, 100%, 70%);
-                pointer-events: none;
-                z-index: 9999;
-                animation: fadeOutScale 2s ease-out forwards;
-            `;
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 2000);
-        }
 
         // 4번: 방문 횟수 마일스톤
         function checkVisitMilestone() {
@@ -1262,46 +1197,6 @@
                     setTimeout(() => firework.remove(), 1500);
                 }, i * 30);
             }
-        }
-
-        // 6번: 흔들기 제스처 (모바일)
-        function setupShakeDetection() {
-            if (window.DeviceMotionEvent) {
-                window.addEventListener('devicemotion', handleShake);
-            }
-        }
-
-        function handleShake(event) {
-            const acceleration = event.accelerationIncludingGravity;
-            const current = Date.now();
-            
-            if (current - lastShakeTime < 1000) return;
-            
-            const threshold = 15;
-            if (Math.abs(acceleration.x) > threshold || 
-                Math.abs(acceleration.y) > threshold || 
-                Math.abs(acceleration.z) > threshold) {
-                
-                lastShakeTime = current;
-                activateShakeEffect();
-            }
-        }
-
-        function activateShakeEffect() {
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100]);
-            }
-            
-            showAchievementPopup('📱 명함 재시작!', '흔들기 감지됨');
-            
-            // 모든 섹션을 떨어뜨리고 다시 조립
-            const sections = document.querySelectorAll('.hero, .about-section, .contact-section, .company-info-section');
-            sections.forEach((section, index) => {
-                section.style.animation = `shake-fall ${1 + index * 0.2}s ease-in-out`;
-                setTimeout(() => {
-                    section.style.animation = '';
-                }, (1 + index * 0.2) * 1000);
-            });
         }
 
         function showAchievementPopup(title, message) {
@@ -1374,14 +1269,12 @@
         }
 
         const style = document.createElement('style');
-        style.textContent = `@keyframes rainbowBackground{0%{filter:hue-rotate(0deg) brightness(1.2)}25%{filter:hue-rotate(90deg) brightness(1.3)}50%{filter:hue-rotate(180deg) brightness(1.2)}75%{filter:hue-rotate(270deg) brightness(1.3)}100%{filter:hue-rotate(360deg) brightness(1.2)}}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}@keyframes emojifall{to{top:100vh;transform:rotate(360deg);opacity:0}}@keyframes fadeOutScale{to{opacity:0;transform:scale(2)}}@keyframes explode{to{transform:translate(var(--tx), var(--ty));opacity:0}}`;
+        style.textContent = `@keyframes rainbowBackground{0%{filter:hue-rotate(0deg) brightness(1.2)}25%{filter:hue-rotate(90deg) brightness(1.3)}50%{filter:hue-rotate(180deg) brightness(1.2)}75%{filter:hue-rotate(270deg) brightness(1.3)}100%{filter:hue-rotate(360deg) brightness(1.2)}}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}@keyframes emojifall{to{top:100vh;transform:rotate(360deg);opacity:0}}@keyframes explode{to{transform:translate(var(--tx), var(--ty));opacity:0}}`;
         document.head.appendChild(style);
 
         window.addEventListener('load', function() {
             loadProfile();
             checkVisitMilestone();
-            setupDoubleClickEasterEgg();
-            setupShakeDetection();
             const inputFields = ['userName', 'userTitle', 'userCompany', 'userPhone', 'userEmail', 'userWebsite', 'userNotion', 'userSNS', 'userLinkedin', 'userAddress', 'userBio', 'userSkills'];
             inputFields.forEach(fieldId => {
                 const field = document.getElementById(fieldId);
