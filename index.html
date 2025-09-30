@@ -595,7 +595,7 @@
                         <a href="#" class="cta-btn" id="emailBtn">📧 이메일</a>
                         <a href="#" class="cta-btn" id="phoneBtn">📞 전화</a>
                         <a href="#" class="cta-btn" id="notionBtn">📋 노션</a>
-                        <a href="#" class="cta-btn" id="websiteBtn">🌐 웹사이트</a>
+                        <a href="#" class="cta-btn" id="websiteBtn">🌍 웹사이트</a>
                     </div>
                 </div>
             </div>
@@ -919,25 +919,33 @@
 
         function generateNFCLink() {
             const profileData = {
-                name: document.getElementById('userName').value,
-                title: document.getElementById('userTitle').value,
-                company: document.getElementById('userCompany').value,
-                phone: document.getElementById('userPhone').value,
-                email: document.getElementById('userEmail').value,
-                website: document.getElementById('userWebsite').value,
-                notion: document.getElementById('userNotion').value,
-                sns: document.getElementById('userSNS').value,
-                linkedin: document.getElementById('userLinkedin').value,
-                address: document.getElementById('userAddress').value,
-                bio: document.getElementById('userBio').value,
-                skills: document.getElementById('userSkills').value,
-                themeColor: document.getElementById('themeColor').value,
-                logo: uploadedLogoData
+                n: document.getElementById('userName').value,
+                t: document.getElementById('userTitle').value,
+                c: document.getElementById('userCompany').value,
+                p: document.getElementById('userPhone').value,
+                e: document.getElementById('userEmail').value,
+                w: document.getElementById('userWebsite').value,
+                nt: document.getElementById('userNotion').value,
+                s: document.getElementById('userSNS').value,
+                l: document.getElementById('userLinkedin').value,
+                a: document.getElementById('userAddress').value,
+                b: document.getElementById('userBio').value,
+                sk: document.getElementById('userSkills').value,
+                tc: document.getElementById('themeColor').value
             };
+            
+            // 빈 값 제거
+            Object.keys(profileData).forEach(key => {
+                if (!profileData[key] || profileData[key] === '.') {
+                    delete profileData[key];
+                }
+            });
+            
             const jsonString = JSON.stringify(profileData);
             const encoded = btoa(unescape(encodeURIComponent(jsonString)));
             const baseURL = window.location.origin + window.location.pathname;
-            const nfcURL = `${baseURL}?data=${encoded}`;
+            const nfcURL = `${baseURL}?d=${encoded}`;
+            
             const textArea = document.createElement('textarea');
             textArea.value = nfcURL;
             textArea.style.position = 'fixed';
@@ -946,32 +954,36 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            showNotification('NFC 링크가 클립보드에 복사되었습니다!', 'success');
-            if (nfcURL.length > 700) {
-                showNotification('⚠️ 링크가 너무 깁니다. 일부 NFC 카드에서 작동하지 않을 수 있습니다.', 'info');
+            
+            showNotification(`링크 복사 완료! (${nfcURL.length}자)`, 'success');
+            
+            if (nfcURL.length > 500) {
+                showNotification('⚠️ 링크가 500자를 초과합니다. bit.ly에서 단축하세요.', 'info');
             }
         }
 
         function checkURLData() {
             const params = new URLSearchParams(window.location.search);
-            const encodedData = params.get('data');
+            const encodedData = params.get('d') || params.get('data');
             if (encodedData) {
                 try {
                     const jsonString = decodeURIComponent(escape(atob(encodedData)));
                     const data = JSON.parse(jsonString);
-                    if (data.name) document.getElementById('userName').value = data.name;
-                    if (data.title) document.getElementById('userTitle').value = data.title;
-                    if (data.company) document.getElementById('userCompany').value = data.company;
-                    if (data.phone) document.getElementById('userPhone').value = data.phone;
-                    if (data.email) document.getElementById('userEmail').value = data.email;
-                    if (data.website) document.getElementById('userWebsite').value = data.website;
-                    if (data.notion) document.getElementById('userNotion').value = data.notion;
-                    if (data.sns) document.getElementById('userSNS').value = data.sns;
-                    if (data.linkedin) document.getElementById('userLinkedin').value = data.linkedin;
-                    if (data.address) document.getElementById('userAddress').value = data.address;
-                    if (data.bio) document.getElementById('userBio').value = data.bio;
-                    if (data.skills) document.getElementById('userSkills').value = data.skills;
-                    if (data.themeColor) document.getElementById('themeColor').value = data.themeColor;
+                    
+                    // 짧은 키와 긴 키 모두 지원
+                    if (data.n || data.name) document.getElementById('userName').value = data.n || data.name;
+                    if (data.t || data.title) document.getElementById('userTitle').value = data.t || data.title;
+                    if (data.c || data.company) document.getElementById('userCompany').value = data.c || data.company;
+                    if (data.p || data.phone) document.getElementById('userPhone').value = data.p || data.phone;
+                    if (data.e || data.email) document.getElementById('userEmail').value = data.e || data.email;
+                    if (data.w || data.website) document.getElementById('userWebsite').value = data.w || data.website;
+                    if (data.nt || data.notion) document.getElementById('userNotion').value = data.nt || data.notion;
+                    if (data.s || data.sns) document.getElementById('userSNS').value = data.s || data.sns;
+                    if (data.l || data.linkedin) document.getElementById('userLinkedin').value = data.l || data.linkedin;
+                    if (data.a || data.address) document.getElementById('userAddress').value = data.a || data.address;
+                    if (data.b || data.bio) document.getElementById('userBio').value = data.b || data.bio;
+                    if (data.sk || data.skills) document.getElementById('userSkills').value = data.sk || data.skills;
+                    if (data.tc || data.themeColor) document.getElementById('themeColor').value = data.tc || data.themeColor;
                     if (data.logo) {
                         uploadedLogoData = data.logo;
                         document.getElementById('logoPreviewImg').src = uploadedLogoData;
