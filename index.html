@@ -65,7 +65,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* 다크모드 스타일 */
         body.dark-mode {
             background: #000000;
             color: #ffffff;
@@ -111,7 +110,8 @@
         body.dark-mode .logo {
             background: #ffffff;
         }
-
+        
+        /* 다크 모드 로고 SVG 색상 수정 */
         body.dark-mode .logo-lightning svg path {
             fill: #000000;
             stroke: #000000;
@@ -176,10 +176,6 @@
             background: #000000;
         }
 
-        body.dark-mode .contact-section h2 {
-            color: #ffffff;
-        }
-
         body.dark-mode .contact-item {
             background: #1a1a1a;
             border: 1px solid #333;
@@ -220,32 +216,55 @@
             color: #ffffff !important;
         }
 
-        body.dark-mode .company-info-section .company-stats > div:first-of-type > div {
+        body.dark-mode .company-info-section .company-stats > div > div:first-child {
             color: #ffffff !important;
         }
 
-        body.dark-mode .company-info-section .company-stats > div:first-of-type > div:last-child {
+        body.dark-mode .company-info-section .company-stats > div > div:last-child {
             color: #cccccc !important;
         }
 
-        body.dark-mode .company-info-section [style*="background: #000000"] {
-            background: #ffffff !important;
+        /* 다크모드일 때 세부 기능 카드 수정 */
+        body.dark-mode .company-info-section > .container > div:last-child > div[style*="background: #ffffff"] {
+            background: #1a1a1a !important; /* 배경색 어둡게 */
+            border: 1px solid #333 !important; /* 테두리 어둡게 */
+        }
+        
+        /* 다크모드일 때 카드 내부의 텍스트와 제목 색상을 밝게 수정 (가독성 확보) */
+        body.dark-mode .company-info-section > .container > div:last-child > div[style*="background: #ffffff"] h4 {
+            color: #ffffff !important; /* 제목을 흰색으로 */
+        }
+        body.dark-mode .company-info-section > .container > div:last-child > div[style*="background: #ffffff"] p {
+            color: #cccccc !important; /* 내용을 밝은 회색으로 */
+        }
+        
+        /* 다크모드일 때 카드 내 검은색 배경 아이콘 부분 수정 */
+        body.dark-mode .company-info-section > .container > div:last-child > div[style*="background: #ffffff"] > div[style*="background: #000000"] {
+            background: #ffffff !important; /* 배경색 밝게 */
+            color: #000000 !important; /* 아이콘 색상 어둡게 */
+        }
+        
+        /* 노션 SVG 아이콘 색상 수정 (텍스트 기반이므로 SVG 스타일 제거) */
+        .contact-icon .notion-block {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #000000; /* 라이트 모드 배경 */
+            color: #ffffff; /* 라이트 모드 글자색 */
+            border-radius: 10px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 50px; /* 텍스트 중앙 정렬 */
+            text-align: center;
+            font-family: serif; /* N자 모양이 더 잘 보이도록 세리프체 적용 */
         }
 
-        body.dark-mode .company-info-section [style*="background: #ffffff"] {
-            background: #1a1a1a !important;
-            border: 1px solid #333 !important;
+        body.dark-mode .contact-icon .notion-block {
+            background: #ffffff !important; /* 다크 모드 배경 */
+            color: #000000 !important; /* 다크 모드 글자색 */
         }
 
-        body.dark-mode .company-info-section h4 {
-            color: #ffffff !important;
-        }
 
-        body.dark-mode .company-info-section p {
-            color: #999 !important;
-        }
-
-        /* 다크모드 - 통계 섹션 */
         body.dark-mode section[style*="background: #f8f8f8"] {
             background: #1a1a1a !important;
         }
@@ -280,7 +299,6 @@
             color: #ffffff;
         }
 
-        /* 푸터 다크모드 */
         body.dark-mode footer {
             background: #ffffff !important;
             color: #000000 !important;
@@ -369,20 +387,6 @@
             color: #999;
         }
 
-        .color-input {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .color-input input[type="color"] {
-            width: 50px;
-            height: 40px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
         .save-btn {
             width: 100%;
             padding: 15px;
@@ -434,7 +438,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .logo-lightning {
@@ -789,10 +792,10 @@
                         <div class="logo-lightning">
                             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M 65 5 L 30 45 L 50 45 L 25 95 L 75 35 L 50 35 Z" 
-                                      fill="#ffffff" 
-                                      stroke="#ffffff" 
-                                      stroke-width="3" 
-                                      stroke-linejoin="round" />
+                                    fill="#ffffff" 
+                                    stroke="#ffffff" 
+                                    stroke-width="3" 
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                     </div>
@@ -833,7 +836,7 @@
         <section class="company-info-section">
             <div class="container">
                 <div class="company-stats">
-                    <h3 style="text-align: center; color: #ffffff; margin-bottom: 40px; font-size: 2rem;">GOLD:ON과 함께하는 성장</h3>
+                    <h3 style="text-align: center; color: #ffffff; margin-bottom: 40px; font-size: 2rem;">GOLD:ON, 디지털 명함의 미래</h3>
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 50px;">
                         <div style="text-align: center;">
@@ -859,6 +862,12 @@
 
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
                         <div style="background: #ffffff; padding: 25px; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="width: 50px; height: 50px; background: #000000; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 15px;">🌱</div>
+                            <h4 style="color: #000000; margin-bottom: 12px; font-size: 1.2rem;">친환경 솔루션</h4>
+                            <p style="color: #666666; line-height: 1.5; font-size: 0.95rem;">종이 명함을 대체하여 환경보호에 기여</p>
+                        </div>
+                        
+                        <div style="background: #ffffff; padding: 25px; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
                             <div style="width: 50px; height: 50px; background: #000000; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 15px;">📱</div>
                             <h4 style="color: #000000; margin-bottom: 12px; font-size: 1.2rem;">간편한 NFC 연동</h4>
                             <p style="color: #666666; line-height: 1.5; font-size: 0.95rem;">스마트폰을 태그에 가까이 대기만 하면 즉시 연결</p>
@@ -868,12 +877,6 @@
                             <div style="width: 50px; height: 50px; background: #000000; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 15px;">🎨</div>
                             <h4 style="color: #000000; margin-bottom: 12px; font-size: 1.2rem;">맞춤형 디자인</h4>
                             <p style="color: #666666; line-height: 1.5; font-size: 0.95rem;">브랜드에 맞는 커스텀 디자인과 3D 프린팅</p>
-                        </div>
-                        
-                        <div style="background: #ffffff; padding: 25px; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
-                            <div style="width: 50px; height: 50px; background: #000000; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 15px;">🌱</div>
-                            <h4 style="color: #000000; margin-bottom: 12px; font-size: 1.2rem;">친환경 솔루션</h4>
-                            <p style="color: #666666; line-height: 1.5; font-size: 0.95rem;">종이 명함을 대체하여 환경보호에 기여</p>
                         </div>
                     </div>
                 </div>
@@ -933,7 +936,6 @@
         let uploadedLogoData = null;
         let isDarkMode = false;
 
-        // 다크모드 토글 함수
         function toggleDarkMode() {
             isDarkMode = !isDarkMode;
             document.body.classList.toggle('dark-mode');
@@ -948,13 +950,11 @@
                 showNotification('라이트모드 활성화!', 'success');
             }
             
-            // 차트 다시 그리기
-            const historyKey = 'local_visit_history';
+            const historyKey = getVisitHistoryKey();
             let visitHistory = JSON.parse(localStorage.getItem(historyKey) || '{}');
             updateChart(visitHistory);
         }
 
-        // 페이지 로드시 다크모드 상태 확인
         function checkDarkMode() {
             const darkModeStatus = localStorage.getItem('darkMode');
             if (darkModeStatus === 'enabled') {
@@ -991,11 +991,14 @@
         }
 
         function updateLogoDisplay() {
+            const logoContainer = document.querySelector('.logo');
             const logoLightning = document.querySelector('.logo-lightning');
             if (uploadedLogoData) {
-                logoLightning.innerHTML = `<img src="${uploadedLogoData}" style="max-width: 80px; max-height: 80px; object-fit: contain; display: block; margin: 0 auto;">`;
+                logoContainer.style.background = 'transparent'; 
+                logoLightning.innerHTML = `<img src="${uploadedLogoData}" style="max-width: 80px; max-height: 80px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px;">`;
             } else {
-                logoLightning.innerHTML = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M 65 5 L 30 45 L 50 45 L 25 95 L 75 35 L 50 35 Z" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" /></svg>`;
+                logoContainer.style.background = isDarkMode ? '#ffffff' : '#000000';
+                logoLightning.innerHTML = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M 65 5 L 30 45 L 50 45 L 25 95 L 75 35 L 50 35 Z" fill="${isDarkMode ? '#000000' : '#ffffff'}" stroke="${isDarkMode ? '#000000' : '#ffffff'}" stroke-width="3" stroke-linejoin="round" /></svg>`;
             }
         }
 
@@ -1061,7 +1064,7 @@
         function updateSkills(skillsText) {
             const skillsContainer = document.getElementById('displaySkills');
             skillsContainer.innerHTML = '';
-            const skillLogos = {'python':'🐍','javascript':'📕','java':'☕','c++':'📗','c#':'📘','react':'⚛️','vue':'♥️','angular':'🔺','nodejs':'📙','node.js':'♠️','html':'♦️','css':'📒','php':'♣️','ruby':'💎','swift':'🍎','kotlin':'🗝','go':'⛏️','rust':'🦀','photoshop':'🎨','illustrator':'🖌️','premiere':'🎬','figma':'🎯','sketch':'✏️','xd':'📱','blender':'🧊','mysql':'🐬','postgresql':'🐘','mongodb':'🍃','redis':'⚒️','oracle':'🔮','aws':'☁️','azure':'☁️','gcp':'☁️','docker':'🐳','kubernetes':'☸️','jenkins':'🔧','git':'📂','github':'🐙','excel':'📊','powerpoint':'📽️','word':'📄','notion':'📋','slack':'💬','jira':'📌','tensorflow':'🤖','pytorch':'🔥','ai':'🤖','인공지능':'🤖','machine learning':'🧠','머신러닝':'🧠','seo':'🔍','마케팅':'📈','marketing':'📈','광고':'📢','sns':'📱','영상편집':'🎬','영상':'📹','video':'📹','음악':'🎵','music':'🎵'};
+            const skillLogos = {'python':'🐍','javascript':'📕','java':'☕','c++':'📗','c#':'📘','react':'⚛️','vue':'♥️','angular':'🔺','nodejs':'📙','node.js':'♠️','html':'♦️','css':'📒','php':'♣️','ruby':'💎','swift':'🍎','kotlin':'🗝','go':'⛏️','rust':'🦀','photoshop':'🎨','illustrator':'🖌️','premiere':'🎬','figma':'🎯','sketch':'✏️','xd':'📱','blender':'🧊','mysql':'🐬','postgresql':'🐘','mongodb':'🍃','redis':'⚒️','oracle':'🔮','aws':'☁','azure':'☁','gcp':'☁','docker':'🐳','kubernetes':'☸','jenkins':'🔧','git':'📂','github':'🐙','excel':'📊','powerpoint':'📽','word':'📄','notion':'📋','slack':'💬','jira':'📌','tensorflow':'🤖','pytorch':'🔥','ai':'🤖','인공지능':'🤖','machine learning':'🧠','머신러닝':'🧠','seo':'🔍','마케팅':'📈','marketing':'📈','광고':'📢','sns':'💬','영상편집':'🎬','영상':'📹','video':'📹','음악':'🎵','music':'🎵'};
             if (skillsText && skillsText.trim()) {
                 const skillsArray = skillsText.split(',').map(skill => skill.trim()).filter(skill => skill);
                 skillsArray.forEach(skill => {
@@ -1092,20 +1095,40 @@
             const contactGrid = document.getElementById('contactGrid');
             contactGrid.innerHTML = '';
             const contacts = [
-                { icon: '📩', title: '이메일', value: email, link: email ? `mailto:${email}` : null },
-                { icon: '📞', title: '전화', value: phone, link: phone ? `tel:${phone}` : null },
-                { icon: '🌍', title: '웹사이트', value: website, link: website },
-                { icon: '🎯', title: '노션', value: notion, link: notion },
-                { icon: '💬', title: 'SNS', value: sns, link: sns },
-                { icon: '♟️', title: '링크드인', value: linkedin, link: linkedin },
-                { icon: '📌', title: '주소', value: address, link: null }
+                { icon: '📩', title: '이메일', value: email, link: email ? `mailto:${email}` : null, type: 'text' },
+                { icon: '📞', title: '전화', value: phone, link: phone ? `tel:${phone}` : null, type: 'text' },
+                { icon: '🌍', title: '웹사이트', value: website, link: website, type: 'text' },
+                { icon: 'notion', title: '노션', value: notion, link: notion, type: 'image' },
+                { icon: 'youtube', title: 'SNS', value: sns, link: sns, type: 'image' },
+                { icon: '♟️', title: '링크드인', value: linkedin, link: linkedin, type: 'text' },
+                { icon: '📌', title: '주소', value: address, link: null, type: 'text' }
             ];
+            
             contacts.forEach(contact => {
-                if (contact.value) {
+                if (contact.value && contact.value.trim() !== '') {
                     const contactItem = document.createElement('div');
                     contactItem.className = 'contact-item';
-                    const displayValue = contact.link ? contact.value.replace('https://', '').substring(0, 30) + (contact.value.length > 30 ? '...' : '') : contact.value;
-                    contactItem.innerHTML = `<div class="contact-icon">${contact.icon}</div><h4>${contact.title}</h4><p>${contact.link ? `<a href="${contact.link}" target="_blank">${displayValue}</a>` : displayValue}</p>`;
+                    const displayValue = contact.link ? contact.value.replace(/^(https?:\/\/(www\.)?)/, '').substring(0, 30) + (contact.value.length > 30 ? '...' : '') : contact.value;
+                    
+                    let iconHTML = `<div class="contact-icon">${contact.icon}</div>`;
+                    
+                    if (contact.type === 'image') {
+                        if (contact.icon === 'youtube') {
+                            iconHTML = `<div class="contact-icon" style="display: flex; align-items: center; justify-content: center;">
+                                <svg width="60" height="42" viewBox="0 0 159 110" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M154 17.5c-1.82-6.73-7.07-12-13.8-13.8C128.2 0 79.5 0 79.5 0S30.8 0 18.8 3.7C12.07 5.5 6.82 10.77 5 17.5 1.45 29.5 1.45 55 1.45 55s0 25.5 3.55 37.5c1.82 6.73 7.07 12 13.8 13.8C30.8 110 79.5 110 79.5 110s48.7 0 60.7-3.7c6.73-1.8 11.98-7.07 13.8-13.8 3.55-12 3.55-37.5 3.55-37.5s0-25.5-3.55-37.5z" fill="#FF0000"/>
+                                    <path d="M64 78.4V31.6L104.2 55 64 78.4z" fill="#FFFFFF"/>
+                                </svg>
+                            </div>`;
+                        } else if (contact.icon === 'notion') {
+                            // 텍스트 기반 'N' 아이콘
+                            iconHTML = `<div class="contact-icon" style="display: flex; align-items: center; justify-content: center;">
+                                <div class="notion-block">N</div>
+                            </div>`;
+                        }
+                    }
+                    
+                    contactItem.innerHTML = `${iconHTML}<h4>${contact.title}</h4><p>${contact.link ? `<a href="${contact.link}" target="_blank">${displayValue}</a>` : displayValue}</p>`;
                     contactGrid.appendChild(contactItem);
                 }
             });
@@ -1177,6 +1200,24 @@
             }
         }
 
+        function getVisitHistoryKey() {
+            const params = new URLSearchParams(window.location.search);
+            const encodedData = params.get('d');
+            if (encodedData) {
+                return 'nfc_visit_' + encodedData.substring(0, 20) + '_history';
+            }
+            return 'local_visit_history_default'; 
+        }
+
+        function getVisitCountKey() {
+            const params = new URLSearchParams(window.location.search);
+            const encodedData = params.get('d');
+            if (encodedData) {
+                return 'nfc_visit_' + encodedData.substring(0, 20) + '_count';
+            }
+            return 'localVisitCount_default';
+        }
+
         function checkURLData() {
             const params = new URLSearchParams(window.location.search);
             const encodedData = params.get('d') || params.get('data');
@@ -1204,7 +1245,7 @@
                         document.getElementById('removeLogoBtn').style.display = 'inline-block';
                         updateLogoDisplay();
                     }
-                    updateRealVisitorStats();
+                    updatePreview();
                     return true;
                 } catch (e) {
                     console.error('URL 데이터 파싱 오류:', e);
@@ -1214,23 +1255,21 @@
         }
 
         function updateRealVisitorStats() {
-            const params = new URLSearchParams(window.location.search);
-            const encodedData = params.get('d');
-            if (encodedData) {
-                const visitKey = 'nfc_visit_' + btoa(encodedData).substring(0, 20);
-                let visitCount = parseInt(localStorage.getItem(visitKey) || '0');
-                visitCount++;
-                localStorage.setItem(visitKey, visitCount.toString());
-                const historyKey = visitKey + '_history';
-                const today = new Date().toDateString();
-                let visitHistory = JSON.parse(localStorage.getItem(historyKey) || '{}');
-                if (!visitHistory[today]) visitHistory[today] = 0;
-                visitHistory[today]++;
-                localStorage.setItem(historyKey, JSON.stringify(visitHistory));
-                animateCounter(visitCount);
-                updateChart(visitHistory);
-                showNotification('NFC 명함에 오신 것을 환영합니다!', 'success');
-            }
+            const visitCountKey = getVisitCountKey();
+            const historyKey = getVisitHistoryKey();
+
+            let visitCount = parseInt(localStorage.getItem(visitCountKey) || '0');
+            visitCount++;
+            localStorage.setItem(visitCountKey, visitCount.toString());
+            
+            const today = new Date().toDateString();
+            let visitHistory = JSON.parse(localStorage.getItem(historyKey) || '{}');
+            if (!visitHistory[today]) visitHistory[today] = 0;
+            visitHistory[today]++;
+            localStorage.setItem(historyKey, JSON.stringify(visitHistory));
+
+            animateCounter(visitCount);
+            updateChart(visitHistory);
         }
 
         function animateCounter(targetCount) {
@@ -1280,6 +1319,7 @@
 
         function loadProfile() {
             if (checkURLData()) {
+                updateRealVisitorStats();
                 setTimeout(updatePreview, 100);
                 return;
             }
@@ -1306,26 +1346,20 @@
                         document.getElementById('removeLogoBtn').style.display = 'inline-block';
                         updateLogoDisplay();
                     }
-                    updatePreview();
                 } catch (e) {
-                    console.error('프로필 로드 오류:', e);
+                    console.error('로컬 프로필 로드 오류:', e);
                 }
             }
             
-            let localCount = parseInt(localStorage.getItem('localVisitCount') || '0');
-            localCount++;
-            localStorage.setItem('localVisitCount', localCount.toString());
-            
-            const historyKey = 'local_visit_history';
-            const today = new Date().toDateString();
-            let visitHistory = JSON.parse(localStorage.getItem(historyKey) || '{}');
-            if (!visitHistory[today]) visitHistory[today] = 0;
-            visitHistory[today]++;
-            localStorage.setItem(historyKey, JSON.stringify(visitHistory));
-            
+            // 로컬 테스트용 방문자 통계 업데이트
+            const localCountKey = getVisitCountKey();
+            const localHistoryKey = getVisitHistoryKey();
+            let localCount = parseInt(localStorage.getItem(localCountKey) || '0');
             animateCounter(localCount);
+            let visitHistory = JSON.parse(localStorage.getItem(localHistoryKey) || '{}');
             updateChart(visitHistory);
-            updatePreview();
+            
+            setTimeout(updatePreview, 100);
         }
 
         function downloadVCard() {
@@ -1351,7 +1385,18 @@
 
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
-            notification.style.cssText = `position: fixed;top: 20px;left: 50%;transform: translateX(-50%);background: ${type === 'success' ? '#000000' : '#333333'};color: white;padding: 15px 25px;border-radius: 25px;z-index: 10000;box-shadow: 0 10px 30px rgba(0,0,0,0.3);font-weight: 500;`;
+            const bgColor = type === 'success' ? '#000000' : '#333333';
+            const textColor = 'white';
+            
+            // 다크 모드일 때 알림창 색상 반전
+            if (document.body.classList.contains('dark-mode')) {
+                const darkModeBg = type === 'success' ? '#ffffff' : '#444444';
+                const darkModeText = type === 'success' ? '#000000' : '#ffffff';
+                notification.style.cssText = `position: fixed;top: 20px;left: 50%;transform: translateX(-50%);background: ${darkModeBg};color: ${darkModeText};padding: 15px 25px;border-radius: 25px;z-index: 10000;box-shadow: 0 10px 30px rgba(255,255,255,0.3);font-weight: 500;transition: all 0.3s ease-out;`;
+            } else {
+                notification.style.cssText = `position: fixed;top: 20px;left: 50%;transform: translateX(-50%);background: ${bgColor};color: ${textColor};padding: 15px 25px;border-radius: 25px;z-index: 10000;box-shadow: 0 10px 30px rgba(0,0,0,0.3);font-weight: 500;transition: all 0.3s ease-out;`;
+            }
+
             notification.textContent = message;
             document.body.appendChild(notification);
             setTimeout(() => {
@@ -1394,7 +1439,7 @@
                     createEmojiRain(emojis[Math.floor(Math.random() * emojis.length)]);
                 }, i * 100);
             }
-            showNotification('🎉 축하합니다! 번개의 힘을 깨우셨습니다! ⚡', 'success');
+            showNotification('🎉 GOLDION을 이용해주셔서 감사합니다 ⚡', 'success');
             const logo = document.querySelector('.logo');
             if (logo) {
                 logo.style.animation = 'bounce 1s ease infinite';
@@ -1419,7 +1464,7 @@
         document.head.appendChild(style);
 
         window.addEventListener('load', function() {
-            checkDarkMode(); // 다크모드 상태 먼저 확인
+            checkDarkMode();
             loadProfile();
             const inputFields = ['userName', 'userTitle', 'userCompany', 'userPhone', 'userEmail', 'userWebsite', 'userNotion', 'userSNS', 'userLinkedin', 'userAddress', 'userBio', 'userSkills'];
             inputFields.forEach(fieldId => {
