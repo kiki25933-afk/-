@@ -22,11 +22,10 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        .dark-mode-toggle {
+        .dark-mode-toggle, .edit-toggle {
             position: fixed;
             top: 20px;
-            left: 20px;
-            z-index: 1000;
+            z-index: 1001;
             background: #000;
             color: #fff;
             border: none;
@@ -36,136 +35,100 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
+        .dark-mode-toggle { left: 20px; }
         .edit-toggle {
-            position: fixed;
-            bottom: 30px;
+            bottom: 90px;
+            top: auto;
             right: 30px;
-            z-index: 1000;
-            background: #000;
-            color: #fff;
-            border: none;
             padding: 16px 32px;
             border-radius: 50px;
-            cursor: pointer;
-            font-weight: 700;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-weight: 700;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
-        .edit-toggle:hover, .dark-mode-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
         
-        /* 다크모드 스타일 */
         body.dark-mode {
             background: #121212;
             color: #e0e0e0;
         }
-        body.dark-mode .edit-toggle {
-            background: linear-gradient(135deg, #c3ff00 0%, #a8e600 100%);
-            color: #000;
-            box-shadow: 0 8px 30px rgba(195, 255, 0, 0.5);
-        }
+        body.dark-mode .edit-toggle,
         body.dark-mode .dark-mode-toggle {
-            background: linear-gradient(135deg, #c3ff00 0%, #a8e600 100%);
+            background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%);
             color: #000;
-            box-shadow: 0 4px 20px rgba(195, 255, 0, 0.3);
-        }
-        body.dark-mode .edit-panel {
-            background: #1a1a1a;
-            border-left: 1px solid #333;
-        }
-        body.dark-mode .edit-panel h3 {
-            color: #c3ff00;
-        }
-        body.dark-mode .form-group label {
-            color: #c3ff00;
-        }
-        body.dark-mode .form-group input,
-        body.dark-mode .form-group textarea {
-            background: #0a0a0a;
-            border: 1px solid #333;
-            color: #c3ff00;
-        }
-        body.dark-mode .save-btn {
-            background: linear-gradient(135deg, #c3ff00 0%, #a8e600 100%);
-            color: #000;
+            box-shadow: 0 4px 20px rgba(0, 217, 163, 0.3);
         }
         
-        /* 편집 패널 */
-        .edit-panel {
+        /* 하단 네비게이션 바 */
+        .bottom-nav {
             position: fixed;
-            top: 0;
-            right: -450px;
-            width: 450px;
-            height: 100vh;
-            background: #fff;
-            border-left: 1px solid #e0e0e0;
-            transition: right 0.3s ease;
-            overflow-y: auto;
-            z-index: 999;
-            padding: 30px;
-            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
-        }
-        .edit-panel.open {
+            bottom: 0;
+            left: 0;
             right: 0;
-        }
-        .edit-panel h3 {
-            color: #000;
-            margin-bottom: 30px;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            color: #000;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px;
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            color: #000;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
+            height: 70px;
             background: #fff;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
         }
-        .save-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
+        body.dark-mode .bottom-nav {
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 20px;
             cursor: pointer;
-            margin-top: 10px;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            flex: 1;
+            color: #666;
         }
-        .save-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        body.dark-mode .nav-item {
+            color: #888;
+        }
+        .nav-item:hover,
+        .nav-item.active {
+            color: #00d9a3;
+        }
+        .nav-item .icon {
+            font-size: 1.5rem;
+        }
+        .nav-item .label {
+            font-size: 0.7rem;
+            font-weight: 600;
         }
         
-        /* 명함 실제 크기 (85.5mm x 54mm) */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 20px 100px;
+        }
+        .page.active {
+            display: block;
+        }
+        
+        .main-content {
+            padding-bottom: 80px;
+        }
+        
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            flex-direction: column;
+        }
+        
         .card-3d {
             perspective: 1500px;
-            margin: 80px auto 50px;
+            margin: 50px auto;
             width: 85.5mm;
             height: 54mm;
             cursor: grab;
@@ -181,6 +144,7 @@
             transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
         }
+        
         .business-card {
             position: absolute;
             width: 100%;
@@ -191,8 +155,12 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             overflow: hidden;
             backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
         }
+        body.dark-mode .business-card {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
         .card-front {
             z-index: 2;
             transform: rotateY(0deg);
@@ -221,30 +189,6 @@
             display: block;
         }
         
-        /* 테두리 엣지 표시 */
-        .business-card::before,
-        .business-card::after {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-        .business-card::before {
-            top: -2px;
-            left: -2px;
-            border-right: none;
-            border-bottom: none;
-            border-top-left-radius: 12px;
-        }
-        .business-card::after {
-            bottom: -2px;
-            right: -2px;
-            border-left: none;
-            border-top: none;
-            border-bottom-right-radius: 12px;
-        }
-        
         .card-corner-tl,
         .card-corner-tr,
         .card-corner-bl,
@@ -253,6 +197,7 @@
             width: 15px;
             height: 15px;
             border: 2px solid rgba(255,255,255,0.3);
+            z-index: 10;
         }
         .card-corner-tl {
             top: -2px;
@@ -282,16 +227,11 @@
             border-top: none;
             border-bottom-right-radius: 12px;
         }
-        
-        body.dark-mode .business-card {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(195, 255, 0, 0.1);
-        }
         body.dark-mode .card-corner-tl,
         body.dark-mode .card-corner-tr,
         body.dark-mode .card-corner-bl,
         body.dark-mode .card-corner-br {
-            border-color: rgba(195, 255, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         
         .card-chip {
@@ -302,139 +242,37 @@
             height: 28px;
             background: linear-gradient(135deg, #d4af37 0%, #f4e5c3 50%, #d4af37 100%);
             border-radius: 4px;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
-        }
-        .card-chip::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
-            background: linear-gradient(135deg, #c9a961 0%, #e8d5a8 100%);
-            border-radius: 2px;
-        }
-        .nfc-icon {
-            position: absolute;
-            top: 15px;
-            right: 60px;
-            width: 28px;
-            height: 28px;
-            opacity: 0.6;
-        }
-        body.dark-mode .nfc-icon {
-            opacity: 1;
-            filter: drop-shadow(0 0 8px rgba(195, 255, 0, 0.5));
         }
         .card-logo {
             width: 40px;
             height: 40px;
-            background: #c3ff00;
+            background: #00d9a3;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(195, 255, 0, 0.3);
         }
         .card-name {
             font-size: 1.3rem;
             font-weight: 700;
             color: #fff;
             margin-bottom: 3px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         body.dark-mode .card-name {
-            color: #c3ff00;
-            text-shadow: 0 0 15px rgba(195, 255, 0, 0.4);
+            color: #00d9a3;
         }
         .card-title {
             font-size: 0.75rem;
             color: #999;
             margin-bottom: 12px;
         }
-        body.dark-mode .card-title {
-            color: #888;
-        }
         .card-contact {
             font-size: 0.7rem;
             color: #ccc;
-            line-height: 1.6;
-        }
-        body.dark-mode .card-contact {
-            color: #888;
         }
         
-        /* 3D 캐릭터 섹션 */
-        .character-section {
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        body.dark-mode .character-section {
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
-        }
-        .character-container {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 40px;
-        }
-        .character {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            position: relative;
-            animation: float 3s ease-in-out infinite;
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
-        }
-        body.dark-mode .character {
-            background: linear-gradient(135deg, #c3ff00 0%, #a8e600 100%);
-            box-shadow: 0 20px 60px rgba(195, 255, 0, 0.4), 0 0 100px rgba(195, 255, 0, 0.2);
-        }
-        .character::before {
-            content: '⚡';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 6rem;
-            opacity: 0.8;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        .character-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
-            animation: pulse 2s ease-in-out infinite;
-        }
-        body.dark-mode .character-glow {
-            background: radial-gradient(circle, rgba(195, 255, 0, 0.3) 0%, transparent 70%);
-        }
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
-        }
-        
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 20px;
-            flex-direction: column;
-        }
         .company-name {
             font-size: 3.5rem;
             font-weight: 900;
@@ -443,10 +281,9 @@
             letter-spacing: 0.1em;
         }
         body.dark-mode .company-name {
-            background: linear-gradient(135deg, #c3ff00 0%, #a8e600 100%);
+            background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         .brand-name {
             font-size: 2rem;
@@ -465,117 +302,465 @@
         body.dark-mode .tagline {
             color: #888;
         }
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-        .cta-btn {
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            border: none;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-        body.dark-mode .cta-btn {
-            background: linear-gradient(135deg, #c3ff00 0%, #a8e600 100%);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(195, 255, 0, 0.4);
-        }
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
-        }
-        body.dark-mode .cta-btn:hover {
-            box-shadow: 0 8px 25px rgba(195, 255, 0, 0.6);
-        }
         
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
-        }
-        .feature-card {
+        /* 편집 패널 */
+        .edit-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100vh;
             background: #fff;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            border-left: 1px solid #e0e0e0;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            z-index: 999;
+            padding: 30px;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
         }
-        body.dark-mode .feature-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .edit-panel.open {
+            right: 0;
         }
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        body.dark-mode .edit-panel {
+            background: #1a1a1a;
+            border-left: 1px solid #333;
         }
-        body.dark-mode .feature-card:hover {
-            box-shadow: 0 20px 40px rgba(195, 255, 0, 0.2);
-        }
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        body.dark-mode .feature-icon {
-            background: linear-gradient(135deg, #c3ff00 0%, #a8e600 100%);
-        }
-        .feature-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+        .edit-panel h3 {
             color: #000;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-align: center;
         }
-        body.dark-mode .feature-title {
-            color: #c3ff00;
+        body.dark-mode .edit-panel h3 {
+            color: #00d9a3;
         }
-        .feature-text {
-            color: #666;
-            line-height: 1.7;
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #000;
+            font-weight: 600;
             font-size: 0.95rem;
         }
-        body.dark-mode .feature-text {
+        body.dark-mode .form-group label {
+            color: #00d9a3;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            color: #000;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            color: #00d9a3;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00d9a3;
+            background: #fff;
+        }
+        .save-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 217, 163, 0.4);
+        }
+        
+        .about-section {
+            padding: 100px 0 50px;
+            text-align: center;
+            background: #f8f8f8;
+        }
+        body.dark-mode .about-section {
+            background: #0a0a0a;
+        }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 60px;
+            border-radius: 30px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 100px;
+        }
+        body.dark-mode .about-content {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+        }
+        .portfolio-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .portfolio-section h2 {
+            color: #000;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        body.dark-mode .portfolio-section h2 {
+            color: #00d9a3;
+        }
+        .about-content h2 {
+            color: #000;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        body.dark-mode .about-content h2 {
+            color: #00d9a3;
+        }
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        body.dark-mode .about-text {
             color: #888;
         }
         
-        footer {
-            background: #000;
-            color: #fff;
-            text-align: center;
-            padding: 40px 0;
-            margin-top: 80px;
-        }
-        body.dark-mode footer {
-            background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
-            border-top: 1px solid #1a1a1a;
-        }
-        footer a {
-            color: #c3ff00;
+        /* 소셜 링크 버튼 */
+        .social-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%);
+            color: #000;
             text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 217, 163, 0.3);
+        }
+        .social-link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 217, 163, 0.5);
+        }
+        body.dark-mode .social-link-btn {
+            background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%);
+            color: #000;
+        }
+        
+        /* 웅장한 3D 캐러셀 컨테이너 */
+        #portfolioGallery {
+            position: relative;
+            margin-top: 50px;
+            perspective: 2000px;
+            overflow: visible;
+        }
+        /* 3D 회전 캐러셀 스타일 */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            cursor: grab;
+            user-select: none;
+        }
+        .carousel-wrapper:active {
+            cursor: grabbing;
+        }
+        .carousel-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .portfolio-item {
+            position: absolute;
+            width: 55%;
+            max-width: 550px;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+        }
+        /* 카드 위치 및 3D 회전 효과 - 원형 배치 */
+        .portfolio-item[data-position="0"] {
+            transform: translateZ(200px) rotateY(0deg);
+            opacity: 1;
+            z-index: 10;
+        }
+        .portfolio-item[data-position="1"] {
+            transform: translateZ(-100px) rotateY(-60deg) translateX(400px);
+            opacity: 0.5;
+            z-index: 5;
+        }
+        .portfolio-item[data-position="-1"] {
+            transform: translateZ(-100px) rotateY(60deg) translateX(-400px);
+            opacity: 0.5;
+            z-index: 5;
+        }
+        .portfolio-item[data-position="2"] {
+            transform: translateZ(-300px) rotateY(-120deg) translateX(500px);
+            opacity: 0.2;
+            z-index: 1;
+        }
+        .portfolio-item[data-position="-2"] {
+            transform: translateZ(-300px) rotateY(120deg) translateX(-500px);
+            opacity: 0.2;
+            z-index: 1;
+        }
+        .portfolio-item:not([data-position]),
+        .portfolio-item[data-position="3"],
+        .portfolio-item[data-position="-3"] {
+            transform: translateZ(-500px) rotateY(180deg);
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .portfolio-card {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 30px 90px rgba(0, 0, 0, 0.5),
+                0 15px 50px rgba(0, 0, 0, 0.3),
+                0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+        body.dark-mode .portfolio-card {
+            background: #1a1a1a;
+        }
+        .portfolio-item:hover .portfolio-card {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 
+                0 50px 120px rgba(0, 0, 0, 0.4),
+                0 30px 80px rgba(0, 0, 0, 0.3),
+                0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        .portfolio-item:hover .portfolio-card::before {
+            opacity: 1;
+        }
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .portfolio-item:hover .portfolio-card img {
+            transform: scale(1.1);
+        }
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, transparent 100%);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            z-index: 2;
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        .portfolio-overlay-title {
+            color: #00d9a3;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .portfolio-overlay-text {
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* 진행 상태를 나타내는 초록색 점 인디케이터 */
+        .carousel-indicators {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(0, 217, 163, 0.3);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .carousel-indicator:hover {
+            background: rgba(0, 217, 163, 0.6);
+            transform: scale(1.2);
+        }
+        .carousel-indicator.active {
+            background: #00d9a3;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(0, 217, 163, 0.6);
+        }
+        /* 진행도에 따라 점점 진하게 */
+        .carousel-indicator.passed {
+            background: #00d9a3;
+            opacity: 1;
+        }
+        
+        body.dark-mode .carousel-indicator {
+            background: rgba(0, 217, 163, 0.2);
+        }
+        body.dark-mode .carousel-indicator.active,
+        body.dark-mode .carousel-indicator.passed {
+            background: #00d9a3;
+        }
+        
+        /* 향상된 포트폴리오 모달 */
+        .portfolio-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .portfolio-modal.active {
+            display: flex;
+        }
+        .modal-content-wrapper {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .portfolio-modal img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .portfolio-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #00d9a3;
+            color: #000;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.2rem;
+            z-index: 10000;
+            transition: all 0.3s ease;
+        }
+        .portfolio-modal-close:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 217, 163, 0.5);
+        }
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 217, 163, 0.9);
+            color: #000;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.8rem;
+            font-weight: 700;
+            z-index: 10000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-nav:hover {
+            background: #00d9a3;
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 10px 30px rgba(0, 217, 163, 0.5);
+        }
+        .modal-nav.prev { left: 30px; }
+        .modal-nav.next { right: 30px; }
+        .modal-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 217, 163, 0.9);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            z-index: 10000;
         }
         
         @media (max-width: 768px) {
             .company-name { font-size: 2.5rem; }
-            .brand-name { font-size: 1.6rem; }
-            .edit-panel { width: 100%; right: -100%; }
-            .card-3d { 
-                width: 320px;
-                height: 200px;
-            }
+            .card-3d { width: 320px; height: 200px; }
+            .carousel-wrapper { height: 450px; }
+            .portfolio-card { height: 350px; }
+            .portfolio-item { flex: 0 0 85%; }
         }
     </style>
 </head>
@@ -587,12 +772,12 @@
         <h3>📝 명함 정보 입력</h3>
         
         <div class="form-group">
-            <label for="userName">이름 *</label>
+            <label for="userName">이름</label>
             <input type="text" id="userName" placeholder="홍길동">
         </div>
 
         <div class="form-group">
-            <label for="userTitle">직책 *</label>
+            <label for="userTitle">직책</label>
             <input type="text" id="userTitle" placeholder="대표이사">
         </div>
 
@@ -602,186 +787,205 @@
         </div>
 
         <div class="form-group">
-            <label for="cardDesignUpload">명함 앞면 디자인</label>
-            <input type="file" id="cardDesignUpload" accept="image/*" onchange="handleCardDesignUpload(event, 'front')" style="display: none;">
-            <div style="display: flex; gap: 10px; flex-direction: column;">
-                <button onclick="document.getElementById('cardDesignUpload').click()" style="padding: 12px 18px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 12px; color: #fff; cursor: pointer; font-weight: 600;">
-                    🖼️ 앞면 이미지 선택
-                </button>
-                <button onclick="removeCardDesign('front')" style="padding: 12px 18px; background: #e0e0e0; border: none; border-radius: 12px; color: #000; cursor: pointer; font-weight: 600; display: none;" id="removeCardFrontBtn">
-                    ❌ 앞면 초기화
-                </button>
-            </div>
-            <div id="cardFrontPreview" style="margin-top: 15px; display: none;">
-                <img id="cardFrontPreviewImg" style="max-width: 100%; border-radius: 12px; border: 2px solid #e0e0e0;">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="cardBackDesignUpload">명함 뒷면 디자인</label>
-            <input type="file" id="cardBackDesignUpload" accept="image/*" onchange="handleCardDesignUpload(event, 'back')" style="display: none;">
-            <div style="display: flex; gap: 10px; flex-direction: column;">
-                <button onclick="document.getElementById('cardBackDesignUpload').click()" style="padding: 12px 18px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 12px; color: #fff; cursor: pointer; font-weight: 600;">
-                    🖼️ 뒷면 이미지 선택
-                </button>
-                <button onclick="removeCardDesign('back')" style="padding: 12px 18px; background: #e0e0e0; border: none; border-radius: 12px; color: #000; cursor: pointer; font-weight: 600; display: none;" id="removeCardBackBtn">
-                    ❌ 뒷면 초기화
-                </button>
-            </div>
-            <div id="cardBackPreview" style="margin-top: 15px; display: none;">
-                <img id="cardBackPreviewImg" style="max-width: 100%; border-radius: 12px; border: 2px solid #e0e0e0;">
-            </div>
-        </div>
-
-        <div class="form-group">
             <label for="userPhone">전화번호</label>
             <input type="tel" id="userPhone" placeholder="010-1234-5678">
         </div>
 
         <div class="form-group">
-            <label for="userEmail">이메일 *</label>
+            <label for="userEmail">이메일</label>
             <input type="email" id="userEmail" placeholder="hello@goldon.com">
         </div>
 
         <div class="form-group">
+            <label for="userBio">소개</label>
+            <textarea id="userBio" rows="3" placeholder="간단한 자기소개를 입력하세요"></textarea>
+        </div>
+
+        <div class="form-group">
             <label for="userWebsite">웹사이트</label>
-            <input type="url" id="userWebsite" placeholder="https://goldon.com">
+            <input type="url" id="userWebsite" placeholder="https://www.mysite.com">
+        </div>
+
+        <div class="form-group">
+            <label for="userNotion">노션 페이지</label>
+            <input type="url" id="userNotion" placeholder="https://notion.so/your-page">
+        </div>
+
+        <div class="form-group">
+            <label for="userYoutube">유튜브 채널</label>
+            <input type="url" id="userYoutube" placeholder="https://youtube.com/@channel">
+        </div>
+
+        <div class="form-group">
+            <label for="userInstagram">인스타그램</label>
+            <input type="url" id="userInstagram" placeholder="https://instagram.com/username">
+        </div>
+
+        <div class="form-group">
+            <label for="userLinkedin">링크드인</label>
+            <input type="url" id="userLinkedin" placeholder="https://linkedin.com/in/username">
+        </div>
+
+        <div class="form-group">
+            <label for="portfolioUpload">포트폴리오 이미지 (최대 6개)</label>
+            <input type="file" id="portfolioUpload" accept="image/*" multiple onchange="handlePortfolioUpload(event)" style="display: none;">
+            <button onclick="document.getElementById('portfolioUpload').click()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%); border: none; border-radius: 12px; color: #000; cursor: pointer; font-weight: 600;">
+                🖼️ 포트폴리오 추가
+            </button>
+            <div id="portfolioPreviewContainer" style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;">
+            </div>
         </div>
 
         <button class="save-btn" onclick="saveProfile()">💾 저장하기</button>
-        <button class="save-btn" onclick="toggleEditMode()" style="background: #e0e0e0; color: #000;">👁️ 미리보기</button>
+        <button class="save-btn" onclick="toggleEditMode()" style="background: #e0e0e0; color: #000;">👁️ 닫기</button>
     </div>
 
-    <section class="hero">
-        <div class="card-3d" id="card3d">
-            <div class="card-inner" id="cardInner">
-                <!-- 앞면 -->
-                <div class="business-card card-front" id="businessCardFront">
-                    <div class="card-corner-tl"></div>
-                    <div class="card-corner-tr"></div>
-                    <div class="card-corner-bl"></div>
-                    <div class="card-corner-br"></div>
-                    
-                    <img class="card-custom-image" id="cardFrontImage" alt="명함 앞면">
-                    
-                    <div class="card-content">
-                        <div class="card-chip"></div>
-                        <svg class="nfc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M6 9l6 6 6-6"/>
-                            <circle cx="12" cy="12" r="10"/>
-                        </svg>
-                        <div class="card-logo">⚡</div>
-                        <div class="card-name" id="displayName">GOLD:ON</div>
-                        <div class="card-title" id="displayTitle">디지털 명함 전문가</div>
-                        <div class="card-contact">
-                            <div id="displayEmail">hello@goldon.com</div>
-                            <div id="displayPhone">010-1234-5678</div>
+    <nav class="bottom-nav">
+        <a class="nav-item active" onclick="showPage('home')">
+            <div class="icon">🏠</div>
+            <div class="label">홈</div>
+        </a>
+        <a class="nav-item" onclick="showPage('history')">
+            <div class="icon">📇</div>
+            <div class="label">교환이력</div>
+        </a>
+        <a class="nav-item" onclick="showPage('stats')">
+            <div class="icon">📊</div>
+            <div class="label">통계</div>
+        </a>
+        <a class="nav-item" onclick="showPage('qr')">
+            <div class="icon">📱</div>
+            <div class="label">QR생성</div>
+        </a>
+        <a class="nav-item" onclick="showPage('settings')">
+            <div class="icon">⚙️</div>
+            <div class="label">설정</div>
+        </a>
+    </nav>
+
+    <div class="page active" id="homePage">
+        <section class="hero">
+            <div class="card-3d" id="card3d">
+                <div class="card-inner" id="cardInner">
+                    <div class="business-card card-front" id="businessCardFront">
+                        <div class="card-corner-tl"></div>
+                        <div class="card-corner-tr"></div>
+                        <div class="card-corner-bl"></div>
+                        <div class="card-corner-br"></div>
+                        <img class="card-custom-image" id="cardFrontImage" alt="명함 앞면">
+                        <div class="card-content">
+                            <div class="card-chip"></div>
+                            <div class="card-logo">⚡</div>
+                            <div class="card-name" id="displayName">GOLD:ON</div>
+                            <div class="card-title" id="displayTitle">디지털 명함 전문가</div>
+                            <div class="card-contact">
+                                <div id="displayEmail">hello@goldon.com</div>
+                                <div id="displayPhone">010-1234-5678</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="business-card card-back" id="businessCardBack">
+                        <div class="card-corner-tl"></div>
+                        <div class="card-corner-tr"></div>
+                        <div class="card-corner-bl"></div>
+                        <div class="card-corner-br"></div>
+                        <img class="card-custom-image" id="cardBackImage" alt="명함 뒷면">
+                        <div class="card-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
+                            <div style="font-size: 1.2rem; font-weight: 700; color: #00d9a3;">GOLD:ON</div>
+                            <div style="font-size: 0.8rem; color: #888; text-align: center;">더블클릭하여 리셋</div>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="container">
+                <h1 class="company-name" id="displayCompany">GOLD:ON</h1>
+                <p class="tagline">미래를 연결하는 스마트 명함</p>
+                <h2 class="brand-name">프리미엄 NFC 솔루션</h2>
+            </div>
+        </section>
 
-                <!-- 뒷면 -->
-                <div class="business-card card-back" id="businessCardBack">
-                    <div class="card-corner-tl"></div>
-                    <div class="card-corner-tr"></div>
-                    <div class="card-corner-bl"></div>
-                    <div class="card-corner-br"></div>
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About</h2>
+                    <div class="about-text" id="displayBio">
+                        포트폴리오를 입력하면 여기에 표시됩니다.
+                    </div>
                     
-                    <img class="card-custom-image" id="cardBackImage" alt="명함 뒷면">
-                    
-                    <div class="card-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #c3ff00; margin-bottom: 8px;">GOLD:ON</div>
-                        <div style="font-size: 0.8rem; color: #888; text-align: center; line-height: 1.6;">
-                            혁신적인 NFC 디지털 명함<br>
-                            클릭하여 앞면 보기
-                        </div>
+                    <div id="socialLinks" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 30px 0;">
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="container">
-            <h1 class="company-name" id="displayCompany">GOLD:ON</h1>
-            <p class="tagline">미래를 연결하는 스마트 명함</p>
-            <h2 class="brand-name">프리미엄 NFC 솔루션</h2>
             
-            <div class="cta-buttons">
-                <a href="#" class="cta-btn" id="emailBtn">📧 문의하기</a>
-                <a href="#" class="cta-btn" id="phoneBtn">📞 상담 신청</a>
-                <a href="#" class="cta-btn" id="websiteBtn">🚀 시작하기</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="character-section">
-        <div class="container">
-            <div class="character-container">
-                <div class="character-glow"></div>
-                <div class="character"></div>
-            </div>
-            
-            <h2 style="font-size: 2.2rem; margin-bottom: 20px;">혁신적인 디지털 명함</h2>
-            <p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">
-                종이 명함은 이제 그만. NFC 기술로 즉시 연결되는 새로운 네트워킹을 경험하세요.
-            </p>
-        </div>
-    </section>
-
-    <section style="padding: 80px 0;">
-        <div class="container">
-            <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 50px;">왜 GOLD:ON인가?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🌱</div>
-                    <h3 class="feature-title">친환경</h3>
-                    <p class="feature-text">종이 명함을 대체하여 환경을 보호합니다</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">즉시 연결</h3>
-                    <p class="feature-text">스마트폰을 가까이 대기만 하면 바로 정보 전달</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3 class="feature-title">맞춤 디자인</h3>
-                    <p class="feature-text">브랜드에 맞는 프리미엄 커스텀 제작</p>
+            <div class="portfolio-section">
+                <h2>Portfolio</h2>
+                <div id="portfolioGallery">
+                    <p style="text-align: center; color: #888; padding: 40px;">포트폴리오 이미지를 추가하면 여기에 표시됩니다</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <footer>
+    <div class="portfolio-modal" id="portfolioModal" onclick="closeModal(event)">
+        <button class="portfolio-modal-close" onclick="closeModal(event)">✕ 닫기</button>
+        <button class="modal-nav prev" onclick="navigateModal(-1, event)">◀</button>
+        <button class="modal-nav next" onclick="navigateModal(1, event)">▶</button>
+        <div class="modal-content-wrapper">
+            <img id="modalImage" src="" alt="포트폴리오">
+        </div>
+        <div class="modal-counter" id="modalCounter">1 / 1</div>
+    </div>
+
+    <div class="page" id="historyPage">
         <div class="container">
-            <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">GOLD:ON</div>
-            <p style="color: #888; margin-bottom: 15px;">NFC 명함의 새로운 기준</p>
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
-                <a href="mailto:kiki25933@gmail.com">kiki25933@gmail.com</a>
-                <span style="color: #333;">|</span>
-                <span style="color: #888;">국립군산대학교 제1학생회관 4층 408호</span>
-                <span style="color: #333;">|</span>
-                <span style="color: #888;">010-6442-1602</span>
-            </div>
-            <div style="border-top: 1px solid #222; padding-top: 20px; color: #666; font-size: 0.9rem;">
-                <p>&copy; 2024 GOLD:ON. All rights reserved.</p>
+            <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center;">📇 명함 교환 이력</h2>
+            <p style="text-align: center; color: #666;">명함 교환 기능은 준비 중입니다.</p>
+        </div>
+    </div>
+
+    <div class="page" id="statsPage">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center;">📊 명함 인사이트</h2>
+            <p style="text-align: center; color: #666;">통계 기능은 준비 중입니다.</p>
+        </div>
+    </div>
+
+    <div class="page" id="qrPage">
+        <div class="container" style="max-width: 600px;">
+            <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center;">📱 QR 코드 생성기</h2>
+            <p style="text-align: center; color: #666;">QR 생성 기능은 준비 중입니다.</p>
+        </div>
+    </div>
+
+    <div class="page" id="settingsPage">
+        <div class="container" style="max-width: 600px;">
+            <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center;">⚙️ 설정</h2>
+            <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #e0e0e0; margin-bottom: 20px;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 20px;">🎨 테마 설정</h3>
+                <button onclick="toggleDarkMode()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%); color: #000; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;">
+                    🌓 다크모드 전환
+                </button>
             </div>
         </div>
-    </footer>
+    </div>
 
     <script>
         let isDarkMode = false;
         let isEditMode = false;
-        let cardFrontDesign = null;
-        let cardBackDesign = null;
-        
-        // 카드 회전 제어 변수
+        let portfolioImages = [];
+        let portfolioTitles = [];
+        let portfolioDescriptions = [];
         let isDragging = false;
-        let startX = 0;
-        let startY = 0;
-        let currentRotateX = 0;
-        let currentRotateY = 0;
-        let rotateX = 0;
-        let rotateY = 0;
+        let startX = 0, startY = 0;
+        let rotateX = 0, rotateY = 0;
+        let currentRotateX = 0, currentRotateY = 0;
+        let currentCarouselIndex = 0;
+        let currentModalIndex = 0;
+        let isCarouselDragging = false;
+        let carouselStartX = 0;
+        let carouselDragDistance = 0;
         
         function toggleDarkMode() {
             isDarkMode = !isDarkMode;
@@ -800,23 +1004,389 @@
             }
         }
 
-        // 카드 드래그 회전 기능
+        function handlePortfolioUpload(event) {
+            const files = Array.from(event.target.files);
+            if (portfolioImages.length + files.length > 6) {
+                alert('⚠️ 포트폴리오 이미지는 최대 6개까지 추가할 수 있습니다.');
+                return;
+            }
+
+            files.forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        portfolioImages.push(e.target.result);
+                        portfolioTitles.push('');
+                        portfolioDescriptions.push('');
+                        updatePortfolioPreview();
+                        updatePortfolioGallery();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        function updatePortfolioPreview() {
+            const container = document.getElementById('portfolioPreviewContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            portfolioImages.forEach((img, index) => {
+                const itemWrapper = document.createElement('div');
+                itemWrapper.style.cssText = 'background: #f8f9fa; padding: 15px; border-radius: 12px; border: 2px solid #e0e0e0;';
+                if (document.body.classList.contains('dark-mode')) {
+                    itemWrapper.style.cssText = 'background: #0a0a0a; padding: 15px; border-radius: 12px; border: 1px solid #333;';
+                }
+                
+                itemWrapper.innerHTML = `
+                    <div style="position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; margin-bottom: 10px;">
+                        <img src="${img}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <button onclick="removePortfolioImage(${index})" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.8); color: #fff; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 1.2rem;">✕</button>
+                    </div>
+                    <input type="text" id="portfolioTitle${index}" placeholder="작품 제목" value="${portfolioTitles[index] || ''}" onchange="updatePortfolioInfo(${index}, 'title', this.value)" style="width: 100%; padding: 10px; margin-bottom: 8px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; color: #000; font-size: 14px;">
+                    <textarea id="portfolioDesc${index}" placeholder="작품 설명" onchange="updatePortfolioInfo(${index}, 'desc', this.value)" style="width: 100%; padding: 10px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; color: #000; font-size: 14px; resize: vertical; min-height: 60px;">${portfolioDescriptions[index] || ''}</textarea>
+                `;
+                container.appendChild(itemWrapper);
+            });
+        }
+
+        function updatePortfolioInfo(index, type, value) {
+            if (type === 'title') {
+                portfolioTitles[index] = value;
+            } else if (type === 'desc') {
+                portfolioDescriptions[index] = value;
+            }
+            updatePortfolioGallery();
+        }
+
+        function updatePortfolioGallery() {
+            const gallery = document.getElementById('portfolioGallery');
+            if (!gallery) return;
+            gallery.innerHTML = '';
+            
+            if (portfolioImages.length === 0) {
+                gallery.innerHTML = '<p style="text-align: center; color: #888; padding: 40px;">포트폴리오 이미지를 추가하면 여기에 표시됩니다</p>';
+                return;
+            }
+
+            const carouselHTML = `
+                <div class="carousel-wrapper" id="carouselWrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                        ${portfolioImages.map((img, index) => `
+                            <div class="portfolio-item" data-index="${index}" onclick="openModal(${index}, event)">
+                                <div class="portfolio-card">
+                                    <img src="${img}" alt="${portfolioTitles[index] || '포트폴리오 ' + (index + 1)}">
+                                    <div class="portfolio-overlay">
+                                        <div class="portfolio-overlay-title">${portfolioTitles[index] || '작품 ' + (index + 1)}</div>
+                                        <div class="portfolio-overlay-text">${portfolioDescriptions[index] || '클릭하여 자세히 보기 🔍'}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${portfolioImages.length > 1 ? `
+                        <div class="carousel-indicators">
+                            ${portfolioImages.map((_, index) => `
+                                <div class="carousel-indicator ${index === 0 ? 'active' : ''} ${index < currentCarouselIndex ? 'passed' : ''}" onclick="goToSlide(${index}, event)"></div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            gallery.innerHTML = carouselHTML;
+            currentCarouselIndex = 0;
+            updateCarouselPositions();
+            
+            const carouselWrapper = document.getElementById('carouselWrapper');
+            if (carouselWrapper) {
+                carouselWrapper.addEventListener('mousedown', startCarouselDrag);
+                carouselWrapper.addEventListener('touchstart', startCarouselDrag);
+                document.addEventListener('mousemove', dragCarousel);
+                document.addEventListener('touchmove', dragCarousel);
+                document.addEventListener('mouseup', stopCarouselDrag);
+                document.addEventListener('touchend', stopCarouselDrag);
+            }
+        }
+
+        function startCarouselDrag(e) {
+            if (e.target.closest('.portfolio-item')) return;
+            isCarouselDragging = true;
+            carouselStartX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            carouselDragDistance = 0;
+        }
+
+        function dragCarousel(e) {
+            if (!isCarouselDragging) return;
+            e.preventDefault();
+            const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            carouselDragDistance = currentX - carouselStartX;
+        }
+
+        function stopCarouselDrag() {
+            if (!isCarouselDragging) return;
+            isCarouselDragging = false;
+            
+            if (Math.abs(carouselDragDistance) > 100) {
+                if (carouselDragDistance > 0) {
+                    moveCarousel(-1);
+                } else {
+                    moveCarousel(1);
+                }
+            }
+            carouselDragDistance = 0;
+        }
+
+        function updateCarouselPositions() {
+            const items = document.querySelectorAll('.portfolio-item');
+            items.forEach((item, index) => {
+                const position = index - currentCarouselIndex;
+                item.setAttribute('data-position', position);
+            });
+        }
+
+        function moveCarousel(direction, event) {
+            if (event) event.stopPropagation();
+            
+            currentCarouselIndex += direction;
+            if (currentCarouselIndex < 0) currentCarouselIndex = portfolioImages.length - 1;
+            if (currentCarouselIndex >= portfolioImages.length) currentCarouselIndex = 0;
+            
+            updateCarouselPositions();
+            updateCarouselIndicators();
+        }
+
+        function goToSlide(index, event) {
+            if (event) event.stopPropagation();
+            
+            currentCarouselIndex = index;
+            updateCarouselPositions();
+            updateCarouselIndicators();
+        }
+
+        function updateCarouselIndicators() {
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.remove('active', 'passed');
+                if (index === currentCarouselIndex) {
+                    indicator.classList.add('active');
+                } else if (index < currentCarouselIndex) {
+                    indicator.classList.add('passed');
+                }
+            });
+        }
+
+        function openModal(index, event) {
+            if (event) event.stopPropagation();
+            const modal = document.getElementById('portfolioModal');
+            const modalImg = document.getElementById('modalImage');
+            const counter = document.getElementById('modalCounter');
+            
+            if (modal && modalImg) {
+                currentModalIndex = index;
+                modalImg.src = portfolioImages[index];
+                counter.textContent = `${index + 1} / ${portfolioImages.length}`;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function navigateModal(direction, event) {
+            if (event) event.stopPropagation();
+            
+            currentModalIndex += direction;
+            if (currentModalIndex < 0) currentModalIndex = portfolioImages.length - 1;
+            if (currentModalIndex >= portfolioImages.length) currentModalIndex = 0;
+            
+            const modalImg = document.getElementById('modalImage');
+            const counter = document.getElementById('modalCounter');
+            
+            if (modalImg && counter) {
+                modalImg.src = portfolioImages[currentModalIndex];
+                counter.textContent = `${currentModalIndex + 1} / ${portfolioImages.length}`;
+            }
+        }
+
+        function closeModal(event) {
+            if (event) event.stopPropagation();
+            const modal = document.getElementById('portfolioModal');
+            if (modal && (event.target === modal || event.currentTarget.classList.contains('portfolio-modal-close'))) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('portfolioModal');
+            if (modal && modal.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') navigateModal(-1);
+                if (e.key === 'ArrowRight') navigateModal(1);
+                if (e.key === 'Escape') closeModal({ target: modal });
+            } else {
+                if (e.key === 'ArrowLeft') moveCarousel(-1);
+                if (e.key === 'ArrowRight') moveCarousel(1);
+            }
+        });
+
+        function removePortfolioImage(index) {
+            portfolioImages.splice(index, 1);
+            portfolioTitles.splice(index, 1);
+            portfolioDescriptions.splice(index, 1);
+            updatePortfolioPreview();
+            updatePortfolioGallery();
+        }
+
+        function saveProfile() {
+            const profileData = {
+                name: document.getElementById('userName')?.value || '',
+                title: document.getElementById('userTitle')?.value || '',
+                company: document.getElementById('userCompany')?.value || '',
+                phone: document.getElementById('userPhone')?.value || '',
+                email: document.getElementById('userEmail')?.value || '',
+                bio: document.getElementById('userBio')?.value || '',
+                website: document.getElementById('userWebsite')?.value || '',
+                notion: document.getElementById('userNotion')?.value || '',
+                youtube: document.getElementById('userYoutube')?.value || '',
+                instagram: document.getElementById('userInstagram')?.value || '',
+                linkedin: document.getElementById('userLinkedin')?.value || '',
+                portfolioImages: portfolioImages,
+                portfolioTitles: portfolioTitles,
+                portfolioDescriptions: portfolioDescriptions
+            };
+            localStorage.setItem('nfcProfile', JSON.stringify(profileData));
+            updatePreview();
+            alert('✅ 저장되었습니다!');
+        }
+
+        function updatePreview() {
+            const name = document.getElementById('userName')?.value || 'GOLD:ON';
+            const title = document.getElementById('userTitle')?.value || '디지털 명함 전문가';
+            const company = document.getElementById('userCompany')?.value || 'GOLD:ON';
+            const phone = document.getElementById('userPhone')?.value || '010-1234-5678';
+            const email = document.getElementById('userEmail')?.value || 'hello@goldon.com';
+            const bio = document.getElementById('userBio')?.value || '포트폴리오를 입력하면 여기에 표시됩니다.';
+
+            const displayName = document.getElementById('displayName');
+            const displayTitle = document.getElementById('displayTitle');
+            const displayCompany = document.getElementById('displayCompany');
+            const displayEmail = document.getElementById('displayEmail');
+            const displayPhone = document.getElementById('displayPhone');
+            const displayBio = document.getElementById('displayBio');
+
+            if (displayName) displayName.textContent = name;
+            if (displayTitle) displayTitle.textContent = title;
+            if (displayCompany) displayCompany.textContent = company;
+            if (displayEmail) displayEmail.textContent = email;
+            if (displayPhone) displayPhone.textContent = phone;
+            if (displayBio) displayBio.textContent = bio;
+
+            updateSocialLinks();
+            updatePortfolioGallery();
+        }
+
+        function updateSocialLinks() {
+            const socialLinksContainer = document.getElementById('socialLinks');
+            if (!socialLinksContainer) return;
+            
+            socialLinksContainer.innerHTML = '';
+            
+            const links = [
+                { id: 'userWebsite', icon: '🌐', label: '웹사이트' },
+                { id: 'userNotion', icon: '📝', label: 'Notion' },
+                { id: 'userYoutube', icon: '▶️', label: 'YouTube' },
+                { id: 'userInstagram', icon: '📷', label: 'Instagram' },
+                { id: 'userLinkedin', icon: '💼', label: 'LinkedIn' }
+            ];
+            
+            links.forEach(link => {
+                const input = document.getElementById(link.id);
+                const url = input?.value || '';
+                
+                if (url && url.trim() !== '') {
+                    const linkBtn = document.createElement('a');
+                    linkBtn.href = url;
+                    linkBtn.target = '_blank';
+                    linkBtn.className = 'social-link-btn';
+                    linkBtn.innerHTML = `<span>${link.icon}</span><span>${link.label}</span>`;
+                    socialLinksContainer.appendChild(linkBtn);
+                }
+            });
+        }
+
+        function loadProfile() {
+            const saved = localStorage.getItem('nfcProfile');
+            if (saved) {
+                const data = JSON.parse(saved);
+                if (document.getElementById('userName')) document.getElementById('userName').value = data.name || '';
+                if (document.getElementById('userTitle')) document.getElementById('userTitle').value = data.title || '';
+                if (document.getElementById('userCompany')) document.getElementById('userCompany').value = data.company || '';
+                if (document.getElementById('userPhone')) document.getElementById('userPhone').value = data.phone || '';
+                if (document.getElementById('userEmail')) document.getElementById('userEmail').value = data.email || '';
+                if (document.getElementById('userBio')) document.getElementById('userBio').value = data.bio || '';
+                if (document.getElementById('userWebsite')) document.getElementById('userWebsite').value = data.website || '';
+                if (document.getElementById('userNotion')) document.getElementById('userNotion').value = data.notion || '';
+                if (document.getElementById('userYoutube')) document.getElementById('userYoutube').value = data.youtube || '';
+                if (document.getElementById('userInstagram')) document.getElementById('userInstagram').value = data.instagram || '';
+                if (document.getElementById('userLinkedin')) document.getElementById('userLinkedin').value = data.linkedin || '';
+                
+                if (data.portfolioImages) {
+                    portfolioImages = data.portfolioImages;
+                    portfolioTitles = data.portfolioTitles || [];
+                    portfolioDescriptions = data.portfolioDescriptions || [];
+                    
+                    while (portfolioTitles.length < portfolioImages.length) {
+                        portfolioTitles.push('');
+                    }
+                    while (portfolioDescriptions.length < portfolioImages.length) {
+                        portfolioDescriptions.push('');
+                    }
+                    
+                    updatePortfolioPreview();
+                    updatePortfolioGallery();
+                }
+                
+                updatePreview();
+            }
+        }
+
+        window.addEventListener('load', loadProfile);
+
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            
+            const pages = {
+                'home': 'homePage',
+                'history': 'historyPage',
+                'stats': 'statsPage',
+                'qr': 'qrPage',
+                'settings': 'settingsPage'
+            };
+            
+            const pageId = pages[pageName];
+            if (pageId && document.getElementById(pageId)) {
+                document.getElementById(pageId).classList.add('active');
+            }
+            
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+
         const card3d = document.getElementById('card3d');
         const cardInner = document.getElementById('cardInner');
 
         card3d.addEventListener('mousedown', startDrag);
         card3d.addEventListener('touchstart', startDrag);
-        
         document.addEventListener('mousemove', drag);
         document.addEventListener('touchmove', drag);
-        
         document.addEventListener('mouseup', stopDrag);
         document.addEventListener('touchend', stopDrag);
+        card3d.addEventListener('dblclick', resetCard);
 
         function startDrag(e) {
             isDragging = true;
             card3d.style.cursor = 'grabbing';
-            
             if (e.type === 'touchstart') {
                 startX = e.touches[0].clientX;
                 startY = e.touches[0].clientY;
@@ -824,7 +1394,6 @@
                 startX = e.clientX;
                 startY = e.clientY;
             }
-            
             currentRotateX = rotateX;
             currentRotateY = rotateY;
         }
@@ -832,9 +1401,7 @@
         function drag(e) {
             if (!isDragging) return;
             e.preventDefault();
-            
             let currentX, currentY;
-            
             if (e.type === 'touchmove') {
                 currentX = e.touches[0].clientX;
                 currentY = e.touches[0].clientY;
@@ -842,13 +1409,10 @@
                 currentX = e.clientX;
                 currentY = e.clientY;
             }
-            
             const deltaX = currentX - startX;
             const deltaY = currentY - startY;
-            
             rotateY = currentRotateY + deltaX * 0.5;
             rotateX = currentRotateX - deltaY * 0.5;
-            
             cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         }
 
@@ -857,164 +1421,15 @@
             card3d.style.cursor = 'grab';
         }
 
-        // 더블클릭으로 리셋
-        card3d.addEventListener('dblclick', resetCard);
-        
         function resetCard() {
             rotateX = 0;
             rotateY = 0;
-            currentRotateX = 0;
-            currentRotateY = 0;
             cardInner.style.transition = 'transform 0.5s ease';
             cardInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
-            
             setTimeout(() => {
                 cardInner.style.transition = 'transform 0.1s ease-out';
             }, 500);
         }
-
-        function handleCardDesignUpload(event, side) {
-            const file = event.target.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    if (side === 'front') {
-                        cardFrontDesign = e.target.result;
-                        document.getElementById('cardFrontPreviewImg').src = cardFrontDesign;
-                        document.getElementById('cardFrontPreview').style.display = 'block';
-                        document.getElementById('removeCardFrontBtn').style.display = 'block';
-                        applyCardDesign('front');
-                    } else {
-                        cardBackDesign = e.target.result;
-                        document.getElementById('cardBackPreviewImg').src = cardBackDesign;
-                        document.getElementById('cardBackPreview').style.display = 'block';
-                        document.getElementById('removeCardBackBtn').style.display = 'block';
-                        applyCardDesign('back');
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function applyCardDesign(side) {
-            if (side === 'front') {
-                const frontCard = document.getElementById('businessCardFront');
-                const frontImage = document.getElementById('cardFrontImage');
-                
-                if (cardFrontDesign) {
-                    frontImage.src = cardFrontDesign;
-                    frontCard.classList.add('has-custom-design');
-                } else {
-                    frontCard.classList.remove('has-custom-design');
-                }
-            } else {
-                const backCard = document.getElementById('businessCardBack');
-                const backImage = document.getElementById('cardBackImage');
-                
-                if (cardBackDesign) {
-                    backImage.src = cardBackDesign;
-                    backCard.classList.add('has-custom-design');
-                } else {
-                    backCard.classList.remove('has-custom-design');
-                }
-            }
-        }
-
-        function removeCardDesign(side) {
-            if (side === 'front') {
-                cardFrontDesign = null;
-                document.getElementById('cardDesignUpload').value = '';
-                document.getElementById('cardFrontPreview').style.display = 'none';
-                document.getElementById('removeCardFrontBtn').style.display = 'none';
-                const frontCard = document.getElementById('businessCardFront');
-                frontCard.classList.remove('has-custom-design');
-                alert('✅ 앞면 디자인이 초기화되었습니다!');
-            } else {
-                cardBackDesign = null;
-                document.getElementById('cardBackDesignUpload').value = '';
-                document.getElementById('cardBackPreview').style.display = 'none';
-                document.getElementById('removeCardBackBtn').style.display = 'none';
-                const backCard = document.getElementById('businessCardBack');
-                backCard.classList.remove('has-custom-design');
-                alert('✅ 뒷면 디자인이 초기화되었습니다!');
-            }
-        }
-
-        function updatePreview() {
-            const name = document.getElementById('userName').value || 'GOLD:ON';
-            const title = document.getElementById('userTitle').value || '디지털 명함 전문가';
-            const company = document.getElementById('userCompany').value || 'GOLD:ON';
-            const phone = document.getElementById('userPhone').value || '010-1234-5678';
-            const email = document.getElementById('userEmail').value || 'hello@goldon.com';
-            const website = document.getElementById('userWebsite').value || '#';
-
-            document.getElementById('displayName').textContent = name;
-            document.getElementById('displayTitle').textContent = title;
-            document.getElementById('displayCompany').textContent = company;
-            document.getElementById('displayEmail').textContent = email;
-            document.getElementById('displayPhone').textContent = phone;
-
-            document.getElementById('emailBtn').href = `mailto:${email}`;
-            document.getElementById('phoneBtn').href = `tel:${phone}`;
-            document.getElementById('websiteBtn').href = website;
-        }
-
-        function saveProfile() {
-            const profileData = {
-                name: document.getElementById('userName').value,
-                title: document.getElementById('userTitle').value,
-                company: document.getElementById('userCompany').value,
-                phone: document.getElementById('userPhone').value,
-                email: document.getElementById('userEmail').value,
-                website: document.getElementById('userWebsite').value,
-                cardFrontDesign: cardFrontDesign,
-                cardBackDesign: cardBackDesign
-            };
-            localStorage.setItem('nfcProfile', JSON.stringify(profileData));
-            updatePreview();
-            alert('✅ 저장되었습니다!');
-        }
-
-        function loadProfile() {
-            const saved = localStorage.getItem('nfcProfile');
-            if (saved) {
-                const data = JSON.parse(saved);
-                document.getElementById('userName').value = data.name || '';
-                document.getElementById('userTitle').value = data.title || '';
-                document.getElementById('userCompany').value = data.company || '';
-                document.getElementById('userPhone').value = data.phone || '';
-                document.getElementById('userEmail').value = data.email || '';
-                document.getElementById('userWebsite').value = data.website || '';
-                
-                if (data.cardFrontDesign) {
-                    cardFrontDesign = data.cardFrontDesign;
-                    document.getElementById('cardFrontPreviewImg').src = cardFrontDesign;
-                    document.getElementById('cardFrontPreview').style.display = 'block';
-                    document.getElementById('removeCardFrontBtn').style.display = 'block';
-                    applyCardDesign('front');
-                }
-                
-                if (data.cardBackDesign) {
-                    cardBackDesign = data.cardBackDesign;
-                    document.getElementById('cardBackPreviewImg').src = cardBackDesign;
-                    document.getElementById('cardBackPreview').style.display = 'block';
-                    document.getElementById('removeCardBackBtn').style.display = 'block';
-                    applyCardDesign('back');
-                }
-                
-                updatePreview();
-            }
-        }
-
-        // 실시간 업데이트
-        ['userName', 'userTitle', 'userCompany', 'userPhone', 'userEmail', 'userWebsite'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('input', updatePreview);
-            }
-        });
-
-        window.addEventListener('load', loadProfile);
     </script>
 </body>
 </html>
