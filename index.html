@@ -122,15 +122,16 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 20px;
             flex-direction: column;
         }
         
+        /* 명함 카드 3D - 모바일 최적화 */
         .card-3d {
             perspective: 1500px;
             margin: 50px auto;
-            width: 85.5mm;
-            height: 54mm;
+            width: min(85.5mm, calc(100vw - 40px));
+            height: min(54mm, calc((100vw - 40px) * 0.632));
             cursor: grab;
             user-select: none;
         }
@@ -255,7 +256,7 @@
             margin-bottom: 10px;
         }
         .card-name {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 4vw, 1.3rem);
             font-weight: 700;
             color: #fff;
             margin-bottom: 3px;
@@ -264,12 +265,12 @@
             color: #00d9a3;
         }
         .card-title {
-            font-size: 0.75rem;
+            font-size: clamp(0.65rem, 3vw, 0.75rem);
             color: #999;
             margin-bottom: 12px;
         }
         .card-contact {
-            font-size: 0.7rem;
+            font-size: clamp(0.6rem, 2.5vw, 0.7rem);
             color: #ccc;
         }
         
@@ -796,13 +797,24 @@
         }
         
         @media (max-width: 768px) {
-            .card-3d { width: 320px; height: 200px; }
             .edit-panel {
                 width: 100%;
                 right: -100%;
             }
             .stats-grid {
                 grid-template-columns: 1fr;
+            }
+            .about-content {
+                padding: 40px 25px;
+            }
+            
+            /* 모바일에서 버튼 크기 조정 */
+            .modal-action-btn {
+                padding: 15px !important;
+                font-size: 1rem !important;
+            }
+            .modal-action-btn span:first-child {
+                font-size: 1.3rem !important;
             }
         }
     </style>
@@ -953,31 +965,31 @@
             </div>
             
             <div class="container" style="max-width: 600px; margin-top: 80px;">
-                <h2 id="displayCompanyTitle" style="font-size: 2.8rem; font-weight: 900; text-align: center; margin-bottom: 30px; color: #000;">회사명을 입력하세요</h2>
+                <h2 id="displayCompanyTitle" style="font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 900; text-align: center; margin-bottom: 30px; color: #000;">회사명을 입력하세요</h2>
                 
-                <p id="displayJobTitle" style="text-align: center; color: #aaa; margin-bottom: 50px; font-size: 1.1rem;">직책을 입력하세요</p>
+                <p id="displayJobTitle" style="text-align: center; color: #aaa; margin-bottom: 50px; font-size: clamp(0.9rem, 3vw, 1.1rem);">직책을 입력하세요</p>
                 
                 <div style="margin-bottom: 50px;">
-                    <h3 id="displayUserName" style="font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 40px; color: #000;">사용자 이름</h3>
+                    <h3 id="displayUserName" style="font-size: clamp(1.4rem, 5vw, 1.8rem); font-weight: 700; text-align: center; margin-bottom: 40px; color: #000;">사용자 이름</h3>
                 </div>
                 
                 <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 60px;">
-                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
+                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
                         <span style="font-size: 1.5rem;">📧</span>
                         <span>이메일</span>
                     </button>
                     
-                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
+                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
                         <span style="font-size: 1.5rem;">📞</span>
                         <span>전화</span>
                     </button>
                     
-                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
+                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
                         <span style="font-size: 1.5rem;">📄</span>
                         <span>노션</span>
                     </button>
                     
-                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
+                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
                         <span style="font-size: 1.5rem;">🌐</span>
                         <span>웹사이트</span>
                     </button>
@@ -1029,7 +1041,6 @@
             <h2 style="font-size: 2.5rem; margin-bottom: 40px; text-align: center; font-weight: 900;">📇 명함 교환 이력</h2>
             
             <div id="historyList">
-                <!-- 샘플 데이터 -->
                 <div class="history-card">
                     <div class="history-avatar">👨‍💼</div>
                     <div class="history-info">
@@ -1098,7 +1109,6 @@
         <div class="container">
             <h2 style="font-size: 2.5rem; margin-bottom: 40px; text-align: center; font-weight: 900;">📊 명함 인사이트</h2>
             
-            <!-- 통계 카드 -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon">📇</div>
@@ -1125,7 +1135,6 @@
                 </div>
             </div>
             
-            <!-- 원형 그래프 -->
             <div class="chart-container">
                 <h3 class="chart-title">클릭 분포</h3>
                 <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
@@ -1151,10 +1160,9 @@
                 </div>
             </div>
             
-            <!-- 막대 그래프 -->
             <div class="chart-container">
                 <h3 class="chart-title">주간 명함 교환 현황</h3>
-                <div style="display: flex; justify-content: center;">
+                <div style="display: flex; justify-content: center; overflow-x: auto;">
                     <canvas id="barChart" width="800" height="300"></canvas>
                 </div>
             </div>
@@ -1195,6 +1203,7 @@
     </div>
 
     <script>
+        // 이전과 동일한 JavaScript 코드
         let isDarkMode = false;
         let isEditMode = false;
         let portfolioImages = [];
@@ -1279,7 +1288,6 @@
             const btn = document.querySelector('.dark-mode-toggle');
             btn.textContent = isDarkMode ? '☀️ 라이트모드' : '🌓 다크모드';
             
-            // 그래프 다시 그리기
             if (document.getElementById('statsPage').classList.contains('active')) {
                 setTimeout(drawCharts, 100);
             }
@@ -1619,7 +1627,6 @@
         }
         
         function drawCharts() {
-            // 원형 그래프
             const pieCanvas = document.getElementById('pieChart');
             if (pieCanvas && pieCanvas.getContext) {
                 const pieCtx = pieCanvas.getContext('2d');
@@ -1651,14 +1658,12 @@
                     currentAngle += sliceAngle;
                 });
                 
-                // 중앙 원 (도넛 효과)
                 pieCtx.beginPath();
                 pieCtx.arc(centerX, centerY, 80, 0, 2 * Math.PI);
                 pieCtx.fillStyle = document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#fff';
                 pieCtx.fill();
             }
             
-            // 막대 그래프
             const barCanvas = document.getElementById('barChart');
             if (barCanvas && barCanvas.getContext) {
                 const barCtx = barCanvas.getContext('2d');
@@ -1705,7 +1710,6 @@
             }
         }
 
-        // 명함 3D 인터랙션
         const card3d = document.getElementById('card3d');
         const cardInner = document.getElementById('cardInner');
 
