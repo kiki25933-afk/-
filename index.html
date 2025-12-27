@@ -14,9 +14,10 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #000;
-            background: #f8f9fa;
+            background: #ffffff;
             overflow-x: hidden;
             width: 100%;
+            transition: all 0.3s ease;
         }
         .container {
             max-width: 1200px;
@@ -48,15 +49,16 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
         
+        /* 다크모드 - 완전히 어두운 배경 */
         body.dark-mode {
-            background: #121212;
-            color: #e0e0e0;
+            background: #000000;
+            color: #ffffff;
         }
         body.dark-mode .edit-toggle,
         body.dark-mode .dark-mode-toggle {
-            background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%);
-            color: #000;
-            box-shadow: 0 4px 20px rgba(0, 217, 163, 0.3);
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
         }
         
         /* 하단 네비게이션 바 */
@@ -66,7 +68,7 @@
             left: 0;
             right: 0;
             height: 70px;
-            background: #fff;
+            background: #ffffff;
             border-top: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-around;
@@ -75,8 +77,8 @@
             box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
         }
         body.dark-mode .bottom-nav {
-            background: #0a0a0a;
-            border-top: 1px solid #333;
+            background: #111111;
+            border-top: 1px solid #333333;
         }
         .nav-item {
             display: flex;
@@ -87,14 +89,18 @@
             cursor: pointer;
             transition: all 0.3s ease;
             flex: 1;
-            color: #666;
+            color: #666666;
         }
         body.dark-mode .nav-item {
-            color: #888;
+            color: #888888;
         }
         .nav-item:hover,
         .nav-item.active {
-            color: #00d9a3;
+            color: #000000;
+        }
+        body.dark-mode .nav-item:hover,
+        body.dark-mode .nav-item.active {
+            color: #ffffff;
         }
         .nav-item .icon {
             font-size: 1.5rem;
@@ -184,8 +190,9 @@
             backface-visibility: hidden;
         }
         body.dark-mode .business-card {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 20px 60px rgba(255,255,255,0.2);
         }
         
         .card-front {
@@ -195,6 +202,9 @@
         .card-back {
             transform: rotateY(180deg);
             background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        }
+        body.dark-mode .card-back {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
         }
         .business-card.has-custom-design {
             padding: 0;
@@ -226,6 +236,12 @@
             border: 2px solid rgba(255,255,255,0.3);
             z-index: 10;
         }
+        body.dark-mode .card-corner-tl,
+        body.dark-mode .card-corner-tr,
+        body.dark-mode .card-corner-bl,
+        body.dark-mode .card-corner-br {
+            border-color: rgba(0, 0, 0, 0.3);
+        }
         .card-corner-tl {
             top: -2px;
             left: -2px;
@@ -254,12 +270,6 @@
             border-top: none;
             border-bottom-right-radius: 12px;
         }
-        body.dark-mode .card-corner-tl,
-        body.dark-mode .card-corner-tr,
-        body.dark-mode .card-corner-bl,
-        body.dark-mode .card-corner-br {
-            border-color: rgba(255, 255, 255, 0.5);
-        }
         
         .card-chip {
             position: absolute;
@@ -267,13 +277,13 @@
             right: 15px;
             width: 35px;
             height: 28px;
-            background: linear-gradient(135deg, #d4af37 0%, #f4e5c3 50%, #d4af37 100%);
+            background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 50%, #c0c0c0 100%);
             border-radius: 4px;
         }
         .card-logo {
             width: 40px;
             height: 40px;
-            background: #00d9a3;
+            background: #000000;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -281,33 +291,32 @@
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
+        body.dark-mode .card-logo {
+            background: #ffffff;
+        }
         .card-name {
             font-size: clamp(1rem, 4vw, 1.3rem);
             font-weight: 700;
-            color: #fff;
+            color: #ffffff;
             margin-bottom: 3px;
         }
         body.dark-mode .card-name {
-            color: #00d9a3;
+            color: #000000;
         }
         .card-title {
             font-size: clamp(0.65rem, 3vw, 0.75rem);
-            color: #999;
+            color: #999999;
             margin-bottom: 12px;
+        }
+        body.dark-mode .card-title {
+            color: #666666;
         }
         .card-contact {
             font-size: clamp(0.6rem, 2.5vw, 0.7rem);
-            color: #ccc;
+            color: #cccccc;
         }
-        
-        /* 다크모드 텍스트 색상 수정 */
-        body.dark-mode #displayCompanyTitle,
-        body.dark-mode #displayJobTitle,
-        body.dark-mode #displayUserName,
-        body.dark-mode h2,
-        body.dark-mode h3,
-        body.dark-mode p {
-            color: #fff !important;
+        body.dark-mode .card-contact {
+            color: #333333;
         }
         
         /* 편집 패널 */
@@ -317,7 +326,7 @@
             right: -450px;
             width: 450px;
             height: 100vh;
-            background: #fff;
+            background: #ffffff;
             border-left: 1px solid #e0e0e0;
             transition: right 0.3s ease;
             overflow-y: auto;
@@ -329,18 +338,18 @@
             right: 0;
         }
         body.dark-mode .edit-panel {
-            background: #0a0a0a;
-            border-left: 1px solid #333;
+            background: #000000;
+            border-left: 1px solid #333333;
         }
         .edit-panel h3 {
-            color: #000;
+            color: #000000;
             margin-bottom: 15px;
             font-size: 2.2rem;
             text-align: center;
             font-weight: 900;
         }
         body.dark-mode .edit-panel h3 {
-            color: #fff;
+            color: #ffffff;
         }
         
         .form-group {
@@ -355,34 +364,35 @@
             width: 100%;
             padding: 16px;
             background: #f8f9fa;
-            border: none;
+            border: 1px solid #e0e0e0;
             border-radius: 12px;
-            color: #000;
+            color: #000000;
             font-size: 15px;
             transition: all 0.3s ease;
             margin-bottom: 0;
         }
         body.dark-mode .form-group input,
         body.dark-mode .form-group textarea {
-            background: #0a0a0a;
-            border: 1px solid #333;
-            color: #fff;
+            background: #111111;
+            border: 1px solid #333333;
+            color: #ffffff;
         }
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            background: #fff;
-            box-shadow: 0 0 0 2px #000;
+            background: #ffffff;
+            box-shadow: 0 0 0 2px #000000;
         }
         body.dark-mode .form-group input:focus,
         body.dark-mode .form-group textarea:focus {
-            box-shadow: 0 0 0 2px #fff;
+            background: #000000;
+            box-shadow: 0 0 0 2px #ffffff;
         }
         .save-btn {
             width: 100%;
             padding: 16px;
-            background: #000;
-            color: #fff;
+            background: #000000;
+            color: #ffffff;
             border: none;
             border-radius: 12px;
             font-weight: 600;
@@ -396,8 +406,11 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
         body.dark-mode .save-btn {
-            background: #fff;
-            color: #000;
+            background: #ffffff;
+            color: #000000;
+        }
+        body.dark-mode .save-btn:hover {
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
         }
         
         .about-section {
@@ -406,20 +419,20 @@
             background: #f8f8f8;
         }
         body.dark-mode .about-section {
-            background: #0a0a0a;
+            background: #000000;
         }
         .about-content {
             max-width: 800px;
             margin: 0 auto;
-            background: #fff;
+            background: #ffffff;
             padding: 60px;
             border-radius: 30px;
             border: 1px solid #e0e0e0;
             margin-bottom: 100px;
         }
         body.dark-mode .about-content {
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
+            background: #111111;
+            border: 1px solid #333333;
         }
         .portfolio-section {
             max-width: 1200px;
@@ -427,101 +440,74 @@
             padding: 0 20px;
         }
         .portfolio-section h2 {
-            color: #000;
+            color: #000000;
             font-size: 2.5rem;
             margin-bottom: 50px;
             text-align: center;
         }
         body.dark-mode .portfolio-section h2 {
-            color: #00d9a3;
+            color: #ffffff;
         }
         .about-content h2 {
-            color: #000;
+            color: #000000;
             font-size: 2.5rem;
             margin-bottom: 30px;
         }
         body.dark-mode .about-content h2 {
-            color: #00d9a3;
+            color: #ffffff;
         }
         
-        /* 다크모드 전구 카드 내부 */
-        body.dark-mode .about-content > div[style*="background: #f8f9fa"] {
-            background: #1a1a1a !important;
-            border-color: #2a2a2a !important;
-        }
-        body.dark-mode .about-content > div[style*="background: #f8f9fa"] div {
-            color: #888 !important;
-        }
-        
-        /* 다크모드 소셜 안내 카드 */
-        body.dark-mode div[style*="background: #fff"][style*="border-radius: 30px"] {
-            background: #1a1a1a !important;
-            border-color: #2a2a2a !important;
-        }
-        body.dark-mode div[style*="background: #fff"][style*="border-radius: 30px"] h3 {
-            color: #fff !important;
-        }
-        body.dark-mode div[style*="background: #fff"][style*="border-radius: 30px"] p {
-            color: #888 !important;
-        }
         .about-text {
             font-size: 1.2rem;
             line-height: 1.8;
-            color: #333;
+            color: #333333;
             margin-bottom: 40px;
         }
         body.dark-mode .about-text {
-            color: #888;
-        }
-        
-        /* 소셜 카드 다크모드 */
-        body.dark-mode #allLinksContainer > div {
-            background: #1a1a1a !important;
-            border-color: #2a2a2a !important;
-        }
-        body.dark-mode #allLinksContainer > div h3 {
-            color: #fff !important;
-        }
-        body.dark-mode #allLinksContainer > div p {
-            color: #888 !important;
+            color: #cccccc;
         }
         
         /* 포트폴리오 카드 스타일 */
         .portfolio-simple-card {
-            background: #fff;
+            background: #ffffff;
             border-radius: 20px;
             padding: 30px;
             margin-bottom: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
+            border: 1px solid #e0e0e0;
         }
         body.dark-mode .portfolio-simple-card {
-            background: #1a1a1a;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            background: #111111;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+            border: 1px solid #333333;
         }
         .portfolio-simple-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 217, 163, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        body.dark-mode .portfolio-simple-card:hover {
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
         }
         .portfolio-simple-card .title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #000;
+            color: #000000;
             text-align: center;
             margin-bottom: 10px;
         }
         body.dark-mode .portfolio-simple-card .title {
-            color: #fff;
+            color: #ffffff;
         }
         .portfolio-simple-card .description {
             font-size: 0.95rem;
-            color: #666;
+            color: #666666;
             text-align: center;
             line-height: 1.6;
         }
         body.dark-mode .portfolio-simple-card .description {
-            color: #888;
+            color: #999999;
         }
         .portfolio-simple-card img {
             width: 100%;
@@ -579,8 +565,8 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: #00d9a3;
-            color: #000;
+            background: #ffffff;
+            color: #000000;
             border: none;
             padding: 15px 25px;
             border-radius: 50px;
@@ -595,8 +581,8 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 217, 163, 0.9);
-            color: #000;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000000;
             padding: 12px 24px;
             border-radius: 25px;
             font-weight: 700;
@@ -619,7 +605,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .modal-info-title {
-            color: #00d9a3;
+            color: #ffffff;
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 12px;
@@ -639,7 +625,7 @@
         }
         
         .stat-card {
-            background: #fff;
+            background: #ffffff;
             padding: 30px;
             border-radius: 20px;
             border: 1px solid #e0e0e0;
@@ -648,13 +634,17 @@
         }
         
         body.dark-mode .stat-card {
-            background: #1a1a1a;
-            border-color: #2a2a2a;
+            background: #111111;
+            border-color: #333333;
         }
         
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 217, 163, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        body.dark-mode .stat-card:hover {
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
         }
         
         .stat-icon {
@@ -665,21 +655,25 @@
         .stat-value {
             font-size: 2.5rem;
             font-weight: 900;
-            color: #00d9a3;
+            color: #000000;
             margin-bottom: 10px;
+        }
+        
+        body.dark-mode .stat-value {
+            color: #ffffff;
         }
         
         .stat-label {
             font-size: 1rem;
-            color: #666;
+            color: #666666;
         }
         
         body.dark-mode .stat-label {
-            color: #888;
+            color: #999999;
         }
         
         .chart-container {
-            background: #fff;
+            background: #ffffff;
             padding: 40px;
             border-radius: 20px;
             border: 1px solid #e0e0e0;
@@ -687,8 +681,8 @@
         }
         
         body.dark-mode .chart-container {
-            background: #1a1a1a;
-            border-color: #2a2a2a;
+            background: #111111;
+            border-color: #333333;
         }
         
         .chart-title {
@@ -696,16 +690,16 @@
             font-weight: 700;
             margin-bottom: 30px;
             text-align: center;
-            color: #000;
+            color: #000000;
         }
         
         body.dark-mode .chart-title {
-            color: #fff;
+            color: #ffffff;
         }
         
         /* 명함 교환 이력 */
         .history-card {
-            background: #fff;
+            background: #ffffff;
             padding: 25px;
             border-radius: 20px;
             border: 1px solid #e0e0e0;
@@ -718,13 +712,17 @@
         }
         
         body.dark-mode .history-card {
-            background: #1a1a1a;
-            border-color: #2a2a2a;
+            background: #111111;
+            border-color: #333333;
         }
         
         .history-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 217, 163, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        body.dark-mode .history-card:hover {
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
         }
         
         .history-avatar {
@@ -738,27 +736,60 @@
         .history-name {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #000;
+            color: #000000;
             margin-bottom: 5px;
         }
         
         body.dark-mode .history-name {
-            color: #fff;
+            color: #ffffff;
         }
         
         .history-detail {
-            color: #666;
+            color: #666666;
             font-size: 0.9rem;
         }
         
         body.dark-mode .history-detail {
-            color: #888;
+            color: #999999;
         }
         
         .history-time {
             text-align: right;
-            color: #999;
+            color: #999999;
             font-size: 0.85rem;
+        }
+        
+        body.dark-mode .history-time {
+            color: #666666;
+        }
+        
+        /* 모든 텍스트 요소 다크모드 */
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode p {
+            color: #ffffff !important;
+        }
+        
+        /* 소셜 카드 */
+        body.dark-mode #allLinksContainer > div {
+            background: #111111 !important;
+            border-color: #333333 !important;
+        }
+        body.dark-mode #allLinksContainer > div h3 {
+            color: #ffffff !important;
+        }
+        body.dark-mode #allLinksContainer > div p {
+            color: #cccccc !important;
+        }
+        
+        /* Skills 카드 */
+        body.dark-mode .about-content > div[style*="background"] {
+            background: #000000 !important;
+            border-color: #333333 !important;
+        }
+        body.dark-mode .about-content > div[style*="background"] div {
+            color: #cccccc !important;
         }
         
         @media (max-width: 768px) {
@@ -840,21 +871,21 @@
 
         <div class="form-group">
             <input type="file" id="cardImageUpload" accept="image/*" onchange="handleCardImageUpload(event, 'front')" style="display: none;">
-            <button onclick="document.getElementById('cardImageUpload').click()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%); border: none; border-radius: 12px; color: #000; cursor: pointer; font-weight: 600; margin-bottom: 10px;">
+            <button onclick="document.getElementById('cardImageUpload').click()" style="width: 100%; padding: 12px; background: #000000; border: none; border-radius: 12px; color: #ffffff; cursor: pointer; font-weight: 600; margin-bottom: 10px;">
                 🎴 명함 앞면 이미지 업로드
             </button>
         </div>
 
         <div class="form-group">
             <input type="file" id="cardImageUploadBack" accept="image/*" onchange="handleCardImageUpload(event, 'back')" style="display: none;">
-            <button onclick="document.getElementById('cardImageUploadBack').click()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%); border: none; border-radius: 12px; color: #000; cursor: pointer; font-weight: 600;">
+            <button onclick="document.getElementById('cardImageUploadBack').click()" style="width: 100%; padding: 12px; background: #000000; border: none; border-radius: 12px; color: #ffffff; cursor: pointer; font-weight: 600;">
                 🎴 명함 뒷면 이미지 업로드
             </button>
         </div>
 
         <div class="form-group">
             <input type="file" id="portfolioUpload" accept="image/*" multiple onchange="handlePortfolioUpload(event)" style="display: none;">
-            <button onclick="document.getElementById('portfolioUpload').click()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%); border: none; border-radius: 12px; color: #000; cursor: pointer; font-weight: 600;">
+            <button onclick="document.getElementById('portfolioUpload').click()" style="width: 100%; padding: 12px; background: #000000; border: none; border-radius: 12px; color: #ffffff; cursor: pointer; font-weight: 600;">
                 🖼️ 포트폴리오 추가
             </button>
             <div id="portfolioPreviewContainer" style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;">
@@ -862,10 +893,10 @@
         </div>
 
         <button class="save-btn" onclick="saveProfile()">💾 저장하기</button>
-        <button class="save-btn" onclick="generateNFCLink()" style="background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%); color: #000; margin-top: 10px;">
+        <button class="save-btn" onclick="generateNFCLink()" style="background: #666666; color: #ffffff; margin-top: 10px;">
             📱 NFC 링크 생성
         </button>
-        <button class="save-btn" onclick="toggleEditMode()" style="background: #e0e0e0; color: #000;">👁️ 닫기</button>
+        <button class="save-btn" onclick="toggleEditMode()" style="background: #e0e0e0; color: #000000;">👁️ 닫기</button>
     </div>
 
     <nav class="bottom-nav">
@@ -921,7 +952,7 @@
                             <img class="card-custom-image" id="cardBackImage" alt="명함 뒷면">
                             <div class="card-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
                                 <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
-                                <div style="font-size: 1.2rem; font-weight: 700; color: #00d9a3;">GOLD:ON</div>
+                                <div class="card-name" style="font-size: 1.2rem; font-weight: 700;">GOLD:ON</div>
                                 <div style="font-size: 0.8rem; color: #888; text-align: center;">더블클릭하여 리셋</div>
                             </div>
                         </div>
@@ -930,31 +961,31 @@
             </div>
             
             <div class="container" style="max-width: 600px; margin-top: 30px; padding: 0 20px;">
-                <h2 id="displayCompanyTitle" style="font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 900; text-align: center; margin-bottom: 30px; color: #000;">회사명을 입력하세요</h2>
+                <h2 id="displayCompanyTitle" style="font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 900; text-align: center; margin-bottom: 30px; color: #000000;">회사명을 입력하세요</h2>
                 
-                <p id="displayJobTitle" style="text-align: center; color: #aaa; margin-bottom: 50px; font-size: clamp(0.9rem, 3vw, 1.1rem);">직책을 입력하세요</p>
+                <p id="displayJobTitle" style="text-align: center; color: #666666; margin-bottom: 50px; font-size: clamp(0.9rem, 3vw, 1.1rem);">직책을 입력하세요</p>
                 
                 <div style="margin-bottom: 50px;">
-                    <h3 id="displayUserName" style="font-size: clamp(1.4rem, 5vw, 1.8rem); font-weight: 700; text-align: center; margin-bottom: 40px; color: #000;">사용자 이름</h3>
+                    <h3 id="displayUserName" style="font-size: clamp(1.4rem, 5vw, 1.8rem); font-weight: 700; text-align: center; margin-bottom: 40px; color: #000000;">사용자 이름</h3>
                 </div>
                 
                 <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 60px;">
-                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
+                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000000; color: #ffffff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
                         <span style="font-size: 1.5rem;">📧</span>
                         <span>이메일</span>
                     </button>
                     
-                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
+                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000000; color: #ffffff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
                         <span style="font-size: 1.5rem;">📞</span>
                         <span>전화</span>
                     </button>
                     
-                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
+                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000000; color: #ffffff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
                         <span style="font-size: 1.5rem;">📄</span>
                         <span>노션</span>
                     </button>
                     
-                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000; color: #fff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
+                    <button class="modal-action-btn" onclick="scrollToLinks()" style="width: 100%; padding: 20px; background: #000000; color: #ffffff; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease;">
                         <span style="font-size: 1.5rem;">🌐</span>
                         <span>웹사이트</span>
                     </button>
@@ -970,7 +1001,7 @@
                     
                     <div style="background: #f8f9fa; border-radius: 20px; padding: 40px; border: 1px solid #e0e0e0; text-align: center;">
                         <div style="font-size: 3rem; margin-bottom: 15px;">💡</div>
-                        <div id="displayBio" style="font-size: 1.1rem; color: #666; line-height: 1.8;">
+                        <div id="displayBio" style="font-size: 1.1rem; color: #666666; line-height: 1.8;">
                             스킬을 입력하세요
                         </div>
                     </div>
@@ -978,13 +1009,13 @@
             </div>
             
             <div class="container" style="margin-top: 50px;">
-                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 30px; color: #000;">소셜</h2>
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 30px; color: #000000;">소셜</h2>
                 
-                <div style="background: #fff; border-radius: 30px; padding: 50px; border: 1px solid #e0e0e0; max-width: 800px; margin: 0 auto 30px;">
+                <div style="background: #ffffff; border-radius: 30px; padding: 50px; border: 1px solid #e0e0e0; max-width: 800px; margin: 0 auto 30px;">
                     <div style="text-align: center; margin-bottom: 20px;">
                         <div style="font-size: 3rem; margin-bottom: 15px;">📝</div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; color: #000;">연락처 정보</h3>
-                        <p style="color: #666; font-size: 1rem;">정보를 입력하면 여기에 표시됩니다</p>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; color: #000000;">연락처 정보</h3>
+                        <p style="color: #666666; font-size: 1rem;">정보를 입력하면 여기에 표시됩니다</p>
                     </div>
                 </div>
                 
@@ -994,7 +1025,7 @@
             <div class="portfolio-section" style="margin-top: 100px;">
                 <h2>Portfolio</h2>
                 <div id="portfolioGallery">
-                    <p style="text-align: center; color: #888; padding: 40px;">포트폴리오 이미지를 추가하면 여기에 표시됩니다</p>
+                    <p style="text-align: center; color: #888888; padding: 40px;">포트폴리오 이미지를 추가하면 여기에 표시됩니다</p>
                 </div>
             </div>
         </section>
@@ -1104,20 +1135,20 @@
                     <canvas id="pieChart" width="400" height="400"></canvas>
                     <div style="display: flex; gap: 30px; margin-top: 30px; flex-wrap: wrap; justify-content: center;">
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="width: 20px; height: 20px; background: #00d9a3; border-radius: 4px;"></div>
-                            <span style="color: #666;">웹사이트 (35%)</span>
+                            <div style="width: 20px; height: 20px; background: #000000; border-radius: 4px;"></div>
+                            <span style="color: #666666;">웹사이트 (35%)</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="width: 20px; height: 20px; background: #00b883; border-radius: 4px;"></div>
-                            <span style="color: #666;">이메일 (25%)</span>
+                            <div style="width: 20px; height: 20px; background: #333333; border-radius: 4px;"></div>
+                            <span style="color: #666666;">이메일 (25%)</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="width: 20px; height: 20px; background: #666; border-radius: 4px;"></div>
-                            <span style="color: #666;">SNS (20%)</span>
+                            <div style="width: 20px; height: 20px; background: #666666; border-radius: 4px;"></div>
+                            <span style="color: #666666;">SNS (20%)</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="width: 20px; height: 20px; background: #999; border-radius: 4px;"></div>
-                            <span style="color: #666;">전화 (20%)</span>
+                            <div style="width: 20px; height: 20px; background: #999999; border-radius: 4px;"></div>
+                            <span style="color: #666666;">전화 (20%)</span>
                         </div>
                     </div>
                 </div>
@@ -1135,16 +1166,16 @@
     <div class="page" id="qrPage">
         <div class="container" style="max-width: 600px;">
             <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center;">📱 QR 코드 생성기</h2>
-            <p style="text-align: center; color: #666;">QR 생성 기능은 준비 중입니다.</p>
+            <p style="text-align: center; color: #666666;">QR 생성 기능은 준비 중입니다.</p>
         </div>
     </div>
 
     <div class="page" id="settingsPage">
         <div class="container" style="max-width: 600px;">
             <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center;">⚙️ 설정</h2>
-            <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #e0e0e0; margin-bottom: 20px;">
+            <div style="background: #ffffff; padding: 25px; border-radius: 20px; border: 1px solid #e0e0e0; margin-bottom: 20px;">
                 <h3 style="font-size: 1.2rem; margin-bottom: 20px;">🎨 테마 설정</h3>
-                <button onclick="toggleDarkMode()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #00d9a3 0%, #00b883 100%); color: #000; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;">
+                <button onclick="toggleDarkMode()" style="width: 100%; padding: 15px; background: #000000; color: #ffffff; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;">
                     🌓 다크모드 전환
                 </button>
             </div>
@@ -1249,6 +1280,21 @@
             if (document.getElementById('statsPage').classList.contains('active')) {
                 setTimeout(drawCharts, 100);
             }
+            
+            // 다크모드 전환시 버튼 색상도 업데이트
+            const actionBtns = document.querySelectorAll('.modal-action-btn');
+            actionBtns.forEach(btn => {
+                if (isDarkMode) {
+                    btn.style.background = '#ffffff';
+                    btn.style.color = '#000000';
+                } else {
+                    btn.style.background = '#000000';
+                    btn.style.color = '#ffffff';
+                }
+            });
+            
+            // 소셜 카드 다크모드 업데이트
+            updateAllLinks();
         }
 
         function toggleEditMode() {
@@ -1292,7 +1338,7 @@
                 const itemWrapper = document.createElement('div');
                 itemWrapper.style.cssText = 'background: #f8f9fa; padding: 15px; border-radius: 12px; border: 2px solid #e0e0e0;';
                 if (document.body.classList.contains('dark-mode')) {
-                    itemWrapper.style.cssText = 'background: #0a0a0a; padding: 15px; border-radius: 12px; border: 1px solid #333;';
+                    itemWrapper.style.cssText = 'background: #111111; padding: 15px; border-radius: 12px; border: 1px solid #333333;';
                 }
                 
                 itemWrapper.innerHTML = `
@@ -1322,7 +1368,7 @@
             gallery.innerHTML = '';
             
             if (portfolioImages.length === 0) {
-                gallery.innerHTML = '<p style="text-align: center; color: #888; padding: 40px;">포트폴리오 이미지를 추가하면 여기에 표시됩니다</p>';
+                gallery.innerHTML = `<p style="text-align: center; color: ${isDarkMode ? '#888888' : '#888888'}; padding: 40px;">포트폴리오 이미지를 추가하면 여기에 표시됩니다</p>`;
                 return;
             }
 
@@ -1479,12 +1525,17 @@
                 
                 if (shouldShow) {
                     const card = document.createElement('div');
-                    card.style.cssText = 'background: #fff; border-radius: 30px; padding: 50px; border: 1px solid #e0e0e0; text-align: center; transition: all 0.3s ease; cursor: pointer;';
+                    const bgColor = isDarkMode ? '#111111' : '#ffffff';
+                    const borderColor = isDarkMode ? '#333333' : '#e0e0e0';
+                    const titleColor = isDarkMode ? '#ffffff' : '#000000';
+                    const textColor = isDarkMode ? '#cccccc' : '#666666';
+                    
+                    card.style.cssText = `background: ${bgColor}; border-radius: 30px; padding: 50px; border: 1px solid ${borderColor}; text-align: center; transition: all 0.3s ease; cursor: pointer;`;
                     
                     card.innerHTML = `
                         <div style="font-size: 4rem; margin-bottom: 20px;">${link.icon}</div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #000; margin-bottom: 10px;">${link.label}</h3>
-                        <p style="color: #666; font-size: 0.9rem; word-break: break-all;">${link.type === 'contact' ? link.value : url}</p>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: ${titleColor}; margin-bottom: 10px;">${link.label}</h3>
+                        <p style="color: ${textColor}; font-size: 0.9rem; word-break: break-all;">${link.type === 'contact' ? link.value : url}</p>
                     `;
                     
                     card.addEventListener('click', () => {
@@ -1593,10 +1644,10 @@
                 const radius = 150;
                 
                 const data = [
-                    { label: '웹사이트', value: 35, color: '#00d9a3' },
-                    { label: '이메일', value: 25, color: '#00b883' },
-                    { label: 'SNS', value: 20, color: '#666' },
-                    { label: '전화', value: 20, color: '#999' }
+                    { label: '웹사이트', value: 35, color: '#000000' },
+                    { label: '이메일', value: 25, color: '#333333' },
+                    { label: 'SNS', value: 20, color: '#666666' },
+                    { label: '전화', value: 20, color: '#999999' }
                 ];
                 
                 let currentAngle = -Math.PI / 2;
@@ -1618,7 +1669,7 @@
                 
                 pieCtx.beginPath();
                 pieCtx.arc(centerX, centerY, 80, 0, 2 * Math.PI);
-                pieCtx.fillStyle = document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#fff';
+                pieCtx.fillStyle = isDarkMode ? '#111111' : '#ffffff';
                 pieCtx.fill();
             }
             
@@ -1650,18 +1701,18 @@
                     const y = 300 - padding - barHeight;
                     
                     const gradient = barCtx.createLinearGradient(x, y, x, y + barHeight);
-                    gradient.addColorStop(0, '#00d9a3');
-                    gradient.addColorStop(1, '#00b883');
+                    gradient.addColorStop(0, '#000000');
+                    gradient.addColorStop(1, '#666666');
                     
                     barCtx.fillStyle = gradient;
                     barCtx.fillRect(x, y, barWidth, barHeight);
                     
-                    barCtx.fillStyle = document.body.classList.contains('dark-mode') ? '#fff' : '#000';
+                    barCtx.fillStyle = isDarkMode ? '#ffffff' : '#000000';
                     barCtx.font = 'bold 14px sans-serif';
                     barCtx.textAlign = 'center';
                     barCtx.fillText(item.day, x + barWidth / 2, 300 - padding + 25);
                     
-                    barCtx.fillStyle = '#00d9a3';
+                    barCtx.fillStyle = '#666666';
                     barCtx.font = 'bold 12px sans-serif';
                     barCtx.fillText(item.value, x + barWidth / 2, y - 10);
                 });
