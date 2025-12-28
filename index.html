@@ -1676,9 +1676,17 @@
         </div>
 
         <button class="save-btn" onclick="saveProfile()">저장하기</button>
-        <button class="save-btn" onclick="generateNFCLink()" style="background: #666666; color: #ffffff; margin-top: 10px;">
-            NFC 링크 생성
+        <button class="save-btn" onclick="generateNFCLink()" style="background: #4CAF50; color: #ffffff; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+            <span>📱 NFC 카드용 URL 생성</span>
         </button>
+        <p style="color: #666; font-size: 0.85rem; margin: 10px 0; padding: 0 20px; line-height: 1.5; text-align: center;">
+            ☝️ 이 버튼을 누르면 명함 정보가 포함된 URL이 생성됩니다.<br>
+            이 URL을 NFC 카드 작성 앱(NFC Tools 등)에 입력하세요!
+        </p>
         <button class="save-btn" onclick="toggleEditMode()" style="background: #e0e0e0; color: #000000;">닫기</button>
     </div>
 
@@ -2124,27 +2132,98 @@
         });
         
         function generateNFCLink() {
-            const currentUrl = window.location.href.split('?')[0];
-            const profileData = localStorage.getItem('nfcProfile');
+            // 먼저 저장
+            const profileData = {
+                name: document.getElementById('userName')?.value || '',
+                title: document.getElementById('userTitle')?.value || '',
+                company: document.getElementById('userCompany')?.value || '',
+                phone: document.getElementById('userPhone')?.value || '',
+                email: document.getElementById('userEmail')?.value || '',
+                bio: document.getElementById('userBio')?.value || '',
+                tagline: document.getElementById('userTagline')?.value || '',
+                website: document.getElementById('userWebsite')?.value || '',
+                notion: document.getElementById('userNotion')?.value || '',
+                youtube: document.getElementById('userYoutube')?.value || '',
+                instagram: document.getElementById('userInstagram')?.value || '',
+                linkedin: document.getElementById('userLinkedin')?.value || '',
+                portfolioImages: portfolioImages,
+                portfolioTitles: portfolioTitles,
+                portfolioDescriptions: portfolioDescriptions
+            };
             
-            if (!profileData) {
-                alert('먼저 프로필을 저장해주세요!');
-                return;
+            try {
+                // Base64 인코딩 (UTF-8 지원)
+                const jsonData = JSON.stringify(profileData);
+                const encodedData = btoa(unescape(encodeURIComponent(jsonData)));
+                
+                // 현재 URL 확인
+                const currentUrl = window.location.href;
+                const isLocalFile = currentUrl.startsWith('file://');
+                
+                let nfcLink;
+                let message;
+                
+                if (isLocalFile) {
+                    // 로컬 파일인 경우
+                    message = `⚠️ 로컬 파일로 실행 중입니다!\n\n이 HTML 파일을 웹 서버에 업로드해야 NFC 카드를 사용할 수 있습니다.\n\n📤 배포 방법:\n1. GitHub Pages (무료)\n2. Netlify (무료)\n3. Vercel (무료)\n\n배포 후 다시 시도하세요.`;
+                    alert(message);
+                    return;
+                } else {
+                    // 웹 서버인 경우
+                    const baseUrl = currentUrl.split('?')[0].split('#')[0];
+                    nfcLink = `${baseUrl}?card=${encodedData}`;
+                    message = `✅ NFC 카드용 URL이 복사되었습니다!\n\n📱 이 URL을 NFC 카드 작성 앱에 입력하세요.\n\n다른 사람이 카드를 찍으면 당신의 명함이 표시됩니다!`;
+                }
+                
+                console.log('생성된 NFC 링크:', nfcLink);
+                
+                // 클립보드 복사
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(nfcLink).then(() => {
+                        alert(message);
+                        const btn = event.target;
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = '✓ 링크 복사 완료';
+                        btn.style.background = '#4CAF50';
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.style.background = '';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('복사 실패:', err);
+                        fallbackCopyNFC(nfcLink, message);
+                    });
+                } else {
+                    fallbackCopyNFC(nfcLink, message);
+                }
+            } catch (error) {
+                console.error('NFC 링크 생성 오류:', error);
+                alert('❌ 링크 생성 실패\n\n' + error.message);
             }
+        }
+        
+        // NFC 링크 복사 폴백
+        function fallbackCopyNFC(text, successMessage) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
             
-            const encodedData = btoa(encodeURIComponent(profileData));
-            const nfcLink = `${currentUrl}?card=${encodedData}`;
-            
-            navigator.clipboard.writeText(nfcLink).then(() => {
-                const btn = event.target;
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '✓ 링크 복사 완료';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                }, 2000);
-            }).catch(() => {
-                prompt('NFC 링크를 복사하세요:', nfcLink);
-            });
+            try {
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                if (successful) {
+                    alert(successMessage);
+                } else {
+                    prompt('이 URL을 NFC 카드에 입력하세요:', text);
+                }
+            } catch (err) {
+                document.body.removeChild(textarea);
+                prompt('이 URL을 NFC 카드에 입력하세요:', text);
+            }
         }
         
         function handleCardImageUpload(event, side) {
