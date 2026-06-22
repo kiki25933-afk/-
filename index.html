@@ -710,6 +710,7 @@ body.dark .qr-box{background:linear-gradient(135deg,#17191c 0%,#112d29 100%);bor
       <div class="qr-copy">스캔하거나 NFC 링크를 태그하면 상대방에게는 홈 화면만 보여요.</div>
       <div class="share-url" id="shareUrlText">프로필을 저장하면 공유 링크가 생성됩니다.</div>
       <button class="save-btn" style="margin-top:14px;" onclick="generateNFCLink(this)">공유 링크 복사</button>
+      <button class="nfc-btn" onclick="previewShareLink()">새 탭에서 미리 보기 (상대방 시점 테스트)</button>
     </div>
   </div>
 </div>
@@ -911,6 +912,13 @@ function handleCardImageUpload(event,side){
     if(!ok)console.warn('명함 이미지가 이번 세션에만 저장됩니다.');
   };
   reader.readAsDataURL(file);
+}
+
+/* ── 공유 링크를 상대방 시점으로 직접 테스트 ── */
+function previewShareLink(){
+  if(!savedProfileJSON){alert('먼저 프로필을 저장해주세요!');return;}
+  const url=getShareUrl();
+  window.open(url,'_blank');
 }
 
 /* ── NFC 링크 생성 ── */
@@ -1197,7 +1205,12 @@ function buildShareJSON(){
 function getShareUrl(){
   const currentUrl=window.location.href.split('?')[0];
   const data=buildShareJSON();
-  return `${currentUrl}?card=${btoa(encodeURIComponent(data))}`;
+  // btoa()가 만든 base64 문자열에는 +, /, = 가 그대로 들어있는데,
+  // 이걸 URL에 인코딩 없이 넣으면 +가 공백으로 바뀌는 등 깨져서
+  // 상대방 쪽에서는 디코딩이 실패해 기본 화면만 보이게 된다.
+  // 그래서 base64 결과 전체를 한 번 더 encodeURIComponent로 감싼다.
+  const encoded=encodeURIComponent(btoa(encodeURIComponent(data)));
+  return `${currentUrl}?card=${encoded}`;
 }
 
 /* QR 코드가 실제로 안전하게 담을 수 있는 글자 수 한도(여유있게 설정) */
