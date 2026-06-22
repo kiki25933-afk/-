@@ -1166,55 +1166,87 @@ function applyProfileData(data){
   }
 }
 
+/* 짧은 키 ↔ 실제 필드명 매핑.
+   "card=base64(JSON)" 방식은 중괄호/따옴표/키이름이 전부 그대로 들어가고
+   base64 자체도 원본보다 ~37% 더 커져서, 평범한 프로필도 링크가 1,300바이트를
+   훌쩍 넘었다. 흔한 NFC 태그(NTAG213)는 약 144바이트밖에 못 담기 때문에
+   태그에 쓰는 순간 잘리거나 쓰기 자체가 실패해서 "다시 찍으면 초기화면"
+   현상이 생긴다. 그래서 JSON+base64 없이, 짧은 키의 일반 쿼리 파라미터로
+   직접 인코딩해서 용량을 절반 이하로 줄인다. */
+const SHARE_FIELD_KEYS={
+  name:'n',title:'t',company:'c',phone:'p',email:'e',
+  bio:'b',tagline:'tg',website:'w',notion:'no',youtube:'yt',
+  instagram:'ig',linkedin:'li'
+};
+
 function getSharedProfileFromUrl(){
-  const card=new URLSearchParams(window.location.search).get('card');
-  if(!card)return null;
-  try{return JSON.parse(decodeURIComponent(atob(card)));}catch{return null;}
+  const params=new URLSearchParams(window.location.search);
+  let found=false;
+  const data={};
+  Object.entries(SHARE_FIELD_KEYS).forEach(([longKey,shortKey])=>{
+    if(params.has(shortKey)){found=true;data[longKey]=params.get(shortKey);}
+  });
+  if(found)return data;
+  // 이전 버전(card=base64) 링크와의 호환을 위한 폴백
+  const card=params.get('card');
+  if(card){
+    try{return JSON.parse(decodeURIComponent(atob(card)));}catch{return null;}
+  }
+  return null;
 }
 
 /* 공유용 데이터는 일부러 가볍게 만든다.
-   포트폴리오 이미지(base64)까지 URL에 넣으면 QR이 담을 수 있는 용량(약 2~3KB)을
-   훨씬 넘어서 버려서 "스캔은 되는데 인식이 안 됨/이동이 안 됨" 현상이 생긴다.
-   그래서 QR/NFC 공유 링크에는 텍스트 정보(이름·직함·연락처·링크)만 담는다. */
-function buildShareJSON(){
-  let full=null;
+   포트폴리오 이미지는 절대 포함하지 않는다(텍스트 정보만 공유). */
+function getShareableProfile(){
   if(savedProfileJSON){
-    try{full=JSON.parse(savedProfileJSON);}catch{full=null;}
+    try{return JSON.parse(savedProfileJSON);}catch{}
   }
-  if(!full){
-    full={
-      name:document.getElementById('userName')?.value||'',
-      title:document.getElementById('userTitle')?.value||'',
-      company:document.getElementById('userCompany')?.value||'',
-      phone:document.getElementById('userPhone')?.value||'',
-      email:document.getElementById('userEmail')?.value||'',
-      bio:document.getElementById('userBio')?.value||'',
-      tagline:document.getElementById('userTagline')?.value||'',
-      website:document.getElementById('userWebsite')?.value||'',
-      notion:document.getElementById('userNotion')?.value||'',
-      youtube:document.getElementById('userYoutube')?.value||'',
-      instagram:document.getElementById('userInstagram')?.value||'',
-      linkedin:document.getElementById('userLinkedin')?.value||''
-    };
-  }
-  // 무거운 이미지 필드는 공유 링크에서 제외
-  const {portfolioImages,portfolioTitles,portfolioDescriptions,...shareable}=full;
-  return JSON.stringify(shareable);
+  return {
+    name:document.getElementById('userName')?.value||'',
+    title:document.getElementById('userTitle')?.value||'',
+    company:document.getElementById('userCompany')?.value||'',
+    phone:document.getElementById('userPhone')?.value||'',
+    email:document.getElementById('userEmail')?.value||'',
+    bio:document.getElementById('userBio')?.value||'',
+    tagline:document.getElementById('userTagline')?.value||'',
+    website:document.getElementById('userWebsite')?.value||'',
+    notion:document.getElementById('userNotion')?.value||'',
+    youtube:document.getElementById('userYoutube')?.value||'',
+    instagram:document.getElementById('userInstagram')?.value||'',
+    linkedin:document.getElementById('userLinkedin')?.value||''
+  };
 }
 
 function getShareUrl(){
   const currentUrl=window.location.href.split('?')[0];
-  const data=buildShareJSON();
-  // btoa()가 만든 base64 문자열에는 +, /, = 가 그대로 들어있는데,
-  // 이걸 URL에 인코딩 없이 넣으면 +가 공백으로 바뀌는 등 깨져서
-  // 상대방 쪽에서는 디코딩이 실패해 기본 화면만 보이게 된다.
-  // 그래서 base64 결과 전체를 한 번 더 encodeURIComponent로 감싼다.
-  const encoded=encodeURIComponent(btoa(encodeURIComponent(data)));
-  return `${currentUrl}?card=${encoded}`;
+  const profile=getShareableProfile();
+  const params=new URLSearchParams();
+  Object.entries(SHARE_FIELD_KEYS).forEach(([longKey,shortKey])=>{
+    const val=(profile[longKey]||'').trim();
+    if(val)params.set(shortKey,val);
+  });
+  const qs=params.toString();
+  return qs?`${currentUrl}?${qs}`:currentUrl;
 }
 
-/* QR 코드가 실제로 안전하게 담을 수 있는 글자 수 한도(여유있게 설정) */
+/* QR이 안전하게 담을 수 있는 글자 수 한도(여유있게 설정) */
 const SAFE_QR_LENGTH=1400;
+
+/* 흔한 NFC 태그 용량(byte) — 안내 표시용 */
+const NFC_TAG_SIZES=[
+  {label:'NTAG213',bytes:144},
+  {label:'NTAG215',bytes:504},
+  {label:'NTAG216',bytes:888}
+];
+
+function describeNfcCapacity(url){
+  const byteLen=new TextEncoder().encode(url).length;
+  const fits=NFC_TAG_SIZES.find(t=>byteLen<=t.bytes-4); // 여유 4바이트
+  if(fits)return {byteLen,text:`${byteLen} bytes · ${fits.label}(${fits.bytes}B) 같은 흔한 NFC 태그에 들어가요`,level:'ok'};
+  const biggest=NFC_TAG_SIZES[NFC_TAG_SIZES.length-1];
+  if(byteLen<=biggest.bytes*2)return {byteLen,text:`${byteLen} bytes · ${biggest.label}(${biggest.bytes}B)보다 커요. 더 큰 용량의 NFC 태그가 필요해요`,level:'warn'};
+  return {byteLen,text:`${byteLen} bytes · 대부분의 NFC 태그 용량을 초과했어요. 소개글·링크를 줄여주세요`,level:'danger'};
+}
 
 /* 지금 보고 있는 주소가 폰 카메라로 실제 스캔 가능한 '진짜 인터넷 주소'인지 확인.
    file://, 미리보기용 about:/blob: 주소, localhost 등은 외부 기기에서 절대 열 수 없다. */
