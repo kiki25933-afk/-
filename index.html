@@ -38,7 +38,6 @@ body{
 a{text-decoration:none;color:inherit;}
 button{font-family:inherit;}
 
-/* topbar */
 .topbar{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:18px 20px;z-index:1000;pointer-events:none;}
 .topbar>*{pointer-events:auto;}
 .icon-btn{width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-soft);box-shadow:var(--shadow-soft);transition:transform .2s ease,color .2s ease;}
@@ -46,12 +45,10 @@ button{font-family:inherit;}
 .icon-btn:hover{color:var(--ink);transform:translateY(-1px);}
 .icon-btn:active{transform:scale(.94);}
 
-/* layout */
 .page{display:none;min-height:100vh;padding:88px 0 110px;}
 .page.active{display:block;}
 .shell{max-width:480px;margin:0 auto;padding:0 24px;}
 
-/* hero */
 .hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding-bottom:8px;padding-top:6px;}
 .avatar-ring{width:96px;height:96px;border-radius:50%;background:var(--brand-gradient);padding:3px;margin-bottom:16px;flex-shrink:0;}
 .avatar-gap{width:100%;height:100%;border-radius:50%;background:var(--bg);padding:3px;}
@@ -64,7 +61,6 @@ button{font-family:inherit;}
 .hero-role{font-size:.86rem;color:var(--ink-soft);font-weight:500;margin-bottom:12px;}
 .hero-tagline{font-size:.9rem;color:var(--ink-soft);max-width:340px;line-height:1.55;margin-bottom:22px;}
 
-/* social */
 .social-row{display:flex;flex-wrap:wrap;gap:11px;justify-content:center;margin-bottom:8px;}
 .social-pill{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:transform .18s ease,filter .18s ease;box-shadow:0 4px 12px rgba(0,0,0,0.15);flex-shrink:0;}
 .social-pill svg{width:20px;height:20px;display:block;}
@@ -79,7 +75,6 @@ button{font-family:inherit;}
 .social-pill.brand-x{background:#000000;}
 .social-pill.brand-phone{background:linear-gradient(135deg,#22c55e,#16a34a);}
 
-/* business card */
 .card-3d-wrapper{width:100%;display:flex;justify-content:center;margin-top:4px;margin-bottom:14px;}
 .card-hint{font-size:.72rem;color:var(--ink-faint);font-weight:500;margin-bottom:30px;text-align:center;}
 .card-3d{perspective:1500px;width:300px;height:188px;cursor:grab;user-select:none;margin:0 auto;}
@@ -88,17 +83,8 @@ button{font-family:inherit;}
 .business-card{position:absolute;width:100%;height:100%;background:linear-gradient(135deg,#18181a 0%,#262628 100%);border-radius:16px;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,0.35);overflow:hidden;backface-visibility:hidden;border:1px solid rgba(255,255,255,0.08);}
 .card-front{z-index:2;transform:rotateY(0deg);}
 .card-back{transform:rotateY(180deg);background:linear-gradient(135deg,#262628 0%,#18181a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;}
-body.dark .business-card{
-  border:2px solid transparent;
-  background-image:linear-gradient(135deg,#18181a 0%,#262628 100%),var(--brand-gradient);
-  background-origin:border-box;
-  background-clip:padding-box,border-box;
-}
-body.dark .card-back{
-  background-image:linear-gradient(135deg,#262628 0%,#18181a 100%),var(--brand-gradient);
-  background-origin:border-box;
-  background-clip:padding-box,border-box;
-}
+body.dark .business-card{border:2px solid transparent;background-image:linear-gradient(135deg,#18181a 0%,#262628 100%),var(--brand-gradient);background-origin:border-box;background-clip:padding-box,border-box;}
+body.dark .card-back{background-image:linear-gradient(135deg,#262628 0%,#18181a 100%),var(--brand-gradient);background-origin:border-box;background-clip:padding-box,border-box;}
 .business-card.has-custom-design{padding:0;}
 .business-card.has-custom-design .card-content{display:none;}
 .card-custom-image{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:16px;display:none;}
@@ -113,7 +99,6 @@ body.dark .card-back{
 .card-back-mark svg{width:100%;height:100%;stroke:currentColor;}
 .card-back-label{font-size:.7rem;color:#7a7a80;}
 
-/* link feed */
 .feed{display:flex;flex-direction:column;gap:12px;margin-top:28px;margin-bottom:36px;}
 .link-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:17px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
 .link-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-pop);border-color:var(--ink-faint);}
@@ -131,20 +116,16 @@ body.dark .card-back{
 .create-card-cta .cta-icon{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .create-card-cta svg{width:20px;height:20px;stroke:currentColor;}
 body.dark .create-card-cta{background:linear-gradient(135deg,#f4f8fa 0%,#dff7f1 100%);color:#101214;}
-body.dark .create-card-cta>span>span{color:#5d686c;}
 
-/* section heading */
 .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;margin-top:8px;}
 .section-head h2{font-size:1.05rem;font-weight:800;letter-spacing:-.01em;}
 .section-head .count{font-size:.78rem;color:var(--ink-faint);font-weight:600;}
 
-/* bio */
 .bio-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:22px;margin-bottom:36px;}
 .bio-text{font-size:.92rem;line-height:1.7;color:var(--ink-soft);margin-bottom:16px;}
 .skill-tags{display:flex;flex-wrap:wrap;gap:7px;}
 .skill-tag{font-size:.76rem;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:50px;padding:6px 13px;}
 
-/* portfolio */
 .portfolio-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px;}
 .portfolio-tile{position:relative;border-radius:var(--radius-sm);overflow:hidden;aspect-ratio:1/1.1;cursor:pointer;background:var(--surface-2);}
 .portfolio-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
@@ -153,10 +134,9 @@ body.dark .create-card-cta>span>span{color:#5d686c;}
 .portfolio-tile-title{color:#fff;font-size:.8rem;font-weight:700;}
 .empty-note{text-align:center;color:var(--ink-faint);font-size:.86rem;padding:40px 0;border:1px dashed var(--border);border-radius:var(--radius-md);}
 
-/* ========== EDIT PANEL ========== */
+/* ── EDIT PANEL ── */
 .edit-panel{position:fixed;top:0;right:-100%;width:100%;max-width:480px;height:100vh;background:var(--bg);transition:right .32s cubic-bezier(.4,0,.2,1);overflow-y:auto;z-index:2000;}
 .edit-panel.open{right:0;}
-
 .edit-topbar{position:sticky;top:0;z-index:10;background:radial-gradient(circle at 88% 18%,rgba(255,255,255,.78),transparent 24%),linear-gradient(135deg,#dffcf5 0%,#c9f8ed 46%,#88ead7 100%);border-bottom:1px solid rgba(69,205,180,.32);box-shadow:0 10px 26px rgba(18,138,119,.10);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;min-height:78px;}
 .edit-topbar-left{display:flex;align-items:center;gap:10px;}
 .edit-back-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.78);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#0f3e36;transition:all .2s;box-shadow:0 6px 18px rgba(20,128,110,.14);}
@@ -181,7 +161,6 @@ body.dark .preview-btn{background:rgba(255,255,255,.1);border-color:rgba(255,255
 .edit-section-title{font-size:.86rem;font-weight:800;letter-spacing:-.01em;}
 .edit-section-count{margin-left:auto;font-size:.72rem;font-weight:700;background:var(--surface-2);color:var(--ink-faint);padding:3px 9px;border-radius:50px;}
 
-/* profile section */
 .edit-section.profile-section{background:radial-gradient(circle at 90% 10%,rgba(166,255,234,.82),transparent 34%),linear-gradient(135deg,#f7fbff 0%,#eaf7ff 28%,#dcfaf3 68%,#c9f8ee 100%);border-color:rgba(156,232,218,.65);border-radius:26px;box-shadow:0 18px 42px rgba(12,73,64,.13);}
 body.dark .edit-section.profile-section{background:linear-gradient(135deg,#0d2d26 0%,#0a2420 40%,#102e28 100%);border-color:#1a4a3e;}
 .edit-section.profile-section .edit-section-header{background:transparent;border-bottom:none;padding-bottom:6px;}
@@ -200,7 +179,6 @@ body.dark .profile-name-input{background:rgba(255,255,255,0.07);border-color:rgb
 body.dark .profile-tagline-input{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1);color:var(--ink);}
 .profile-tagline-input::placeholder{color:var(--ink-faint);}
 
-/* avatar edit row */
 .avatar-edit-row{padding:18px;display:flex;align-items:center;gap:16px;}
 .avatar-edit-img{width:76px;height:76px;border-radius:22px;background:#202124;border:0;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;overflow:visible;flex-shrink:0;position:relative;cursor:pointer;font-weight:850;box-shadow:0 10px 24px rgba(21,31,35,.16);}
 .avatar-edit-img img{width:100%;height:100%;object-fit:cover;border-radius:22px;}
@@ -213,7 +191,6 @@ body.dark .profile-tagline-input{background:rgba(255,255,255,0.07);border-color:
 body.dark .avatar-edit-name{color:#e9fffb;}
 body.dark .avatar-edit-hint{color:#9ccac0;}
 
-/* field rows */
 .field-row{padding:0 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;min-height:54px;}
 .field-row:last-child{border-bottom:none;}
 .field-row-label{font-size:.76rem;font-weight:700;color:var(--ink-faint);width:56px;flex-shrink:0;}
@@ -222,7 +199,6 @@ body.dark .avatar-edit-hint{color:#9ccac0;}
 .field-row-textarea{flex:1;padding:14px 0;background:transparent;border:none;color:var(--ink);font-size:.9rem;font-family:inherit;outline:none;resize:none;min-height:74px;line-height:1.55;}
 .field-row-textarea::placeholder{color:var(--ink-faint);}
 
-/* link rows */
 .link-row{padding:0 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;min-height:54px;}
 .link-row:last-child{border-bottom:none;}
 .link-row-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.15);}
@@ -235,7 +211,6 @@ body.dark .avatar-edit-hint{color:#9ccac0;}
 .link-row-input{flex:1;padding:14px 0;background:transparent;border:none;color:var(--ink);font-size:.86rem;font-family:inherit;outline:none;min-width:0;}
 .link-row-input::placeholder{color:var(--ink-faint);}
 
-/* card design */
 .card-design-row{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .15s;}
 .card-design-row:last-child{border-bottom:none;}
 .card-design-row:hover{background:var(--surface-2);}
@@ -247,7 +222,6 @@ body.dark .avatar-edit-hint{color:#9ccac0;}
 .card-design-label-sub{font-size:.74rem;color:var(--ink-faint);}
 .card-design-arrow{color:var(--ink-faint);}
 
-/* portfolio edit */
 .portfolio-add-btn{margin:14px 18px;padding:12px;background:var(--surface-2);border:1.5px dashed var(--border);border-radius:12px;color:var(--ink-soft);font-size:.85rem;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;}
 .portfolio-add-btn:hover{border-color:var(--ink-faint);color:var(--ink);}
 .portfolio-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 18px 16px;}
@@ -257,17 +231,14 @@ body.dark .avatar-edit-hint{color:#9ccac0;}
 .portfolio-edit-tile-remove svg{width:13px;height:13px;}
 .portfolio-empty{margin:0 18px 16px;padding:28px;text-align:center;color:var(--ink-faint);font-size:.82rem;line-height:1.6;background:var(--surface-2);border-radius:12px;}
 
-/* save bar */
 .save-btn{width:100%;padding:15px;background:var(--ink);color:var(--accent-ink);border:none;border-radius:14px;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;transition:opacity .2s;}
 .save-btn:hover{opacity:.85;}
 .nfc-btn{width:100%;margin-top:8px;padding:13px;background:transparent;color:var(--ink-soft);border:1px solid var(--border);border-radius:14px;font-weight:600;font-size:.88rem;cursor:pointer;font-family:inherit;transition:all .2s;}
 .nfc-btn:hover{border-color:var(--ink-faint);color:var(--ink);}
 
-/* overlay */
 .overlay-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:1900;}
 .overlay-backdrop.show{opacity:1;pointer-events:auto;}
 
-/* bottom nav */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:64px;background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;z-index:1000;}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 16px;cursor:pointer;flex:1;color:var(--ink-faint);transition:color .2s ease;}
 .nav-item.active,.nav-item:hover{color:var(--ink);}
@@ -278,7 +249,6 @@ body.dark .avatar-edit-hint{color:#9ccac0;}
 .share-mode .page{padding-top:34px;padding-bottom:48px;}
 .share-mode .avatar-edit,.share-mode .card-hint{display:none;}
 
-/* history */
 .page-title{font-size:1.45rem;font-weight:850;margin-bottom:20px;letter-spacing:0;color:var(--ink);}
 #historyList{display:flex;flex-direction:column;gap:14px;}
 .history-card{position:relative;min-height:154px;background:radial-gradient(circle at 94% 0%,rgba(157,245,226,.82),transparent 30%),linear-gradient(135deg,#ffffff 0%,#f6fbff 44%,#e4fbf5 100%);border:1px solid rgba(225,231,237,.86);border-radius:24px;padding:20px;cursor:pointer;transition:all .2s ease;box-shadow:0 10px 28px rgba(20,33,46,.07);overflow:hidden;}
@@ -297,43 +267,20 @@ body.dark .history-card{background:linear-gradient(135deg,#17191c 0%,#112d29 100
 body.dark .history-detail,body.dark .history-note{color:#9da9ad;}
 body.dark .history-time,body.dark .history-pill{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.09);color:#c7f0e8;}
 
-/* stats */
-.stats-hero{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:26px;padding:24px 22px;margin-bottom:14px;
-  box-shadow:var(--shadow-soft);
-  position:relative;overflow:hidden;
-}
-.stats-hero::before{
-  content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;
-  border-radius:50%;background:var(--surface-2);opacity:.6;
-}
+.stats-hero{background:var(--surface);border:1px solid var(--border);border-radius:26px;padding:24px 22px;margin-bottom:14px;box-shadow:var(--shadow-soft);position:relative;overflow:hidden;}
+.stats-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:var(--surface-2);opacity:.6;}
 .stats-hero-label{font-size:.72rem;font-weight:800;color:var(--ink-faint);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;position:relative;}
 .stats-hero-value{font-size:2.6rem;font-weight:900;letter-spacing:-.03em;color:var(--ink);margin-bottom:6px;position:relative;}
 .stats-hero-copy{font-size:.84rem;color:var(--ink-soft);font-weight:500;line-height:1.55;position:relative;}
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.stat-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:22px;padding:18px 16px;text-align:left;
-  box-shadow:var(--shadow-soft);
-}
-.stat-icon{
-  width:34px;height:34px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--ink-soft);background:var(--surface-2);
-  margin-bottom:14px;
-}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:18px 16px;text-align:left;box-shadow:var(--shadow-soft);}
+.stat-icon{width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);background:var(--surface-2);margin-bottom:14px;}
 .stat-icon svg{width:18px;height:18px;stroke:currentColor;}
 .stat-value{font-size:1.6rem;font-weight:900;margin-bottom:4px;letter-spacing:-.02em;color:var(--ink);}
 .stat-label{font-size:.74rem;color:var(--ink-faint);font-weight:600;}
 .stat-delta{font-size:.72rem;color:var(--ink-soft);font-weight:700;margin-top:8px;}
 .stat-delta.up{color:#22c55e;}
-.chart-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:24px;padding:22px 20px;margin-bottom:14px;
-  box-shadow:var(--shadow-soft);
-}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:22px 20px;margin-bottom:14px;box-shadow:var(--shadow-soft);}
 .chart-title{font-size:.94rem;font-weight:800;margin-bottom:18px;text-align:left;color:var(--ink);}
 .metric-list{display:flex;flex-direction:column;gap:14px;}
 .metric-row{display:grid;grid-template-columns:76px 1fr 42px;align-items:center;gap:10px;font-size:.76rem;font-weight:700;color:var(--ink-soft);}
@@ -342,20 +289,16 @@ body.dark .history-time,body.dark .history-pill{background:rgba(255,255,255,.08)
 .metric-fill.f1{opacity:.85;}
 .metric-fill.f2{opacity:.55;}
 .metric-fill.f3{opacity:.32;}
-body.dark .stats-hero,body.dark .stat-card,body.dark .chart-card{background:var(--surface);border-color:var(--border);}
-body.dark .metric-fill{background:#fff;}
 
-/* qr */
 .qr-box{background:radial-gradient(circle at 90% 0%,rgba(135,238,217,.75),transparent 30%),var(--surface);border:1px solid rgba(226,233,238,.9);border-radius:28px;padding:24px;text-align:center;color:var(--ink-soft);font-size:.9rem;box-shadow:0 12px 30px rgba(20,33,46,.07);}
 .qr-frame{width:230px;height:230px;margin:0 auto 18px;padding:14px;background:#fff;border-radius:28px;box-shadow:0 12px 28px rgba(17,17,19,.08);display:flex;align-items:center;justify-content:center;}
 #qrCode{display:flex;align-items:center;justify-content:center;}
 #qrCode img,#qrCode canvas{border-radius:8px;display:block;}
 .qr-title{font-size:1.05rem;font-weight:900;color:var(--ink);margin-bottom:7px;}
 .qr-copy{font-size:.82rem;line-height:1.55;color:var(--ink-soft);font-weight:650;margin-bottom:16px;}
-.share-url{width:100%;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.76);color:var(--ink-soft);font-size:.75rem;padding:12px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;}
+.share-url{width:100%;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.76);color:var(--ink-soft);font-size:.75rem;padding:12px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;display:block;word-break:break-all;white-space:normal;}
 body.dark .qr-box{background:linear-gradient(135deg,#17191c 0%,#112d29 100%);border-color:rgba(255,255,255,.08);}
 
-/* settings */
 .settings-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;margin-bottom:14px;}
 .settings-card h3{font-size:.88rem;font-weight:700;margin-bottom:14px;color:var(--ink-soft);}
 .settings-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--border);}
@@ -365,7 +308,11 @@ body.dark .qr-box{background:linear-gradient(135deg,#17191c 0%,#112d29 100%);bor
 .toggle-knob{position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:50%;background:var(--surface);transition:transform .2s ease;box-shadow:0 1px 3px rgba(0,0,0,.2);}
 .toggle-switch.on .toggle-knob{transform:translateX(19px);background:#fff;}
 
-/* portfolio modal */
+/* 저장 상태 배너 */
+.save-notice{display:none;margin:0 0 10px;padding:10px 14px;border-radius:12px;font-size:.8rem;font-weight:700;text-align:center;}
+.save-notice.ok{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;display:block;}
+.save-notice.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca;display:block;}
+
 .portfolio-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:3000;align-items:center;justify-content:center;padding:20px;}
 .portfolio-modal.active{display:flex;}
 .modal-content-wrapper{position:relative;max-width:92%;max-height:80%;touch-action:pan-y;user-select:none;}
@@ -416,16 +363,17 @@ body.dark .qr-box{background:linear-gradient(135deg,#17191c 0%,#112d29 100%);bor
       </button>
       <div>
         <div class="edit-topbar-title">라이브 스튜디오</div>
-        <div class="edit-topbar-sub">자동 저장됨</div>
+        <div class="edit-topbar-sub" id="autoSaveLabel">자동 저장됨</div>
       </div>
     </div>
-    <button class="preview-btn" onclick="saveProfile(this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-      미리보기
+    <button class="preview-btn" onclick="saveAndClose()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      저장 후 닫기
     </button>
   </div>
 
   <div class="edit-body">
+    <div class="save-notice" id="saveNotice"></div>
 
     <!-- 프로필 -->
     <div class="edit-section profile-section">
@@ -450,7 +398,7 @@ body.dark .qr-box{background:linear-gradient(135deg,#17191c 0%,#112d29 100%);bor
       </div>
       <div class="profile-fields-wrap">
         <div class="profile-row-name">
-          <label for="userName">이름 (명함에 표시됨)</label>
+          <label for="userName">이름</label>
           <input type="text" class="profile-name-input" id="userName" placeholder="홍길동" oninput="updatePreview()">
         </div>
         <div class="profile-two-col">
@@ -570,7 +518,7 @@ body.dark .qr-box{background:linear-gradient(135deg,#17191c 0%,#112d29 100%);bor
     </div>
 
     <button class="save-btn" onclick="saveProfile(this)">저장하기</button>
-    <button class="nfc-btn" onclick="generateNFCLink(this)">NFC 링크 생성</button>
+    <button class="nfc-btn" onclick="copyShareLink(this)">공유 링크 복사 (NFC용)</button>
   </div>
 </div>
 
@@ -707,9 +655,9 @@ body.dark .qr-box{background:linear-gradient(135deg,#17191c 0%,#112d29 100%);bor
       <div id="qrHostWarning" style="display:none;background:rgba(250,204,21,.14);border:1px solid rgba(250,204,21,.4);color:#92660a;border-radius:14px;padding:11px 13px;font-size:.76rem;line-height:1.5;font-weight:650;margin-bottom:16px;text-align:left;"></div>
       <div class="qr-frame"><div id="qrCode"></div></div>
       <div class="qr-title">내 명함 공유 QR</div>
-      <div class="qr-copy">스캔하거나 NFC 링크를 태그하면 상대방에게는 홈 화면만 보여요.</div>
+      <div class="qr-copy">QR을 스캔하거나 아래 링크를 NFC 태그에 저장하면 상대방에게 내 명함이 보여요.</div>
       <div class="share-url" id="shareUrlText">프로필을 저장하면 공유 링크가 생성됩니다.</div>
-      <button class="save-btn" style="margin-top:14px;" onclick="generateNFCLink(this)">공유 링크 복사</button>
+      <button class="save-btn" style="margin-top:14px;" onclick="copyShareLink(this)">공유 링크 복사</button>
       <button class="nfc-btn" onclick="previewShareLink()">새 탭에서 미리 보기 (상대방 시점 테스트)</button>
     </div>
   </div>
@@ -755,200 +703,265 @@ body.dark .qr-box{background:linear-gradient(135deg,#17191c 0%,#112d29 100%);bor
 </div>
 
 <script>
-let isDarkMode=false,isEditMode=false;
-let portfolioImages=[],portfolioTitles=[],portfolioDescriptions=[];
-let avatarImage=null,cardFrontImageData=null,cardBackImageData=null;
-let isDragging=false,startX=0,startY=0,rotateX=0,rotateY=0,currentRotateX=0,currentRotateY=0;
-let currentModalIndex=0,touchStartX=0,touchEndX=0;
-let isShareMode=false;
-let savedProfileJSON=null;
+// ─────────────────────────────────────────────────────────
+// 상태
+// ─────────────────────────────────────────────────────────
+let isDarkMode = false, isEditMode = false, isShareMode = false;
+let portfolioImages = [], portfolioTitles = [], portfolioDescriptions = [];
+let avatarImage = null, cardFrontImageData = null, cardBackImageData = null;
+let isDragging = false, startX = 0, startY = 0, rotateX = 0, rotateY = 0, currentRotateX = 0, currentRotateY = 0;
+let currentModalIndex = 0, touchStartX = 0, touchEndX = 0;
 
-/* ────────────────────────────────────────────────────────────
-   영구 저장소 레이어
-   - 이 파일이 Claude.ai 아티팩트로 열려있을 때는 window.storage API를
-     사용해 새로고침/재방문 후에도 데이터가 유지됩니다.
-   - window.storage가 없는 환경(파일을 내려받아 다른 서버에서 열었을 때
-     등)에서는 자동으로 메모리 저장소로 대체되어, 최소한 에러 없이
-     같은 세션 안에서는 정상 동작합니다. (이 경우 새로고침하면 초기화됩니다)
-   ──────────────────────────────────────────────────────────── */
-const memoryStore={};
-const hasPersistentStorage = typeof window!=='undefined' && !!window.storage;
+// ─────────────────────────────────────────────────────────
+// 저장소: window.storage(아티팩트 영구저장) → 없으면 localStorage → 없으면 메모리
+// ─────────────────────────────────────────────────────────
+const memStore = {};
 
-async function storageSet(key,value){
-  if(hasPersistentStorage){
-    try{
-      await window.storage.set(key,value,false);
-      memoryStore[key]=value;
-      return true;
-    }catch(err){
-      console.error('저장소 쓰기 오류 ('+key+'):',err);
-      memoryStore[key]=value;
-      return false;
-    }
+async function sto_set(key, val) {
+  if (typeof window !== 'undefined' && window.storage) {
+    try { await window.storage.set(key, val, false); } catch(e) {}
   }
-  memoryStore[key]=value;
-  return true;
-}
-async function storageGet(key){
-  if(hasPersistentStorage){
-    try{
-      const result=await window.storage.get(key,false);
-      return result?result.value:null;
-    }catch(err){
-      // 저장된 값이 없으면 에러가 발생하는 사양이므로 정상 흐름으로 처리
-      return null;
-    }
-  }
-  return Object.prototype.hasOwnProperty.call(memoryStore,key)?memoryStore[key]:null;
-}
-async function storageDelete(key){
-  if(hasPersistentStorage){
-    try{ await window.storage.delete(key,false); }catch(err){ /* 이미 없음 - 무시 */ }
-  }
-  delete memoryStore[key];
+  try { localStorage.setItem(key, val); } catch(e) {}
+  memStore[key] = val;
 }
 
-/* 프로필(텍스트/링크/포트폴리오)과 디자인(아바타/명함 이미지)을
-   각각 하나의 키로 묶어 저장 — 저장소 호출 횟수를 최소화 */
-async function persistProfile(profileData){
-  const json=JSON.stringify(profileData);
-  const ok=await storageSet('card-profile',json);
-  savedProfileJSON=json;
+async function sto_get(key) {
+  // 1) window.storage (아티팩트)
+  if (typeof window !== 'undefined' && window.storage) {
+    try {
+      const r = await window.storage.get(key, false);
+      if (r && r.value != null) return r.value;
+    } catch(e) {}
+  }
+  // 2) localStorage
+  try {
+    const v = localStorage.getItem(key);
+    if (v != null) return v;
+  } catch(e) {}
+  // 3) 메모리
+  return memStore[key] != null ? memStore[key] : null;
+}
+
+async function sto_del(key) {
+  if (typeof window !== 'undefined' && window.storage) {
+    try { await window.storage.delete(key, false); } catch(e) {}
+  }
+  try { localStorage.removeItem(key); } catch(e) {}
+  delete memStore[key];
+}
+
+// ─────────────────────────────────────────────────────────
+// URL 파라미터 기반 공유 (짧은 키)
+// ─────────────────────────────────────────────────────────
+const KEYS = { name:'n', title:'t', company:'c', phone:'p', email:'e', bio:'b', tagline:'tg', website:'w', notion:'no', youtube:'yt', instagram:'ig', linkedin:'li' };
+
+function getSharedProfileFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  let found = false;
+  const data = {};
+  Object.entries(KEYS).forEach(([longKey, shortKey]) => {
+    if (params.has(shortKey)) { found = true; data[longKey] = params.get(shortKey); }
+  });
+  return found ? data : null;
+}
+
+function buildShareUrl(profile) {
+  const base = window.location.href.split('?')[0];
+  const params = new URLSearchParams();
+  Object.entries(KEYS).forEach(([longKey, shortKey]) => {
+    const v = (profile[longKey] || '').trim();
+    if (v) params.set(shortKey, v);
+  });
+  const qs = params.toString();
+  return qs ? base + '?' + qs : base;
+}
+
+function getCurrentProfile() {
+  return {
+    name: document.getElementById('userName')?.value || '',
+    title: document.getElementById('userTitle')?.value || '',
+    company: document.getElementById('userCompany')?.value || '',
+    phone: document.getElementById('userPhone')?.value || '',
+    email: document.getElementById('userEmail')?.value || '',
+    bio: document.getElementById('userBio')?.value || '',
+    tagline: document.getElementById('userTagline')?.value || '',
+    website: document.getElementById('userWebsite')?.value || '',
+    notion: document.getElementById('userNotion')?.value || '',
+    youtube: document.getElementById('userYoutube')?.value || '',
+    instagram: document.getElementById('userInstagram')?.value || '',
+    linkedin: document.getElementById('userLinkedin')?.value || '',
+    portfolioImages, portfolioTitles, portfolioDescriptions
+  };
+}
+
+// ─────────────────────────────────────────────────────────
+// 저장 / 불러오기
+// ─────────────────────────────────────────────────────────
+async function saveProfile(btn) {
+  const profile = getCurrentProfile();
+  const json = JSON.stringify(profile);
+  if (btn) { btn.textContent = '저장 중...'; btn.disabled = true; }
+
+  await sto_set('goldon-profile', json);
+
+  // 저장 확인: 바로 읽어서 검증
+  const verify = await sto_get('goldon-profile');
+  const ok = !!verify;
+
+  updatePreview();
+  updateShareQR();
+
+  const notice = document.getElementById('saveNotice');
+  if (notice) {
+    notice.className = 'save-notice ' + (ok ? 'ok' : 'err');
+    notice.textContent = ok ? '✓ 저장 완료! 이 기기에서 재방문해도 유지됩니다.' : '⚠ 저장에 실패했습니다. 다시 시도해주세요.';
+    setTimeout(() => { notice.className = 'save-notice'; }, 3500);
+  }
+
+  if (btn) {
+    btn.textContent = ok ? '저장 완료 ✓' : '저장 실패';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = '저장하기'; }, 2000);
+  }
   return ok;
 }
-async function loadProfileFromStorage(){
-  const json=await storageGet('card-profile');
-  return json||null;
-}
-async function persistDesign(){
-  const json=JSON.stringify({avatarImage,cardFrontImageData,cardBackImageData});
-  return await storageSet('card-design',json);
-}
-async function loadDesignFromStorage(){
-  const json=await storageGet('card-design');
-  if(!json)return null;
-  try{return JSON.parse(json);}catch{return null;}
-}
-async function clearAllStoredData(){
-  await storageDelete('card-profile');
-  await storageDelete('card-design');
+
+async function saveAndClose() {
+  const ok = await saveProfile(null);
+  const lbl = document.getElementById('autoSaveLabel');
+  if (lbl) lbl.textContent = ok ? '저장 완료 ✓' : '저장 실패';
+  setTimeout(() => { if (lbl) lbl.textContent = '자동 저장됨'; }, 2000);
+  if (ok) toggleEditMode();
 }
 
-window.addEventListener('load',async function(){
-  await loadProfile();
-  if(isShareMode){document.body.classList.add('share-mode');showPage('home',true);}
-  else showPage('home');
-  updateShareQR();
-  updateStorageStatusText();
-});
+async function loadProfile() {
+  // 1) URL 공유 파라미터 확인 (상대방 시점)
+  const shared = getSharedProfileFromUrl();
+  if (shared) {
+    isShareMode = true;
+    applyProfileData(shared);
+    updatePreview();
+    return;
+  }
 
-/* ── 다크모드 ── */
-function toggleDarkMode(){
-  isDarkMode=!isDarkMode;
-  document.body.classList.toggle('dark');
-  const icon=document.getElementById('darkModeIcon');
-  icon.innerHTML=isDarkMode
-    ?'<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>'
-    :'<path d="M21 12.6A8.3 8.3 0 0 1 11.4 3 8.5 8.5 0 1 0 21 12.6Z"/>';
-  document.getElementById('settingsToggle')?.classList.toggle('on',isDarkMode);
-  if(document.getElementById('statsPage').classList.contains('active')) setTimeout(drawCharts,80);
-  updateShareQR();
+  // 2) 로컬 저장 데이터 불러오기
+  const json = await sto_get('goldon-profile');
+  if (json) {
+    try {
+      const data = JSON.parse(json);
+      applyProfileData(data);
+      // 포트폴리오 이미지 복원
+      if (data.portfolioImages && data.portfolioImages.length) {
+        portfolioImages = data.portfolioImages;
+        portfolioTitles = data.portfolioTitles || [];
+        portfolioDescriptions = data.portfolioDescriptions || [];
+        while (portfolioTitles.length < portfolioImages.length) portfolioTitles.push('');
+        while (portfolioDescriptions.length < portfolioImages.length) portfolioDescriptions.push('');
+        updatePortfolioEditPanel();
+      }
+    } catch(e) { console.error('프로필 파싱 오류:', e); }
+  }
+
+  // 3) 명함 디자인(이미지) 복원
+  const designJson = await sto_get('goldon-design');
+  if (designJson) {
+    try {
+      const d = JSON.parse(designJson);
+      avatarImage = d.avatarImage || null;
+      cardFrontImageData = d.cardFrontImageData || null;
+      cardBackImageData = d.cardBackImageData || null;
+      renderAvatar();
+      renderCardImage('front');
+      renderCardImage('back');
+    } catch(e) {}
+  }
+
+  updatePreview();
 }
 
-/* ── 편집 패널 ── */
-function toggleEditMode(){
-  if(isShareMode)return;
-  isEditMode=!isEditMode;
-  document.getElementById('editPanel').classList.toggle('open',isEditMode);
-  document.getElementById('overlayBackdrop').classList.toggle('show',isEditMode);
+function applyProfileData(data) {
+  const map = { userName:'name', userTitle:'title', userCompany:'company', userPhone:'phone', userEmail:'email', userBio:'bio', userTagline:'tagline', userWebsite:'website', userNotion:'notion', userYoutube:'youtube', userInstagram:'instagram', userLinkedin:'linkedin' };
+  Object.entries(map).forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = data[key] || '';
+  });
 }
 
-/* ── 화면 렌더 헬퍼 (업로드 시점과 로드 시점에 공통으로 사용) ── */
-function renderAvatar(){
-  if(!avatarImage)return;
-  document.getElementById('avatarDisplay').innerHTML=`<img src="${avatarImage}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
-  const ed=document.getElementById('editAvatarDisplay');
-  ed.innerHTML=`<img src="${avatarImage}" alt="avatar" style="border-radius:22px;"><div class="camera-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="#101114" stroke-width="2" style="width:18px;height:18px"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
-  ed.onclick=()=>document.getElementById('avatarUpload').click();
+async function saveDesign() {
+  const json = JSON.stringify({ avatarImage, cardFrontImageData, cardBackImageData });
+  await sto_set('goldon-design', json);
 }
-function renderCardImage(side){
-  if(side==='front'&&cardFrontImageData){
-    document.getElementById('cardFrontImage').src=cardFrontImageData;
+
+async function resetStoredData(btn) {
+  if (!confirm('저장된 프로필과 명함 디자인을 모두 삭제할까요?')) return;
+  await sto_del('goldon-profile');
+  await sto_del('goldon-design');
+  location.reload();
+}
+
+// ─────────────────────────────────────────────────────────
+// 렌더 헬퍼
+// ─────────────────────────────────────────────────────────
+function renderAvatar() {
+  if (!avatarImage) return;
+  const disp = document.getElementById('avatarDisplay');
+  if (disp) disp.innerHTML = `<img src="${avatarImage}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+  const ed = document.getElementById('editAvatarDisplay');
+  if (ed) {
+    ed.innerHTML = `<img src="${avatarImage}" alt="avatar" style="border-radius:22px;"><div class="camera-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="#101114" stroke-width="2" style="width:18px;height:18px"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
+    ed.onclick = () => document.getElementById('avatarUpload').click();
+  }
+}
+
+function renderCardImage(side) {
+  if (side === 'front' && cardFrontImageData) {
+    document.getElementById('cardFrontImage').src = cardFrontImageData;
     document.getElementById('businessCardFront').classList.add('has-custom-design');
-    document.getElementById('cardFrontThumbImg').src=cardFrontImageData;
+    document.getElementById('cardFrontThumbImg').src = cardFrontImageData;
     document.getElementById('cardFrontThumb').classList.add('has-img');
-  }else if(side==='back'&&cardBackImageData){
-    document.getElementById('cardBackImage').src=cardBackImageData;
+  } else if (side === 'back' && cardBackImageData) {
+    document.getElementById('cardBackImage').src = cardBackImageData;
     document.getElementById('businessCardBack').classList.add('has-custom-design');
-    document.getElementById('cardBackThumbImg').src=cardBackImageData;
+    document.getElementById('cardBackThumbImg').src = cardBackImageData;
     document.getElementById('cardBackThumb').classList.add('has-img');
   }
 }
 
-/* ── 아바타 업로드 ── */
-function handleAvatarUpload(event){
-  const file=event.target.files[0];
-  if(!file||!file.type.startsWith('image/'))return;
-  const reader=new FileReader();
-  reader.onload=async function(e){
-    avatarImage=e.target.result;
+// ─────────────────────────────────────────────────────────
+// 업로드 핸들러
+// ─────────────────────────────────────────────────────────
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (!file || !file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    avatarImage = e.target.result;
     renderAvatar();
-    const ok=await persistDesign();
-    if(!ok)console.warn('아바타 이미지가 이번 세션에만 저장됩니다.');
+    await saveDesign();
   };
   reader.readAsDataURL(file);
 }
 
-/* ── 명함 이미지 업로드 ── */
-function handleCardImageUpload(event,side){
-  const file=event.target.files[0];
-  if(!file||!file.type.startsWith('image/'))return;
-  const reader=new FileReader();
-  reader.onload=async function(e){
-    const d=e.target.result;
-    if(side==='front')cardFrontImageData=d;else cardBackImageData=d;
+function handleCardImageUpload(event, side) {
+  const file = event.target.files[0];
+  if (!file || !file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    if (side === 'front') cardFrontImageData = e.target.result;
+    else cardBackImageData = e.target.result;
     renderCardImage(side);
-    const ok=await persistDesign();
-    if(!ok)console.warn('명함 이미지가 이번 세션에만 저장됩니다.');
+    await saveDesign();
   };
   reader.readAsDataURL(file);
 }
 
-/* ── 공유 링크를 상대방 시점으로 직접 테스트 ── */
-function previewShareLink(){
-  if(!savedProfileJSON){alert('먼저 프로필을 저장해주세요!');return;}
-  const url=getShareUrl();
-  window.open(url,'_blank');
-}
-
-/* ── NFC 링크 생성 ── */
-function generateNFCLink(btn){
-  if(!savedProfileJSON){alert('먼저 프로필을 저장해주세요!');return;}
-  const nfcLink=getShareUrl();
-  const copyText=()=>{
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(nfcLink).then(()=>{
-        if(btn){const orig=btn.textContent;btn.textContent='링크 복사 완료!';setTimeout(()=>{btn.textContent=orig;},2000);}
-      }).catch(()=>{prompt('NFC 링크를 복사하세요:',nfcLink);});
-    }else{
-      prompt('NFC 링크를 복사하세요:',nfcLink);
-    }
-  };
-  if(!isPubliclyReachableUrl()){
-    alert('지금 이 주소는 외부 기기에서 열 수 있는 인터넷 주소가 아니에요. 링크는 복사되지만, 실제로 다른 사람이 열려면 이 파일을 웹에 호스팅한 뒤 그 주소에서 다시 생성해야 해요.');
-  }
-  copyText();
-  updateShareQR();
-}
-
-/* ── 포트폴리오 업로드 ── */
-function handlePortfolioUpload(event){
-  const files=Array.from(event.target.files);
-  if(portfolioImages.length+files.length>6){alert('최대 6개까지만 업로드 가능합니다.');return;}
-  files.forEach(file=>{
-    if(!file.type.startsWith('image/'))return;
-    const reader=new FileReader();
-    reader.onload=function(e){
+function handlePortfolioUpload(event) {
+  const files = Array.from(event.target.files);
+  if (portfolioImages.length + files.length > 6) { alert('최대 6개까지만 업로드 가능합니다.'); return; }
+  files.forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
       portfolioImages.push(e.target.result);
       portfolioTitles.push('');
       portfolioDescriptions.push('');
@@ -959,475 +972,406 @@ function handlePortfolioUpload(event){
   });
 }
 
-function updatePortfolioEditPanel(){
-  const grid=document.getElementById('portfolioEditGrid');
-  const countEl=document.getElementById('portfolioEditCount');
-  if(countEl)countEl.textContent=`${portfolioImages.length}개`;
-  if(!portfolioImages.length){grid.className='portfolio-empty';grid.innerHTML='이미지를 추가하면<br>여기에 표시됩니다';return;}
-  grid.className='portfolio-edit-grid';
-  grid.innerHTML=portfolioImages.map((img,i)=>`
-    <div class="portfolio-edit-tile">
-      <img src="${img}" alt="">
-      <button class="portfolio-edit-tile-remove" onclick="removePortfolioImage(${i})" aria-label="삭제"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-    </div>`).join('');
-}
+// ─────────────────────────────────────────────────────────
+// UI 업데이트
+// ─────────────────────────────────────────────────────────
+function updatePreview() {
+  const name = document.getElementById('userName')?.value || '';
+  const title = document.getElementById('userTitle')?.value || '';
+  const company = document.getElementById('userCompany')?.value || '';
+  const phone = document.getElementById('userPhone')?.value || '';
+  const email = document.getElementById('userEmail')?.value || '';
+  const bio = document.getElementById('userBio')?.value || '';
+  const tagline = document.getElementById('userTagline')?.value || '';
 
-function updatePortfolioGallery(){
-  const gallery=document.getElementById('portfolioGallery');
-  const countLabel=document.getElementById('portfolioCount');
-  if(!gallery)return;
-  if(countLabel)countLabel.textContent=portfolioImages.length?`${portfolioImages.length}개`:'';
-  if(!portfolioImages.length){gallery.innerHTML='<div class="empty-note">포트폴리오 이미지를 추가하면 여기에 표시됩니다</div>';return;}
-  gallery.innerHTML=`<div class="portfolio-grid">${portfolioImages.map((img,i)=>`
-    <div class="portfolio-tile" onclick="openModal(${i},event)">
-      <img src="${img}" alt="${portfolioTitles[i]||'포트폴리오 '+(i+1)}">
-      <div class="portfolio-tile-overlay"><div class="portfolio-tile-title">${portfolioTitles[i]||'작품 '+(i+1)}</div></div>
-    </div>`).join('')}</div>`;
-}
+  setText('displayUserName', name || '사용자 이름');
+  setText('displayJobTitle', [title, company].filter(Boolean).join(' · ') || '직책 · 회사명');
+  setText('displayTagline', tagline || '한 줄 소개를 입력하면 여기에 표시됩니다.');
+  setText('displayBio', bio || '소개를 입력하면 여기에 표시됩니다.');
+  setText('cardDisplayName', company || name || 'GOLD:ON');
+  setText('cardDisplayTitle', title || '디지털 명함 전문가');
+  setText('cardDisplayEmail', email || 'hello@goldon.com');
+  setText('cardDisplayPhone', phone || '010-1234-5678');
 
-/* ── 모달 ── */
-function openModal(index,event){
-  if(event)event.stopPropagation();
-  currentModalIndex=index;
-  updateModalContent();
-  document.getElementById('portfolioModal').classList.add('active');
-  document.body.style.overflow='hidden';
-  const w=document.getElementById('modalContentWrapper');
-  w.addEventListener('touchstart',handleTouchStart,false);
-  w.addEventListener('touchend',handleTouchEnd,false);
-}
-function updateModalContent(){
-  document.getElementById('modalImage').src=portfolioImages[currentModalIndex];
-  document.getElementById('modalCounter').textContent=`${currentModalIndex+1} / ${portfolioImages.length}`;
-  document.getElementById('modalInfoTitle').textContent=portfolioTitles[currentModalIndex]||`작품 ${currentModalIndex+1}`;
-  document.getElementById('modalInfoDesc').textContent=portfolioDescriptions[currentModalIndex]||'작품 설명이 없습니다.';
-}
-function prevImage(e){e.stopPropagation();if(!portfolioImages.length)return;currentModalIndex=(currentModalIndex-1+portfolioImages.length)%portfolioImages.length;updateModalContent();}
-function nextImage(e){e.stopPropagation();if(!portfolioImages.length)return;currentModalIndex=(currentModalIndex+1)%portfolioImages.length;updateModalContent();}
-function handleTouchStart(e){touchStartX=e.changedTouches[0].screenX;}
-function handleTouchEnd(e){touchEndX=e.changedTouches[0].screenX;if(touchEndX<touchStartX-50)nextImage(new Event('click'));else if(touchEndX>touchStartX+50)prevImage(new Event('click'));}
-function closeModalOnBackground(e){if(e.target.id==='portfolioModal')closeModal(e);}
-function closeModal(e){
-  if(e)e.stopPropagation();
-  document.getElementById('portfolioModal').classList.remove('active');
-  document.body.style.overflow='';
-  const w=document.getElementById('modalContentWrapper');
-  w.removeEventListener('touchstart',handleTouchStart);
-  w.removeEventListener('touchend',handleTouchEnd);
-}
-function removePortfolioImage(index){
-  portfolioImages.splice(index,1);portfolioTitles.splice(index,1);portfolioDescriptions.splice(index,1);
-  updatePortfolioEditPanel();updatePortfolioGallery();
-}
+  const editName = document.getElementById('editAvatarName');
+  if (editName) editName.textContent = name ? `${name} (명함에 표시됨)` : '이름 (명함에 표시됨)';
 
-/* ── 카운트 ── */
-function updateLinkCount(){
-  const ids=['userWebsite','userInstagram','userLinkedin','userNotion','userYoutube'];
-  const count=ids.filter(id=>(document.getElementById(id)?.value||'').trim()).length;
-  const el=document.getElementById('linkCount');if(el)el.textContent=`${count}개`;
-}
-function updateContentCount(){
-  const ids=['userPhone','userEmail','userBio'];
-  const count=ids.filter(id=>(document.getElementById(id)?.value||'').trim()).length;
-  const el=document.getElementById('contentCount');if(el)el.textContent=`${count}개`;
-}
-
-/* ── 저장 ── */
-async function saveProfile(btn){
-  const profileData={
-    name:document.getElementById('userName')?.value||'',
-    title:document.getElementById('userTitle')?.value||'',
-    company:document.getElementById('userCompany')?.value||'',
-    phone:document.getElementById('userPhone')?.value||'',
-    email:document.getElementById('userEmail')?.value||'',
-    bio:document.getElementById('userBio')?.value||'',
-    tagline:document.getElementById('userTagline')?.value||'',
-    website:document.getElementById('userWebsite')?.value||'',
-    notion:document.getElementById('userNotion')?.value||'',
-    youtube:document.getElementById('userYoutube')?.value||'',
-    instagram:document.getElementById('userInstagram')?.value||'',
-    linkedin:document.getElementById('userLinkedin')?.value||'',
-    portfolioImages,portfolioTitles,portfolioDescriptions
-  };
-  if(btn){btn.dataset.origText=btn.dataset.origText||btn.textContent;btn.textContent='저장 중...';}
-  const ok=await persistProfile(profileData);
-  updatePreview();
-  updateShareQR();
-  if(btn){
-    btn.textContent=ok?'저장 완료 ✓':'세션에만 저장됨';
-    setTimeout(()=>{btn.textContent=btn.dataset.origText;},1800);
-  }
-}
-
-/* ── 저장된 데이터 초기화 ── */
-async function resetStoredData(btn){
-  if(!confirm('저장된 프로필과 명함 디자인을 모두 삭제할까요? 이 작업은 되돌릴 수 없습니다.'))return;
-  await clearAllStoredData();
-  location.reload();
-}
-
-/* ── 프리뷰 업데이트 ── */
-function updatePreview(){
-  const name=document.getElementById('userName')?.value||'';
-  const title=document.getElementById('userTitle')?.value||'';
-  const company=document.getElementById('userCompany')?.value||'';
-  const phone=document.getElementById('userPhone')?.value||'';
-  const email=document.getElementById('userEmail')?.value||'';
-  const bio=document.getElementById('userBio')?.value||'';
-  const tagline=document.getElementById('userTagline')?.value||'';
-  setText('displayUserName',name||'사용자 이름');
-  setText('displayJobTitle',[title,company].filter(Boolean).join(' · ')||'직책 · 회사명');
-  setText('displayTagline',tagline||'한 줄 소개를 입력하면 여기에 표시됩니다.');
-  setText('displayBio',bio||'소개를 입력하면 여기에 표시됩니다.');
-  setText('cardDisplayName',company||name||'GOLD:ON');
-  setText('cardDisplayTitle',title||'디지털 명함 전문가');
-  setText('cardDisplayEmail',email||'hello@goldon.com');
-  setText('cardDisplayPhone',phone||'010-1234-5678');
-  const editName=document.getElementById('editAvatarName');
-  if(editName)editName.textContent=name?`${name} (명함에 표시됨)`:'이름 (명함에 표시됨)';
   updateSkillTags(bio);
   updateAllLinks();
   updatePortfolioGallery();
   updateLinkCount();
   updateContentCount();
 }
-function setText(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
 
-function updateSkillTags(bio){
-  const wrap=document.getElementById('skillTags');
-  if(!wrap)return;
-  wrap.innerHTML='';
-  if(!bio)return;
-  bio.split(/[,\n·]/).map(s=>s.trim()).filter(Boolean).slice(0,10).forEach(p=>{
-    const tag=document.createElement('span');tag.className='skill-tag';tag.textContent=p;wrap.appendChild(tag);
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+function updateSkillTags(bio) {
+  const wrap = document.getElementById('skillTags');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  if (!bio) return;
+  bio.split(/[,\n·]/).map(s => s.trim()).filter(Boolean).slice(0, 10).forEach(p => {
+    const tag = document.createElement('span');
+    tag.className = 'skill-tag'; tag.textContent = p; wrap.appendChild(tag);
   });
 }
 
-/* ── 소셜/링크 아이콘 SVG ── */
-function getSvgIcon(brand){
-  const icons={
-    email:`<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>`,
-    phone:`<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
-    website:`<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
-    notion:`<svg viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08V19.35c0 .7.373.98 1.168.934l14.298-.84c.793-.047.887-.56.887-1.168V6.354c0-.607-.233-.933-.7-.887l-14.9.887c-.514.047-.753.327-.753.934zm14.275.654c.093.42 0 .84-.42.887l-.7.14v10.26c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.7l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.14c-.094-.514.28-.887.747-.933z"/></svg>`,
-    youtube:`<svg viewBox="0 0 24 24" fill="#fff"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#ff2d2d"/></svg>`,
-    instagram:`<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
-    linkedin:`<svg viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`
-  };
-  return icons[brand]||'';
+function updateLinkCount() {
+  const ids = ['userWebsite','userInstagram','userLinkedin','userNotion','userYoutube'];
+  const count = ids.filter(id => (document.getElementById(id)?.value || '').trim()).length;
+  const el = document.getElementById('linkCount');
+  if (el) el.textContent = `${count}개`;
 }
 
-function updateAllLinks(){
-  const container=document.getElementById('allLinksContainer');
-  const socialRow=document.getElementById('socialRow');
-  if(!container||!socialRow)return;
-  container.innerHTML='';socialRow.innerHTML='';
-  const phone=document.getElementById('userPhone')?.value||'';
-  const email=document.getElementById('userEmail')?.value||'';
-  const feedLinks=[
-    {value:email,href:`mailto:${email}`,brand:'email',label:'이메일',sub:email,show:!!email},
-    {value:phone,href:`tel:${phone.replace(/[^0-9+]/g,'')}`,brand:'phone',label:'전화',sub:phone,show:!!phone},
-    {id:'userWebsite',brand:'website',label:'웹사이트'},
-    {id:'userNotion',brand:'notion',label:'Notion'},
-    {id:'userYoutube',brand:'youtube',label:'YouTube'},
-    {id:'userInstagram',brand:'instagram',label:'Instagram'},
-    {id:'userLinkedin',brand:'linkedin',label:'LinkedIn'}
+function updateContentCount() {
+  const ids = ['userPhone','userEmail','userBio'];
+  const count = ids.filter(id => (document.getElementById(id)?.value || '').trim()).length;
+  const el = document.getElementById('contentCount');
+  if (el) el.textContent = `${count}개`;
+}
+
+function getSvgIcon(brand) {
+  const icons = {
+    email: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>`,
+    phone: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+    website: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    notion: `<svg viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08V19.35c0 .7.373.98 1.168.934l14.298-.84c.793-.047.887-.56.887-1.168V6.354c0-.607-.233-.933-.7-.887l-14.9.887c-.514.047-.753.327-.753.934zm14.275.654c.093.42 0 .84-.42.887l-.7.14v10.26c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.7l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.14c-.094-.514.28-.887.747-.933z"/></svg>`,
+    youtube: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#ff2d2d"/></svg>`,
+    instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+    linkedin: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`
+  };
+  return icons[brand] || '';
+}
+
+function updateAllLinks() {
+  const container = document.getElementById('allLinksContainer');
+  const socialRow = document.getElementById('socialRow');
+  if (!container || !socialRow) return;
+  container.innerHTML = ''; socialRow.innerHTML = '';
+
+  const phone = document.getElementById('userPhone')?.value || '';
+  const email = document.getElementById('userEmail')?.value || '';
+
+  const feedLinks = [
+    { value: email, href: `mailto:${email}`, brand: 'email', label: '이메일', sub: email, show: !!email },
+    { value: phone, href: `tel:${phone.replace(/[^0-9+]/g,'')}`, brand: 'phone', label: '전화', sub: phone, show: !!phone },
+    { id: 'userWebsite', brand: 'website', label: '웹사이트' },
+    { id: 'userNotion', brand: 'notion', label: 'Notion' },
+    { id: 'userYoutube', brand: 'youtube', label: 'YouTube' },
+    { id: 'userInstagram', brand: 'instagram', label: 'Instagram' },
+    { id: 'userLinkedin', brand: 'linkedin', label: 'LinkedIn' }
   ];
-  feedLinks.forEach(link=>{
-    let url='',show=false,sub=link.sub||'';
-    if(link.id){url=document.getElementById(link.id)?.value||'';show=!!url.trim();sub=url;}
-    else{url=link.href;show=link.show;}
-    if(!show)return;
-    const svgIcon=getSvgIcon(link.brand);
-    const card=document.createElement('div');
-    card.className='link-card';
-    card.innerHTML=`<div class="link-icon social-pill brand-${link.brand}" style="width:38px;height:38px;border-radius:10px;box-shadow:none;">${svgIcon}</div><div class="link-text"><div class="link-title">${link.label}</div><div class="link-sub">${sub}</div></div><div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>`;
-    card.addEventListener('click',()=>window.open(url,link.id?'_blank':'_self'));
+
+  feedLinks.forEach(link => {
+    let url = '', show = false, sub = link.sub || '';
+    if (link.id) { url = document.getElementById(link.id)?.value || ''; show = !!url.trim(); sub = url; }
+    else { url = link.href; show = link.show; }
+    if (!show) return;
+
+    const svgIcon = getSvgIcon(link.brand);
+    const card = document.createElement('div');
+    card.className = 'link-card';
+    card.innerHTML = `<div class="link-icon social-pill brand-${link.brand}" style="width:38px;height:38px;border-radius:10px;box-shadow:none;">${svgIcon}</div><div class="link-text"><div class="link-title">${link.label}</div><div class="link-sub">${sub}</div></div><div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>`;
+    card.addEventListener('click', () => window.open(url, link.id ? '_blank' : '_self'));
     container.appendChild(card);
-    const pill=document.createElement('div');
-    pill.className=`social-pill brand-${link.brand}`;
-    pill.innerHTML=svgIcon;pill.title=link.label;
-    pill.addEventListener('click',()=>window.open(url,link.id?'_blank':'_self'));
+
+    const pill = document.createElement('div');
+    pill.className = `social-pill brand-${link.brand}`;
+    pill.innerHTML = svgIcon; pill.title = link.label;
+    pill.addEventListener('click', () => window.open(url, link.id ? '_blank' : '_self'));
     socialRow.appendChild(pill);
   });
 }
 
-/* ── 프로필 적용 ── */
-function applyProfileData(data){
-  const map={userName:'name',userTitle:'title',userCompany:'company',userPhone:'phone',userEmail:'email',userBio:'bio',userTagline:'tagline',userWebsite:'website',userNotion:'notion',userYoutube:'youtube',userInstagram:'instagram',userLinkedin:'linkedin'};
-  Object.entries(map).forEach(([id,key])=>{const el=document.getElementById(id);if(el)el.value=data[key]||'';});
-  if(data.portfolioImages){
-    portfolioImages=data.portfolioImages;
-    portfolioTitles=data.portfolioTitles||[];
-    portfolioDescriptions=data.portfolioDescriptions||[];
-    while(portfolioTitles.length<portfolioImages.length)portfolioTitles.push('');
-    while(portfolioDescriptions.length<portfolioImages.length)portfolioDescriptions.push('');
-    updatePortfolioEditPanel();
+function updatePortfolioEditPanel() {
+  const grid = document.getElementById('portfolioEditGrid');
+  const countEl = document.getElementById('portfolioEditCount');
+  if (countEl) countEl.textContent = `${portfolioImages.length}개`;
+  if (!portfolioImages.length) {
+    grid.className = 'portfolio-empty';
+    grid.innerHTML = '이미지를 추가하면<br>여기에 표시됩니다';
+    return;
   }
+  grid.className = 'portfolio-edit-grid';
+  grid.innerHTML = portfolioImages.map((img, i) => `
+    <div class="portfolio-edit-tile">
+      <img src="${img}" alt="">
+      <button class="portfolio-edit-tile-remove" onclick="removePortfolioImage(${i})" aria-label="삭제"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>`).join('');
 }
 
-/* 짧은 키 ↔ 실제 필드명 매핑.
-   "card=base64(JSON)" 방식은 중괄호/따옴표/키이름이 전부 그대로 들어가고
-   base64 자체도 원본보다 ~37% 더 커져서, 평범한 프로필도 링크가 1,300바이트를
-   훌쩍 넘었다. 흔한 NFC 태그(NTAG213)는 약 144바이트밖에 못 담기 때문에
-   태그에 쓰는 순간 잘리거나 쓰기 자체가 실패해서 "다시 찍으면 초기화면"
-   현상이 생긴다. 그래서 JSON+base64 없이, 짧은 키의 일반 쿼리 파라미터로
-   직접 인코딩해서 용량을 절반 이하로 줄인다. */
-const SHARE_FIELD_KEYS={
-  name:'n',title:'t',company:'c',phone:'p',email:'e',
-  bio:'b',tagline:'tg',website:'w',notion:'no',youtube:'yt',
-  instagram:'ig',linkedin:'li'
-};
-
-function getSharedProfileFromUrl(){
-  const params=new URLSearchParams(window.location.search);
-  let found=false;
-  const data={};
-  Object.entries(SHARE_FIELD_KEYS).forEach(([longKey,shortKey])=>{
-    if(params.has(shortKey)){found=true;data[longKey]=params.get(shortKey);}
-  });
-  if(found)return data;
-  // 이전 버전(card=base64) 링크와의 호환을 위한 폴백
-  const card=params.get('card');
-  if(card){
-    try{return JSON.parse(decodeURIComponent(atob(card)));}catch{return null;}
+function updatePortfolioGallery() {
+  const gallery = document.getElementById('portfolioGallery');
+  const countLabel = document.getElementById('portfolioCount');
+  if (!gallery) return;
+  if (countLabel) countLabel.textContent = portfolioImages.length ? `${portfolioImages.length}개` : '';
+  if (!portfolioImages.length) {
+    gallery.innerHTML = '<div class="empty-note">포트폴리오 이미지를 추가하면 여기에 표시됩니다</div>';
+    return;
   }
-  return null;
+  gallery.innerHTML = `<div class="portfolio-grid">${portfolioImages.map((img, i) => `
+    <div class="portfolio-tile" onclick="openModal(${i},event)">
+      <img src="${img}" alt="${portfolioTitles[i]||'포트폴리오 '+(i+1)}">
+      <div class="portfolio-tile-overlay"><div class="portfolio-tile-title">${portfolioTitles[i]||'작품 '+(i+1)}</div></div>
+    </div>`).join('')}</div>`;
 }
 
-/* 공유용 데이터는 일부러 가볍게 만든다.
-   포트폴리오 이미지는 절대 포함하지 않는다(텍스트 정보만 공유). */
-function getShareableProfile(){
-  if(savedProfileJSON){
-    try{return JSON.parse(savedProfileJSON);}catch{}
-  }
-  return {
-    name:document.getElementById('userName')?.value||'',
-    title:document.getElementById('userTitle')?.value||'',
-    company:document.getElementById('userCompany')?.value||'',
-    phone:document.getElementById('userPhone')?.value||'',
-    email:document.getElementById('userEmail')?.value||'',
-    bio:document.getElementById('userBio')?.value||'',
-    tagline:document.getElementById('userTagline')?.value||'',
-    website:document.getElementById('userWebsite')?.value||'',
-    notion:document.getElementById('userNotion')?.value||'',
-    youtube:document.getElementById('userYoutube')?.value||'',
-    instagram:document.getElementById('userInstagram')?.value||'',
-    linkedin:document.getElementById('userLinkedin')?.value||''
+function removePortfolioImage(index) {
+  portfolioImages.splice(index, 1); portfolioTitles.splice(index, 1); portfolioDescriptions.splice(index, 1);
+  updatePortfolioEditPanel(); updatePortfolioGallery();
+}
+
+// ─────────────────────────────────────────────────────────
+// 모달
+// ─────────────────────────────────────────────────────────
+function openModal(index, event) {
+  if (event) event.stopPropagation();
+  currentModalIndex = index;
+  updateModalContent();
+  document.getElementById('portfolioModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  const w = document.getElementById('modalContentWrapper');
+  w.addEventListener('touchstart', handleTouchStart, false);
+  w.addEventListener('touchend', handleTouchEnd, false);
+}
+function updateModalContent() {
+  document.getElementById('modalImage').src = portfolioImages[currentModalIndex];
+  document.getElementById('modalCounter').textContent = `${currentModalIndex+1} / ${portfolioImages.length}`;
+  document.getElementById('modalInfoTitle').textContent = portfolioTitles[currentModalIndex] || `작품 ${currentModalIndex+1}`;
+  document.getElementById('modalInfoDesc').textContent = portfolioDescriptions[currentModalIndex] || '작품 설명이 없습니다.';
+}
+function prevImage(e) { e.stopPropagation(); if (!portfolioImages.length) return; currentModalIndex = (currentModalIndex - 1 + portfolioImages.length) % portfolioImages.length; updateModalContent(); }
+function nextImage(e) { e.stopPropagation(); if (!portfolioImages.length) return; currentModalIndex = (currentModalIndex + 1) % portfolioImages.length; updateModalContent(); }
+function handleTouchStart(e) { touchStartX = e.changedTouches[0].screenX; }
+function handleTouchEnd(e) { touchEndX = e.changedTouches[0].screenX; if (touchEndX < touchStartX - 50) nextImage(new Event('click')); else if (touchEndX > touchStartX + 50) prevImage(new Event('click')); }
+function closeModalOnBackground(e) { if (e.target.id === 'portfolioModal') closeModal(e); }
+function closeModal(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('portfolioModal').classList.remove('active');
+  document.body.style.overflow = '';
+  const w = document.getElementById('modalContentWrapper');
+  w.removeEventListener('touchstart', handleTouchStart);
+  w.removeEventListener('touchend', handleTouchEnd);
+}
+
+// ─────────────────────────────────────────────────────────
+// 공유 링크
+// ─────────────────────────────────────────────────────────
+async function copyShareLink(btn) {
+  const profile = getCurrentProfile();
+  const url = buildShareUrl(profile);
+
+  // 저장도 같이 해줌
+  await sto_set('goldon-profile', JSON.stringify(profile));
+
+  const doCopy = () => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        if (btn) { const orig = btn.textContent; btn.textContent = '복사 완료! ✓'; setTimeout(() => { btn.textContent = orig; }, 2000); }
+      }).catch(() => { prompt('아래 링크를 복사하세요:', url); });
+    } else {
+      prompt('아래 링크를 복사하세요:', url);
+    }
   };
+
+  if (!isPubliclyReachableUrl()) {
+    alert('⚠ 현재 주소는 외부 기기에서 열 수 없는 주소예요.\n이 HTML 파일을 GitHub Pages나 Netlify 같은 곳에 올리면 NFC/QR로 실제 공유할 수 있어요.\n\n링크는 일단 복사해드릴게요.');
+  }
+  doCopy();
+  updateShareQR();
 }
 
-function getShareUrl(){
-  const currentUrl=window.location.href.split('?')[0];
-  const profile=getShareableProfile();
-  const params=new URLSearchParams();
-  Object.entries(SHARE_FIELD_KEYS).forEach(([longKey,shortKey])=>{
-    const val=(profile[longKey]||'').trim();
-    if(val)params.set(shortKey,val);
-  });
-  const qs=params.toString();
-  return qs?`${currentUrl}?${qs}`:currentUrl;
+function previewShareLink() {
+  const profile = getCurrentProfile();
+  const url = buildShareUrl(profile);
+  if (url === window.location.href.split('?')[0]) {
+    alert('먼저 프로필을 입력하세요!'); return;
+  }
+  window.open(url, '_blank');
 }
 
-/* QR이 안전하게 담을 수 있는 글자 수 한도(여유있게 설정) */
-const SAFE_QR_LENGTH=1400;
-
-/* 흔한 NFC 태그 용량(byte) — 안내 표시용 */
-const NFC_TAG_SIZES=[
-  {label:'NTAG213',bytes:144},
-  {label:'NTAG215',bytes:504},
-  {label:'NTAG216',bytes:888}
-];
-
-function describeNfcCapacity(url){
-  const byteLen=new TextEncoder().encode(url).length;
-  const fits=NFC_TAG_SIZES.find(t=>byteLen<=t.bytes-4); // 여유 4바이트
-  if(fits)return {byteLen,text:`${byteLen} bytes · ${fits.label}(${fits.bytes}B) 같은 흔한 NFC 태그에 들어가요`,level:'ok'};
-  const biggest=NFC_TAG_SIZES[NFC_TAG_SIZES.length-1];
-  if(byteLen<=biggest.bytes*2)return {byteLen,text:`${byteLen} bytes · ${biggest.label}(${biggest.bytes}B)보다 커요. 더 큰 용량의 NFC 태그가 필요해요`,level:'warn'};
-  return {byteLen,text:`${byteLen} bytes · 대부분의 NFC 태그 용량을 초과했어요. 소개글·링크를 줄여주세요`,level:'danger'};
-}
-
-/* 지금 보고 있는 주소가 폰 카메라로 실제 스캔 가능한 '진짜 인터넷 주소'인지 확인.
-   file://, 미리보기용 about:/blob: 주소, localhost 등은 외부 기기에서 절대 열 수 없다. */
-function isPubliclyReachableUrl(){
-  const proto=window.location.protocol;
-  if(proto!=='http:'&&proto!=='https:')return false;
-  const host=window.location.hostname;
-  if(!host)return false;
-  if(host==='localhost'||host==='127.0.0.1'||host==='0.0.0.0'||host.endsWith('.local'))return false;
+function isPubliclyReachableUrl() {
+  const proto = window.location.protocol;
+  if (proto !== 'http:' && proto !== 'https:') return false;
+  const host = window.location.hostname;
+  if (!host) return false;
+  if (host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0' || host.endsWith('.local')) return false;
   return true;
 }
 
-/* ── 프로필 로드 (페이지 진입 시 1회) ── */
-async function loadProfile(){
-  const shared=getSharedProfileFromUrl();
-  if(shared){
-    isShareMode=true;
-    applyProfileData(shared);
-  }else{
-    const profileJSON=await loadProfileFromStorage();
-    if(profileJSON){
-      savedProfileJSON=profileJSON;
-      try{applyProfileData(JSON.parse(profileJSON));}catch{}
-    }
-    const design=await loadDesignFromStorage();
-    if(design){
-      avatarImage=design.avatarImage||null;
-      cardFrontImageData=design.cardFrontImageData||null;
-      cardBackImageData=design.cardBackImageData||null;
-      renderAvatar();
-      renderCardImage('front');
-      renderCardImage('back');
+const SAFE_QR_LENGTH = 1400;
+
+function updateShareQR() {
+  const profile = getCurrentProfile();
+  const url = buildShareUrl(profile);
+  const textEl = document.getElementById('shareUrlText');
+  const container = document.getElementById('qrCode');
+  const warningEl = document.getElementById('qrHostWarning');
+
+  if (textEl) textEl.textContent = url;
+
+  if (warningEl) {
+    if (isPubliclyReachableUrl()) {
+      warningEl.style.display = 'none';
+    } else {
+      warningEl.style.display = 'block';
+      warningEl.innerHTML = '⚠ 지금 보는 주소는 인터넷에서 접속 가능한 주소가 아니에요. 이 파일을 GitHub Pages·Netlify 같은 곳에 올린 뒤 그 주소에서 열어야 QR/NFC로 실제 공유할 수 있어요.';
     }
   }
-  updatePreview();
-}
 
-function showPage(pageName,force=false){
-  if(isShareMode&&pageName!=='home'&&!force)pageName='home';
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
-  const pages={home:'homePage',history:'historyPage',stats:'statsPage',qr:'qrPage',settings:'settingsPage'};
-  const pageId=pages[pageName];
-  if(pageId)document.getElementById(pageId).classList.add('active');
-  document.querySelector(`.nav-item[data-nav="${pageName}"]`)?.classList.add('active');
-  if(pageName==='stats')setTimeout(drawCharts,80);
-  if(pageName==='qr')setTimeout(updateShareQR,80);
-  if(pageName==='settings')updateStorageStatusText();
-}
+  if (!container) return;
 
-function updateStorageStatusText(){
-  const el=document.getElementById('storageStatusText');
-  if(!el)return;
-  el.textContent=hasPersistentStorage
-    ?'✓ 프로필과 명함 디자인이 새로고침/재방문 후에도 유지됩니다.'
-    :'⚠ 이 환경에서는 영구 저장소를 사용할 수 없어, 새로고침하면 데이터가 초기화됩니다.';
-}
-
-function goCreateCard(){window.location.href=window.location.href.split('?')[0];}
-
-/* ── QR (실제 작동) ── */
-let qrInstance=null;
-function updateShareQR(){
-  const textEl=document.getElementById('shareUrlText');
-  const container=document.getElementById('qrCode');
-  const warningEl=document.getElementById('qrHostWarning');
-  let url='';
-  try{
-    url=getShareUrl();
-  }catch(err){
-    console.error('공유 URL 생성 오류:',err);
-    if(textEl)textEl.textContent='공유 링크를 생성할 수 없습니다.';
+  if (url.length > SAFE_QR_LENGTH) {
+    container.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:202px;color:#a6a6ad;font-size:.78rem;text-align:center;padding:0 14px;line-height:1.5;">공유 정보가 많아 QR로 담기 어려워요.<br>소개글이나 링크 길이를 줄여보세요.</div>`;
     return;
   }
-  if(textEl)textEl.textContent=url;
 
-  // 호스팅 환경 안내 — 진짜 인터넷 주소가 아니면 QR을 만들어도 카메라로 못 엽니다.
-  if(warningEl){
-    if(isPubliclyReachableUrl()){
-      warningEl.style.display='none';
-    }else{
-      warningEl.style.display='block';
-      warningEl.innerHTML='⚠ 지금 보는 주소는 외부에서 접속 가능한 인터넷 주소가 아니에요. 이 파일을 GitHub Pages·Netlify Drop 같은 곳에 올린 뒤 그 주소에서 열어야 폰 카메라로 QR을 스캔했을 때 실제로 이동돼요.';
-    }
-  }
-
-  if(!container)return;
-  if(url.length>SAFE_QR_LENGTH){
-    container.innerHTML=`<div style="display:flex;align-items:center;justify-content:center;height:202px;color:#a6a6ad;font-size:.78rem;text-align:center;padding:0 14px;line-height:1.5;">공유 정보가 너무 많아 QR로 담을 수 없어요.<br>소개글이나 링크 길이를 줄여보세요.</div>`;
-    return;
-  }
-  // qrcode.js 라이브러리가 로드된 경우 실제 QR 생성
-  if(typeof QRCode!=='undefined'){
-    try{
-      container.innerHTML='';
-      qrInstance=new QRCode(container,{
-        text:url,
-        width:202,height:202,
-        colorDark:'#111113',colorLight:'#ffffff',
-        correctLevel:QRCode.CorrectLevel.M
-      });
-    }catch(err){
-      console.error('QR 생성 오류:',err);
-      container.innerHTML=`<div style="display:flex;align-items:center;justify-content:center;height:202px;color:#a6a6ad;font-size:.8rem;text-align:center;padding:0 10px;">QR 생성에 실패했습니다</div>`;
+  if (typeof QRCode !== 'undefined') {
+    try {
+      container.innerHTML = '';
+      new QRCode(container, { text: url, width: 202, height: 202, colorDark: '#111113', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+    } catch(err) {
+      container.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:202px;color:#a6a6ad;font-size:.8rem;text-align:center;">QR 생성 실패</div>`;
     }
   } else {
-    // 폴백: 라이브러리가 아직 로드되지 않은 경우 잠시 후 재시도
-    container.innerHTML=`<div style="display:flex;align-items:center;justify-content:center;height:202px;color:#a6a6ad;font-size:.8rem;">QR 로딩 중...</div>`;
-    setTimeout(updateShareQR,400);
+    container.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:202px;color:#a6a6ad;font-size:.8rem;">QR 로딩 중...</div>`;
+    setTimeout(updateShareQR, 400);
   }
 }
 
-/* ── 차트 ── */
-function getCSS(v){return getComputedStyle(document.body).getPropertyValue(v).trim();}
-function drawCharts(){
-  const ink=getCSS('--ink');
-  const inkFaint=getCSS('--ink-faint');
-  const inkSoft=getCSS('--ink-soft');
-  const surface=getCSS('--surface');
-  const surface2=getCSS('--surface-2');
+// ─────────────────────────────────────────────────────────
+// 다크모드 / 탐색
+// ─────────────────────────────────────────────────────────
+function toggleDarkMode() {
+  isDarkMode = !isDarkMode;
+  document.body.classList.toggle('dark');
+  const icon = document.getElementById('darkModeIcon');
+  icon.innerHTML = isDarkMode
+    ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>'
+    : '<path d="M21 12.6A8.3 8.3 0 0 1 11.4 3 8.5 8.5 0 1 0 21 12.6Z"/>';
+  document.getElementById('settingsToggle')?.classList.toggle('on', isDarkMode);
+  if (document.getElementById('statsPage').classList.contains('active')) setTimeout(drawCharts, 80);
+}
 
-  // Pie chart — monochrome ink shades
-  const pieCanvas=document.getElementById('pieChart');
-  if(pieCanvas&&pieCanvas.getContext){
-    const ctx=pieCanvas.getContext('2d'),cx=140,cy=140,r=108;
-    // 다크모드 대응 ink 기반 팔레트
-    const dm=document.body.classList.contains('dark');
-    const palette=dm
-      ?['rgba(255,255,255,0.85)','rgba(255,255,255,0.55)','rgba(255,255,255,0.3)','rgba(255,255,255,0.12)']
-      :['rgba(17,17,19,0.82)','rgba(17,17,19,0.52)','rgba(17,17,19,0.28)','rgba(17,17,19,0.10)'];
-    const data=[{value:35,color:palette[0]},{value:25,color:palette[1]},{value:20,color:palette[2]},{value:20,color:palette[3]}];
-    let angle=-Math.PI/2;const total=data.reduce((s,d)=>s+d.value,0);
+function toggleEditMode() {
+  if (isShareMode) return;
+  isEditMode = !isEditMode;
+  document.getElementById('editPanel').classList.toggle('open', isEditMode);
+  document.getElementById('overlayBackdrop').classList.toggle('show', isEditMode);
+}
+
+function showPage(pageName, force = false) {
+  if (isShareMode && pageName !== 'home' && !force) pageName = 'home';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  const pages = { home:'homePage', history:'historyPage', stats:'statsPage', qr:'qrPage', settings:'settingsPage' };
+  const pageId = pages[pageName];
+  if (pageId) document.getElementById(pageId).classList.add('active');
+  document.querySelector(`.nav-item[data-nav="${pageName}"]`)?.classList.add('active');
+  if (pageName === 'stats') setTimeout(drawCharts, 80);
+  if (pageName === 'qr') setTimeout(updateShareQR, 80);
+  if (pageName === 'settings') updateStorageStatusText();
+}
+
+function updateStorageStatusText() {
+  const el = document.getElementById('storageStatusText');
+  if (!el) return;
+  const hasWS = typeof window !== 'undefined' && !!window.storage;
+  let hasLS = false;
+  try { localStorage.setItem('_t','1'); localStorage.removeItem('_t'); hasLS = true; } catch(e) {}
+  el.textContent = hasWS
+    ? '✓ 아티팩트 영구 저장소 사용 중 — 재방문해도 유지됩니다.'
+    : hasLS
+      ? '✓ 브라우저 저장소 사용 중 — 같은 브라우저에서 재방문해도 유지됩니다.'
+      : '⚠ 저장소를 사용할 수 없어 새로고침하면 초기화됩니다.';
+}
+
+function goCreateCard() { window.location.href = window.location.href.split('?')[0]; }
+
+// ─────────────────────────────────────────────────────────
+// 차트
+// ─────────────────────────────────────────────────────────
+function getCSS(v) { return getComputedStyle(document.body).getPropertyValue(v).trim(); }
+function drawCharts() {
+  const surface = getCSS('--surface');
+  const inkSoft = getCSS('--ink-soft');
+  const inkFaint = getCSS('--ink-faint');
+  const dm = document.body.classList.contains('dark');
+
+  const pieCanvas = document.getElementById('pieChart');
+  if (pieCanvas && pieCanvas.getContext) {
+    const ctx = pieCanvas.getContext('2d'), cx = 140, cy = 140, r = 108;
+    const palette = dm
+      ? ['rgba(255,255,255,0.85)','rgba(255,255,255,0.55)','rgba(255,255,255,0.3)','rgba(255,255,255,0.12)']
+      : ['rgba(17,17,19,0.82)','rgba(17,17,19,0.52)','rgba(17,17,19,0.28)','rgba(17,17,19,0.10)'];
+    const data = [{value:35,color:palette[0]},{value:25,color:palette[1]},{value:20,color:palette[2]},{value:20,color:palette[3]}];
+    let angle = -Math.PI/2;
+    const total = data.reduce((s,d) => s+d.value, 0);
     ctx.clearRect(0,0,280,280);
-    data.forEach(item=>{
-      const slice=(item.value/total)*2*Math.PI;
-      ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,angle,angle+slice);ctx.closePath();
-      ctx.fillStyle=item.color;ctx.fill();
-      angle+=slice;
+    data.forEach(item => {
+      const slice = (item.value/total)*2*Math.PI;
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,angle,angle+slice); ctx.closePath();
+      ctx.fillStyle = item.color; ctx.fill(); angle += slice;
     });
-    // donut hole
-    ctx.beginPath();ctx.arc(cx,cy,60,0,2*Math.PI);ctx.fillStyle=surface;ctx.fill();
+    ctx.beginPath(); ctx.arc(cx,cy,60,0,2*Math.PI); ctx.fillStyle = surface; ctx.fill();
   }
 
-  // Bar chart — ink fill
-  const barCanvas=document.getElementById('barChart');
-  if(barCanvas&&barCanvas.getContext){
-    const ctx=barCanvas.getContext('2d');
-    const dm=document.body.classList.contains('dark');
-    const barData=[{day:'월',value:12},{day:'화',value:19},{day:'수',value:15},{day:'목',value:25},{day:'금',value:22},{day:'토',value:10},{day:'일',value:8}];
-    const maxValue=Math.max(...barData.map(d=>d.value));
-    const padding=34,w=380,h=200,chartW=w-padding*2,chartH=h-padding*2,barWidth=chartW/barData.length-14;
+  const barCanvas = document.getElementById('barChart');
+  if (barCanvas && barCanvas.getContext) {
+    const ctx = barCanvas.getContext('2d');
+    const barData = [{day:'월',value:12},{day:'화',value:19},{day:'수',value:15},{day:'목',value:25},{day:'금',value:22},{day:'토',value:10},{day:'일',value:8}];
+    const maxValue = Math.max(...barData.map(d=>d.value));
+    const padding = 34, w = 380, h = 200, chartW = w-padding*2, chartH = h-padding*2, barWidth = chartW/barData.length-14;
     ctx.clearRect(0,0,w,h);
-    barData.forEach((item,i)=>{
-      const barH=(item.value/maxValue)*chartH,x=padding+(i*(chartW/barData.length))+7,y=h-padding-barH;
-      ctx.fillStyle=dm?'rgba(255,255,255,0.75)':'rgba(17,17,19,0.80)';
+    barData.forEach((item,i) => {
+      const barH = (item.value/maxValue)*chartH, x = padding+(i*(chartW/barData.length))+7, y = h-padding-barH;
+      ctx.fillStyle = dm ? 'rgba(255,255,255,0.75)' : 'rgba(17,17,19,0.80)';
       ctx.beginPath();
-      if(ctx.roundRect)ctx.roundRect(x,y,barWidth,barH,5);else ctx.rect(x,y,barWidth,barH);
+      if (ctx.roundRect) ctx.roundRect(x,y,barWidth,barH,5); else ctx.rect(x,y,barWidth,barH);
       ctx.fill();
-      ctx.fillStyle=inkSoft;ctx.font='600 11px -apple-system,sans-serif';ctx.textAlign='center';
-      ctx.fillText(item.day,x+barWidth/2,h-padding+18);
-      ctx.fillStyle=inkFaint;ctx.font='600 10px -apple-system,sans-serif';
-      ctx.fillText(item.value,x+barWidth/2,y-7);
+      ctx.fillStyle = inkSoft; ctx.font = '600 11px -apple-system,sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(item.day, x+barWidth/2, h-padding+18);
+      ctx.fillStyle = inkFaint; ctx.font = '600 10px -apple-system,sans-serif';
+      ctx.fillText(item.value, x+barWidth/2, y-7);
     });
   }
 }
 
-/* ── 3D 카드 드래그 ── */
-const card3d=document.getElementById('card3d');
-const cardInner=document.getElementById('cardInner');
-card3d.addEventListener('mousedown',startDrag);
-card3d.addEventListener('touchstart',startDrag,{passive:true});
-document.addEventListener('mousemove',drag);
-document.addEventListener('touchmove',drag,{passive:false});
-document.addEventListener('mouseup',stopDrag);
-document.addEventListener('touchend',stopDrag);
-card3d.addEventListener('dblclick',resetCard);
+// ─────────────────────────────────────────────────────────
+// 3D 카드 드래그
+// ─────────────────────────────────────────────────────────
+const card3d = document.getElementById('card3d');
+const cardInner = document.getElementById('cardInner');
+card3d.addEventListener('mousedown', startDrag);
+card3d.addEventListener('touchstart', startDrag, {passive:true});
+document.addEventListener('mousemove', drag);
+document.addEventListener('touchmove', drag, {passive:false});
+document.addEventListener('mouseup', stopDrag);
+document.addEventListener('touchend', stopDrag);
+card3d.addEventListener('dblclick', resetCard);
 
-function startDrag(e){isDragging=true;card3d.style.cursor='grabbing';const p=e.type==='touchstart'?e.touches[0]:e;startX=p.clientX;startY=p.clientY;currentRotateX=rotateX;currentRotateY=rotateY;}
-function drag(e){if(!isDragging)return;e.preventDefault();const p=e.type==='touchmove'?e.touches[0]:e;rotateY=currentRotateY+(p.clientX-startX)*0.5;rotateX=currentRotateX-(p.clientY-startY)*0.5;cardInner.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;}
-function stopDrag(){isDragging=false;card3d.style.cursor='grab';}
-function resetCard(){rotateX=0;rotateY=0;cardInner.style.transition='transform 0.5s ease';cardInner.style.transform='rotateX(0deg) rotateY(0deg)';setTimeout(()=>{cardInner.style.transition='transform 0.1s ease-out';},500);}
+function startDrag(e) { isDragging = true; card3d.style.cursor = 'grabbing'; const p = e.type==='touchstart'?e.touches[0]:e; startX=p.clientX; startY=p.clientY; currentRotateX=rotateX; currentRotateY=rotateY; }
+function drag(e) { if (!isDragging) return; e.preventDefault(); const p = e.type==='touchmove'?e.touches[0]:e; rotateY=currentRotateY+(p.clientX-startX)*0.5; rotateX=currentRotateX-(p.clientY-startY)*0.5; cardInner.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`; }
+function stopDrag() { isDragging = false; card3d.style.cursor = 'grab'; }
+function resetCard() { rotateX=0; rotateY=0; cardInner.style.transition='transform 0.5s ease'; cardInner.style.transform='rotateX(0deg) rotateY(0deg)'; setTimeout(()=>{ cardInner.style.transition='transform 0.1s ease-out'; },500); }
+
+// ─────────────────────────────────────────────────────────
+// 초기화
+// ─────────────────────────────────────────────────────────
+window.addEventListener('load', async function() {
+  await loadProfile();
+  if (isShareMode) {
+    document.body.classList.add('share-mode');
+    showPage('home', true);
+  } else {
+    showPage('home');
+  }
+  updateShareQR();
+  updateStorageStatusText();
+});
 </script>
 </body>
 </html>
